@@ -1,3 +1,9 @@
 require('../css/app.css');
 
-console.log('right here');
+var $ = require('jquery');
+
+$(function() {
+    "use strict";
+    console.log('right here:', $('h1').html());
+});
+
