@@ -12,10 +12,22 @@ class DefaultController extends Controller
      */
     public function index()
     {
-        $number = mt_rand(0, 100);
+        return $this->render('pages/startpage.html.twig');
+    }
 
-        return $this->render('startpage/index.html.twig', array(
-            'number' => $number
-        ));
+    /**
+     * @Route("/vorverkauf/")
+     */
+    public function vorverkauf()
+    {
+        return $this->render('pages/vorverkauf.html.twig');
+    }
+
+    /**
+     * @Route("/influencerdb/")
+     */
+    public function influnecerDB()
+    {
+        return $this->render('pages/influencer-db.html.twig');
     }
 }

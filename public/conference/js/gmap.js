@@ -12,7 +12,7 @@ function initialize() {
     map = new google.maps.Map(document.getElementById('map-canvas'), 
     mapOptions);
     
-    var image = '/bundles/app/conference/img/flag.png';
+    var image = '/conference/img/flag.png';
     marker = new google.maps.Marker({
         map: map,
         draggable: true,

@@ -1,14 +1,52 @@
 <!DOCTYPE html>
+<!--
+Support für unsere Open Source Projekte gesucht!!
+-->
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="{{ asset('build/app.css') }}">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        <script src="{{ asset('build/app.js') }}"></script>
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Python Workshop Influencer DB Never Code Alone Events</title>
+    {% block meta %}{% endblock %}
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.020/css/hack-extended.min.css">
+    <link href="/css/main.css" rel="stylesheet" />
+</head>
+<body>
+{% block body %}{% endblock %}
+<!--site footer-->
+<footer class="site-footer text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <!--social-->
+                <ul class="social">
+                    <li><a href="https://www.youtube.com/channel/UCjVT6iJ_wg7OM0DkV5TpNCQ" class="waves-effect waves-light" target="_blank"><i class="fa fa-youtube"></i></a></li>
+                    <li><a href="https://twitter.com/nevercodealone/" class="waves-effect waves-light" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="https://www.facebook.com/nevercodealone/" class="waves-effect waves-light" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://www.instagram.com/nevercodealone/" class="waves-effect waves-light" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="https://plus.google.com/b/110472147669354156019/+NevercodealoneDe" class="waves-effect waves-light" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a href="https://shop.spreadshirt.de/nevercodealone" class="waves-effect waves-light" target="_blank"><i class="fa fa-shopping-cart"></i></a></li>
+                </ul>
+                <!--social end-->
+
+                <small>&copy; 2016 Never Code Alone. All rights reserved.</small><br><a href="http://www.rogoit.de/impressum/" target="_blank">Impressum</a></div>
+        </div>
+    </div>
+</footer>
+<!--site footer end-->
+<script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="/js/jquery.ajaxchimp.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/retina.min.js"></script>
+<script src="/js/Constellation.js"></script>
+<script src="/js/main.js"></script>
+{% include 'google-analytics.html' %}
+</body>
 </html>

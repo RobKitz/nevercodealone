@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+
+<html lang="en" class="no-js">
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,300italic,700,400,300' rel='stylesheet'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Python Workshop InfluencerDB #NCAEvent</title>
+    {% block meta %}
+        <meta name="description" content="Live-Coding InfluencerDB Never Code Alone Event am 03.03.18 in Münster mit Django , Flask und Pyramid "/>
+        <meta property="og:locale" content="de_DE" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Python Workshop InfluencerDB #NCAEvent" />
+        <meta property="og:description" content="Live-Coding InfluencerDB Never Code Alone Event am 03.03.18 in Münster mit Django , Flask und Pyramid " />
+        <meta property="og:url" content="https://nevercodealone.de/influencerdb/" />
+        <meta property="og:site_name" content="Python Workshop InfluencerDB #NCAEvent" />
+        <meta property="article:tag" content="event" />
+        <meta property="article:tag" content="training" />
+        <meta property="article:section" content="Webdevelopment" />
+        <meta property="og:image" content="https://nevercodealone.de/bundles/app/conference/img/python-live-coding-workshop.png" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Python Workshop InfluencerDB #NCAEvent" />
+        <meta name="twitter:description" content="Live-Coding InfluencerDB Never Code Alone Event am 03.03.18 in Münster mit Django , Flask und Pyramid " />
+        <meta name="twitter:site" content="@nevercodealone" />
+        <meta name="twitter:image" content="https://nevercodealone.de/bundles/app/conference/img/python-live-coding-workshop.png" />
+        <meta name="twitter:creator" content="@nevercodealone" />
+    {% endblock %}
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    <link href="/conference/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/conference/css/owl.carousel.css" rel="stylesheet">
+    <link href="/conference/css/main.css" rel="stylesheet">
+    <script src="/conference/js/modernizr.min.js"></script>
+</head>
+<body>
+<main>
+    <header class="hero-section">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                    <a href="" class="logo-brand"><img src="/conference/img/influencer-db-logo.png" data-at2x="/conference/img/influencer-db-logo.png" alt="site name" class="logo-nav"> </a> </div>
+                <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#speaker">Speakers</a></li>
+                        <li><a href="#schedule">Zeitplan</a></li>
+                        <li><a href="#pricing">Preise</a></li>
+                        <li><a href="#highlights">Highlights</a></li>
+                        <li><a href="#venue">Location</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="https://www.eventbrite.de/e/python-workshop-influencerdb-never-code-alone-event-tickets-42178847067" target="_blank" class="bttn">Tickets</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="welcome-message">
+                        <h1>Python Workshop - InfluencerDB #NCAEvent</h1>
+                        <p>03. März 2018</p>
+                        <p>Münster, NRW</p>
+                    </div>
+                    <div class="action-btn"><a href="https://www.eventbrite.de/e/python-workshop-influencerdb-never-code-alone-event-tickets-42178847067" target="_blank" class="bttn">Tickets kaufen</a> <a href="#counter" class="bttn">Event Infos</a></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="counter text-center" id="counter">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 col-xs-6"> <i class="fa fa-user fa-3x"></i>
+                    <h3 class="total-number-1">0</h3>
+                    <p>Speaker</p>
+                </div>
+                <div class="col-sm-3 col-xs-6"> <i class="fa fa-graduation-cap fa-3x"></i>
+                    <h3 class="total-number-2">0</h3>
+                    <p>Teilnehmer</p>
+                </div>
+                <div class="col-sm-3 col-xs-6"> <i class="fa fa-clock-o fa-3x"></i>
+                    <h3 class="total-number-3">0</h3>
+                    <p>Stunden</p>
+                </div>
+                <div class="col-sm-3 col-xs-6"> <i class="fa fa-hand-spock-o fa-3x"></i>
+                    <h3><span class="total-number-4">0</span>,- Euro</h3>
+                    <p>Spende</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="speaker section-spacing text-center" id="speaker">
+        <div class="container">
+            <header>
+                <h2>#NCAEvent Speaker</h2>
+                <h3>Übersicht der Python Speaker beim Live-Coding Event</h3>
+            </header>
+            <div class="row">
+                <div class="speaker-slider">
+                    <div class="item">
+                        <div class="event-speaker">
+                            <figure> <img src="/conference/img/speaker/340/python-speaker-christoph-gnip.png" alt="Live Coding Christoph Gnip" data-no-retina>
+                                <figcaption>
+                                    <h4>Christoph Gnip</h4>
+                                    <p>Developer Evangelist</p>
+                                    <ul class="social">
+                                        <li><a href="https://twitter.com/codethonian" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="https://www.xing.com/profile/Christoph_Gnip" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                        <li><a href="https://github.com/cmg-dev" target="_blank"><i class="fa fa-github-alt"></i></a></li>
+                                    </ul>
+                                </figcaption>
+                            </figure>
+                            <a href="#0" data-type="speaker-1" class="bttn">Profil</a> </div>
+                    </div>
+                    <div class="item">
+                        <div class="event-speaker">
+                            <figure> <img src="/conference/img/speaker/340/andre-cimander.jpg" alt="André Cimander" data-no-retina>
+                                <figcaption>
+                                    <h4>André Cimander</h4>
+                                    <p>CTO InfluencerDB</p>
+                                    <ul class="social">
+                                        <li><a href="https://twitter.com/influencer_db" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="https://www.xing.com/profile/Andre_Cimander" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                        <li><a href="https://github.com/andrecimander" target="_blank"><i class="fa fa-github-alt"></i></a></li>
+                                    </ul>
+                                </figcaption>
+                            </figure>
+                            <a href="#0" data-type="speaker-2" class="bttn">Profil</a> </div>
+                    </div>
+                    <div class="item">
+                        <div class="event-speaker">
+                            <figure> <img src="/conference/img/speaker/340/python-codecentric-mark-keinhoerster.png" alt="Python Codecentric Mark Keinhörster" data-no-retina>
+                                <figcaption>
+                                    <h4>Mark Keinhörster</h4>
+                                    <p>codecentric AG</p>
+                                    <ul class="social">
+                                        <li><a href="https://twitter.com/kein_mark" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="https://www.xing.com/profile/Mark_Keinhoerster" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                        <li><a href="https://github.com/crazzle/" target="_blank"><i class="fa fa-github-alt"></i></a></li>
+                                    </ul>
+                                </figcaption>
+                            </figure>
+                            <a href="#0" data-type="speaker-3" class="bttn">Profil</a> </div>
+                    </div>
+                    <div class="item">
+                        <div class="event-speaker">
+                            <figure> <img src="/conference/img/speaker/340/python-special-guest.jpeg" alt="Special Speaker" data-no-retina>
+                                <figcaption>
+                                    <h4>Special Speaker 2</h4>
+                                    <p>Wird bald bekannt gegeben</p>
+                                    <ul class="social">
+                                        <li><a href="https://twitter.com/nevercodealone" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="https://www.facebook.com/nevercodealone" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="https://github.com/nevercodealone" target="_blank"><i class="fa fa-github-alt"></i></a></li>
+                                    </ul>
+                                </figcaption>
+                            </figure>
+                            <a href="#0" data-type="speaker-4" class="bttn">Call for Papers</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="about section-spacing">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6"> <iframe width="560" height="315" src="https://www.youtube.com/embed/SEJiOHelEPQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> </div>
+                <div class="col-md-6">
+                    <h2>Über #NCAEvents - Nerds für Nerds</h2>
+                    <p>Web Developer brauchen kostenlose und gute Weiterbildung. Auf den Events lernen wir gemeinsam an der Funktastatur.</p>
+                    <p>Wir halten nichts von Präsentationen und wollen Coder coden sehen. Debugging, der richtige Einsatz von Tools, Pair Programming und der Blick über den Tellerrand.</p>
+                    <p>Soziale Projekte sind uns wichtig und werden von uns mit dem Eintrittsgeld als Schutzgebühr unterstützt.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="schedule section-spacing" id="schedule">
+        <div class="container">
+            <header class="text-center">
+                <h2>Zeitplan</h2>
+                <h3>Grober Ablauf des Events</h3>
+            </header>
+            <div class="row">
+                <div class="col-md-12">
+                    <div role="tabpanel" id="schedule-days">
+                        <ul class="nav nav-tabs content-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#day-1" aria-controls="day-1" role="tab" data-toggle="tab"><i class="fa fa-calendar"></i>Samstag, 03 März</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="day-1">
+                                <ul class="timeline">
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>9:00 Uhr</p>
+                                                <h4>Frühstück</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>9:45 Uhr</p>
+                                                <h4>Vorstellung Roland Golla</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>9:55 Uhr</p>
+                                                <h4>Vorstellung Speaker</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-3 text-center"><img src="/conference/img/speaker/python-speaker-christoph-gnip.png" alt="Python Speaker Christoph Gnip" data-no-retina></div>
+                                            <div class="col-md-9">
+                                                <p>10:00 Uhr</p>
+                                                <h4>Python - Django 2.0</h4>
+                                                <p>Eine Übersicht über API, Model, Migrations und Views in der aktuellen Django Version. Wir setzen gemeinsam eine neue App auf mit der wir die mathematischen Fähigkeiten der Python Bibliotheken nutzen.</p>
+                                                <p class="event-speaker">- Mit Christoph Gnip</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>11:30 Uhr</p>
+                                                <h4>Pause</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>11:40 Uhr</p>
+                                                <h4>Vorstellung Speaker</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-3 col-md-push-9 text-center"><img src="/conference/img/speaker/andre-cimander.jpg" alt="Python Special Speaker" data-no-retina></div>
+                                            <div class="col-md-9 col-md-pull-3">
+                                                <p>11:45 Uhr</p>
+                                                <h4>Live Coding - Staubsaugen auf der Instagram API und Anreicherung der Daten mit künstlicher Intelligenz |
+                                                    <a href="https://www.python.org/download/releases/3.0/" target="_blank">Python3</a>,
+                                                    <a href="https://docs.pytest.org/en/latest/contents.html" target="_blank">Pytest</a>,
+                                                    <a href="https://travis-ci.org/" target="_blank">TravisCI</a></h4>
+                                                <p>Wir werden uns mit der Instagram API beschäftigen und ein kleines Package für das Abfragen und Anreichern von Instagram-Daten schreiben.</p>
+                                                <p>Wir schauen uns dazu auch kurz an, wie wir mittels Travis-CI, Pytest und Tox unseren Code linten, validieren und die coverage tracken können.</p>
+                                                <p class="event-speaker">- Mit André Cimander</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>13:15 Uhr</p>
+                                                <h4>Pause</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>13:30 Uhr</p>
+                                                <h4>Mittagessen</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-3 text-center"><img src="/conference/img/speaker/david-bosse.jpg" alt="Python Special Speaker" data-no-retina></div>
+                                            <div class="col-md-8">
+                                                <p>14:15 Uhr</p>
+                                                <h4>Vorstellung Sponsor InfluencerDB</h4>
+                                                <p>Gute und transparente Bezahlung, 5 Tage Weiterbildung, Software-Qualität und automatisierte Tests, Pair Programming und Codereviews.</p>
+                                                <p>Was zeichnet einen guten Arbeitgeber für die InfluencerDB aus? Eine persönliche Vorstellung mit offener Fragerunde.</p>
+                                                <p class="event-speaker">- Mit David Bosse</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>14:25 Uhr</p>
+                                                <h4>Vorstellung Speaker</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-3 col-md-push-9 text-center"><img src="/conference/img/speaker/python-codecentric-mark-keinhoerster.png" alt="Python Special Speaker" data-no-retina></div>
+                                            <div class="col-md-9 col-md-pull-3">
+                                                <p>14:30 Uhr</p>
+                                                <h4>Funktionale Programmierung mit Python</h4>
+                                                <p>Wir machen einen Ausflug in die funktionale Programmierung mit Python. Dabei lernen wir wie man mit Python elegant und ohne Seiteneffekte entwickelt, nutzen Higher-Order Functions und bauen uns nebenbei unser eigenes Function-Currying.</p>
+                                                <p class="event-speaker">- Mit Mark Keinhörster</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>16:00 Uhr</p>
+                                                <h4>Pause</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>16:10 Uhr</p>
+                                                <h4>Vorstellung Speaker</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-3 text-center"><img src="/conference/img/speaker/python-special-guest.jpeg" alt="Python Special Speaker" data-no-retina></div>
+                                            <div class="col-md-8">
+                                                <p>16:15 Uhr</p>
+                                                <h4>Live Coding 4</h4>
+                                                <p>Flogt uns dafür auf <a href="https://twitter.com/nevercodealone" target="_blank">Twitter</a></p>
+                                                <p class="event-speaker">- Mit Special Guest 2</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <p>17:45 Uhr</p>
+                                        <h4>Gewinnspiel</h4>
+                                        <p>Ende der Veranstaltung mit Abmoderation, einem Gewinnspiel und Video-Interviews für Never Code Alone TV</p>
+                                    </li>
+                                    <li class="event">
+                                        <p>18:30 Uhr</p>
+                                        <h4>Open After Event Party</h4>
+                                        <p>In dem Räumen der InfluencerDB</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pricing section-spacing text-center" id="pricing">
+        <div class="container">
+            <header>
+                <h2>Preis</h2>
+                <h3>Wir setzen uns ein für kostenlose Weiterbildung</h3>
+                <p>Der Ticketpreis versteht sich als Schutzgebühr. Diese kann freiwillig gespendet oder auf dem Event diskret zurück bekommen werden.</p>
+            </header>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="plan">
+                        <div class="header">
+                            <h4>Teilnehmer</h4>
+                            <div class="price"><span class="currency">€</span>10,-<span class="ticket">/ Pro Ticket</span> </div>
+                        </div>
+                        <ul class="plan-features">
+                            <li>4 Live Coding Sessions</li>
+                            <li>Frühstück und Mittagessen</li>
+                            <li>Getränke</li>
+                            <li>Teilnahmebescheinigung</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="action-btn-pricing"><a href="https://www.eventbrite.de/e/python-workshop-influencerdb-never-code-alone-event-tickets-42178847067" target="_blank" class="bttn">Ticket kaufen</a></div>
+        </div>
+    </section>
+    <section class="hotels section-spacing text-center" id="highlights">
+        <div class="container">
+            <header class="text-center">
+                <h2>Weitere Highlights</h2>
+                <h3>Auf dem Event präsentieren wir zusätzlich ein Rahmenprogramm</h3>
+            </header>
+            <div class="row">
+                <div class="col-md-6">
+                    <figure class="text-left"> <img src="/conference/img/specials/wachschuetteln.jpg" alt="Wachschuetteln" data-no-retina>
+                        <figcaption>
+                            <div class="hotel-details">
+                                <h4>Schütteln Trinken. Wach!<span class="ratings five"></span></h4>
+                                <p class="hotel-info">Der erste natürliche & gesunde Wachmacher in Bio- und Vegan Qualität.. 27mg Koffein/100ml einzig und allein aus dem feinsten japanischen Matcha. Kombiniert mit Limette und der Süße der Agave ergibt sich ein einzigartiges erfrischendes Erlebnis und dein Fokus bleibt für bis zu 5 Stunden auf höchstem Level!
+                                    <a href="https://twitter.com/search?q=%23wachsch%C3%BCtteln" target="_blank">#wachschütteln</a></p>
+                                <a class="hotel-map" href="http://www.ma-tea.de/" target="_blank">[ma.tɕa]ncasozial.png</a></div>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-md-6">
+                    <figure class="text-left"> <img src="/conference/img/specials/ncasozial.png" alt="hotel" data-no-retina>
+                        <figcaption>
+                            <div class="hotel-details">
+                                <h4>Der gute Zweck<span class="ratings five"></span></h4>
+                                <p class="hotel-price">400,- Euro</p>
+                                <p class="hotel-info">Wir setzen uns ein für Software-Qualität und soziale Projekte. Unser Eintrittsgeld ist eine Schutzgebühr. Die spenden wir immer einer sozialen Einrichtung im Event Ort. So haben wir schon über 3.000 Euro in den bisherigen Events gesammelt. Wir haben auch Open Source Projekte auf Github veröffentlicht.</p>
+                                <a class="hotel-map" href="https://github.com/nevercodealone/emma" target="_blank">on GitHub</a></div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="venue section-spacing" id="venue">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <h2>Anfahrt</h2>
+                    <address>
+                        <p> <i class="fa fa-map-marker"></i> InfluencerDB, Scheibenstraße 117, 48153 Münster</p>
+                        <p><i class="fa fa-mobile"></i>0251 32359511</p>
+                        <p class="map-link"><a target="_blank" href="https://www.google.de/maps/place/Influencer+DB/@51.9386085,7.6278281,15z/data=!4m5!3m4!1s0x0:0xc1d6a76f9cc5316!8m2!3d51.9386085!4d7.6278281">Google Maps</a></p>
+                    </address>
+                </div>
+                <div class="col-md-7">
+                    <div class="map">
+                        <div id="map-canvas"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="sponsor section-spacing text-center">
+        <div class="container">
+            <header>
+                <h2>Der Sponsor - InfluencerDBB</h2>
+                <h3>Ein tolles und familäres Startup aus Münster setzt sich ein. Als guter Arbeitgeber, für die Community und für den guten Zweck</h3>
+            </header>
+            <div class="row">
+                <div class="col-md-12">
+                    <figure><img src="/conference/img/influencer-db-logo.png" data-at2x="/conference/img/influencer-db-logo.png" alt="#NCAEvent Sponsor InfluencerDB Münster"></figure>
+                </div>
+            </div>
+            <div class="action-btn-sponsor"><a href="https://blog.nevercodealone.de/gute-webdeveloper-suchen-gute-arbeitgeber/" target="_blank" data-toggle="modal" data-target="#modal-contact-form" class="bttn">Über #NCAEvents</a></div>
+        </div>
+    </section>
+    <section class="faq section-spacing" id="faq">
+        <div class="container">
+            <header class="text-center">
+                <h2>FAQ</h2>
+                <h3>Fragen und Antworten zu dem Event</h3>
+            </header>
+            <div class="row">
+                <div class="col-md-10 center-block">
+                    <ul class="cd-faq-group">
+                        <li> <a class="cd-faq-trigger" href="#0">Gibt es einen Shuttle Service vom Bahnhof?</a>
+                            <div class="cd-faq-content">
+                                <p>Ja, wenn es genug Interessenten gibt organisieren wir einen Shuttle Service vom Bahnhof zur Location und zurück. Benutzt dafür bitte unseren Slack Channel.</p>
+                                <p>Zur Anmeldung schickt uns einfach eine E-Mail an <a href="mailto:nevercodealone@gmail.com">nevercodealone@gmail.com</a></p>
+                            </div>
+                        </li>
+                        <li> <a class="cd-faq-trigger" href="#0">Kann ich kostenlos parken?</a>
+                            <div class="cd-faq-content">
+                                <p>Ja, vor dem Gebäude gibt es ausreichend viele und kostenlose Parkplätze.</p>
+                            </div>
+                        </li>
+                        <li> <a class="cd-faq-trigger" href="#0">Live-Coding - Muß ich an die Tastatur?</a>
+                            <div class="cd-faq-content">
+                                <p>Keiner muß an die Tastatur. Sie wird Reihenweise an Freiwillige weiter gegeben. Alles ist ganz entspannt und freundlich. Darauf legen wir großen Wert und moderieren hier auch.</p>
+                            </div>
+                        </li>
+                        <li> <a class="cd-faq-trigger" href="#0">Kann ich meinen Hund mitbringen?</a>
+                            <div class="cd-faq-content">
+                                <p>Die InfluencerDB hat selber einige Büro Hunde und generell nichts gegen Vierbeiner. Das Event sollte durch die tierischen Gäste allerdings nicht gestört werden.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="site-footer section-spacing text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <p class="footer-links"><a href="http://www.rogoit.de/impressum/" target="_blank">Impressum</a> | <a href="/">NCA</a> | <a href="https://blog.nevercodealone.de/" target="_blank">Blog</a></p>
+                </div>
+                <div class="col-sm-4">
+                    <figure><img src="/img/logo.png" data-at2x="/img/logo.png" alt="Never Code Alone"></figure>
+                    <small>2018 InfluencerDB Never Code Alone Event.</small></div>
+                <div class="col-sm-4">
+                    <p class="footer-contact-us">Folgt uns</p>
+                    <ul class="social">
+                        <li><a href="https://www.youtube.com/channel/UCjVT6iJ_wg7OM0DkV5TpNCQ"><i class="fa fa-youtube"></i></a></li>
+                        <li><a href="https://twitter.com/nevercodealone" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="https://www.facebook.com/nevercodealone" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</main>
+<div>
+    <div class="cd-speaker-bio speaker-1">
+        <div class="cd-bio-content">
+            <h2>5Minds Christoph Gnip</h2>
+            <p>Christoph ist Software-Craftsman aus Gelsenkirchen. Tagsüber Projektleiter der OpenSource Bestrebungen von 5Minds-IT Solutions (<a
+                        href="https://www.5minds.de/" target="_blank">www.5minds.de</a>); nachts bricht das Interesse an neuen Technologien hervor: Python, Elixir und .NET Core sind momentan seine Steckenpferde.</p>
+        </div>
+    </div>
+    <div class="cd-speaker-bio speaker-2">
+        <div class="cd-bio-content">
+            <h2>InfluencerDB André Cimander</h2>
+            <p>Coding enthusiast since 2004, sometimes struggling with "done is better than perfect" - I'm still not perfect in that regard ;-)</p>
+        </div>
+    </div>
+    <div class="cd-speaker-bio speaker-3">
+        <div class="cd-bio-content">
+            <h2>codecentric AG Mark Keinhörster</h2>
+            <p>Mark ist im Big-Data Zoo zu Hause und bringt Erfahrungen mit Hadoop und Apache Spark mit. Außerdem beschäftigt er sich mit Docker, Microservices und Cloud-Technologien.</p>
+        </div>
+    </div>
+    <div class="cd-speaker-bio speaker-4">
+        <div class="cd-bio-content">
+            <h2>Call for papers</h2>
+            <p>Es gibt noch Platz für Speaker. Alle Talks sind Live Coding Sessions. Sie dauern 90 Minuten. Eine halbe Stunde stellt der Speaker pratisch sein Topic vor und gibt dann eine Funktastatur ins Publikum. Ab dann wird gemeinsam unter Anleitung im Pair-Programming gearbeitet..</p>
+            <p>Kontakt <a href="mailto:nevercodealone@gmail.com">nevercodealone@gmail.com</a></p>
+        </div>
+    </div>
+    <a href="#0" class="cd-speaker-bio-close">Close</a> </div>
+<p class="scroll-top"><a href="#"><i class="fa fa-chevron-up"></i></a></p>
+<script src="/conference/js/jquery-2.1.3.min.js"></script>
+<script src="/conference/js/bootstrap.min.js"></script>
+<script src="/conference/js/waypoints.min.js"></script>
+<script src="/conference/js/jquery.animateNumber.min.js"></script>
+<script src="/conference/js/waypoints-sticky.min.js"></script>
+<script src="/conference/js/retina.min.js"></script>
+<script src="/conference/js/owl.carousel.min.js"></script>
+<script src="/conference/js/jquery.ajaxchimp.min.js"></script>
+<script src="/conference/js/jquery.form.min.js"></script>
+<script src="/conference/js/jquery.validate.min.js"></script>
+<script src="/conference/js/main.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script src="/conference/js/gmap.js"></script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-3268576-52', 'auto');
+    ga('set','anonymizeIp',true);
+    ga('send', 'pageview');
+</script>
+</body>
+</html>
+
