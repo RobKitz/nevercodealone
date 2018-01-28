@@ -1,6 +1,7 @@
 <?php
 namespace NCATesting\navigation;
 use NCATesting\AcceptanceTester;
+use NCATesting\Helper\Config;
 use NCATesting\Page\startpage;
 
 class mainCest
@@ -12,24 +13,21 @@ class mainCest
     }
 
     // tests
-    public function allItemsAreTargetBlank(AcceptanceTester $I, startpage $startpage)
+    public function allItemsAreTargetBlank(AcceptanceTester $I, startpage $startpage, Config $helperConfig)
     {
-        $noBlankItems = ['home'];
+        $url = $helperConfig->getUrlFromConfigWebdriver('url');
 
-        $items = $I->grabMultiple($startpage::$navMainLeft);
-        $items = array_merge($items, $I->grabMultiple($startpage::$navMainRight));
+        $items = $I->grabMultiple($startpage::$navMainLeft, 'href');
+        $items = array_merge($items, $I->grabMultiple($startpage::$navMainRight, 'href'));
 
         $itemsTargets = $I->grabMultiple($startpage::$navMainLeft, 'target');
         $itemsTargets = array_merge($itemsTargets, $I->grabMultiple($startpage::$navMainRight, 'target'));
 
         foreach ($items as $key => $item) {
-            // Selector gets for each an empty value - no beer could fix this
-            if($item !== '') {
-                if(in_array(strtolower($item), $noBlankItems)) {
-                    $I->assertEquals('', $itemsTargets[$key], 'Item: ' . $item);
-                } else {
-                    $I->assertEquals('_blank', $itemsTargets[$key], 'Item: ' . $item);
-                }
+            if(strpos($item, $url) === false) {
+                $I->assertEquals('_blank', $itemsTargets[$key], 'Item blank: ' . $item);
+            } else {
+                $I->assertEquals('', $itemsTargets[$key], 'Item no blank: ' . $item);
             }
         }
     }
