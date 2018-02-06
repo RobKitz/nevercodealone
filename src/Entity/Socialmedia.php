@@ -3,11 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\SocialMediaRepository")
+ * @ORM\Entity
+ * @ApiResource
  */
-class SocialMedia
+class Socialmedia
 {
     /**
      * @ORM\Id
