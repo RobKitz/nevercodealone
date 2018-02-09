@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -36,6 +37,18 @@ class Message
      * @Assert\NotBlank
      */
     private $message;
+
+    /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank
+     */
+    private $ip;
 
     /**
      * @return mixed
@@ -101,5 +114,28 @@ class Message
         $this->message = $message;
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    /**
+     * @param mixed $ip
+     */
+    public function setIp($ip): void
+    {
+        $this->ip = $ip;
+    }
 
 }
