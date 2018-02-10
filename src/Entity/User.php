@@ -53,6 +53,22 @@ class User implements UserInterface
      */
     private $isActive;
 
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
     public function getEmail()
     {
         return $this->email;
