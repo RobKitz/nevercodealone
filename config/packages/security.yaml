@@ -15,6 +15,9 @@ security:
             form_login:
                 login_path: /community/login
                 check_path: /community/login
+            logout:
+                path:   /community/logout
+                target: /
     access_control:
         - { path: ^/community/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/community/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
