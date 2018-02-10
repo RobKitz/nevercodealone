@@ -48,7 +48,10 @@ class User implements UserInterface
      */
     private $password;
 
-    // other properties and methods
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
 
     public function getEmail()
     {
@@ -97,7 +100,7 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return null;
+        return ['ROLE_USER'];
     }
 
     public function eraseCredentials()
@@ -105,4 +108,19 @@ class User implements UserInterface
         return null;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getisActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setIsActive($isActive): void
+    {
+        $this->isActive = $isActive;
+    }
 }
