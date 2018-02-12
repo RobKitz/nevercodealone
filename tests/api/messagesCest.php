@@ -31,5 +31,6 @@ class messagesCest
 
         $I->assertEquals('doRegistration', $response);
         $I->seeResponseCodeIs(200);
+        $I->seeNumRecords(1, 'message', $messagePost);
     }
 }

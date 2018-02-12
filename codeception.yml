@@ -17,7 +17,6 @@ extensions:
 modules:
     config:
         Db:
-            dsn: ''
-            user: ''
-            password: ''
-            dump: tests/_data/dump.sql
+            dsn: 'mysql:localhost=db;dbname=nca'
+            user: 'root'
+            password: 'root'

@@ -12,6 +12,7 @@ modules:
              depends: PhpBrowser
              part: Json
        - Asserts
+       - Db
 env:
    fast:
    debug:
