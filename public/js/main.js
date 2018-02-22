@@ -31,7 +31,7 @@ $(function() {
     $("#frm_contact").submit(function(e) {
 
         e.preventDefault();
-        var url = "/api/message"; // the script where you handle the form input.
+        var url = "/api/messages"; // the script where you handle the form input.
 
         var data = JSON.stringify(
             {
