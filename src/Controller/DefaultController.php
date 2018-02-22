@@ -48,6 +48,13 @@ class DefaultController extends Controller
         $email = $data['email'];
         $message = $data['message'];
 
+        if($name === '' || $email === '' || $message === '') {
+            return new JsonResponse(
+                'doRegistration has empty values',
+                400
+            );
+        }
+
         $messageEntity = new Message();
         $messageEntity->setName($name);
         $messageEntity->setEmail($email);
@@ -62,8 +69,6 @@ class DefaultController extends Controller
             mail('rolandgolla@gmail.com', 'Kontakt NCA', $email . ' ' . $message);
             $status = 200;
         } catch (\Exception $exception) {
-            var_dump(__FILE__, $name, $email, $exception);
-            exit;
             $status = 500;
         }
 

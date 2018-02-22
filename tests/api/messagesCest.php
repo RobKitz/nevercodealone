@@ -33,4 +33,38 @@ class messagesCest
         $I->seeResponseCodeIs(200);
         $I->seeNumRecords(1, 'message', $messagePost);
     }
+
+    public function emptyMessageWithValidEmailAndNameNotWorking(ApiTester $I)
+    {
+        $time = time();
+
+        $name = 'test';
+        $email = 'test' . $time . '@ify.com';
+        $message = 'This is a test:' . $time;
+
+        $messagePost = [
+            'name'    => $name,
+            'email'   => $email,
+            'message' => $message
+        ];
+
+        foreach ($messagePost as $key => $value) {
+            $postArray = $messagePost;
+            $postArray[$key] = '';
+
+            $I->haveHttpHeader('Content-Type', 'application/json');
+            $I->sendPOST(
+                '/api/messages',
+                json_encode($postArray)
+            );
+
+            $I->seeResponseIsJson();
+
+            $response = json_decode($I->grabResponse(), true);
+
+            $I->assertContains('empty', $response);
+            $I->seeResponseCodeIs(400);
+            $I->dontSeeInDatabase('message', $postArray);
+        }
+    }
 }

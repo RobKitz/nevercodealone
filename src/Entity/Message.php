@@ -22,19 +22,19 @@ class Message
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank
+     * @Assert\NotBlank()
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=500)
-     * @Assert\NotBlank
+     * @Assert\NotBlank()
      */
     private $message;
 
@@ -46,7 +46,7 @@ class Message
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank
+     * @Assert\NotBlank()
      */
     private $ip;
 
