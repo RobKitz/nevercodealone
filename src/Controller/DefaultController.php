@@ -44,6 +44,14 @@ class DefaultController extends Controller
     {
 
         $data = json_decode($request->getContent(), true);
+
+        if(!isset($data['name']) || !isset($data['email']) || !isset($data['message'])) {
+            return new JsonResponse(
+                'doRegistration has not set values',
+                401
+            );
+        }
+
         $name = $data['name'];
         $email = $data['email'];
         $message = $data['message'];
