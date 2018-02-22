@@ -6,7 +6,7 @@ class messagesCest
 {
     public function addMessageWithValidNameAndEmail(ApiTester $I)
     {
-        $time = time();
+        $time = microtime();
 
         $name = 'test';
         $email = 'test' . $time . '@ify.com';
@@ -36,7 +36,7 @@ class messagesCest
 
     public function singleEmptyValueMessageStatus(ApiTester $I)
     {
-        $time = time();
+        $time = microtime();
 
         $name = 'test';
         $email = 'test' . $time . '@ify.com';
@@ -70,7 +70,7 @@ class messagesCest
 
     public function singleNotSetValueMessageStatus(ApiTester $I)
     {
-        $time = time();
+        $time = microtime();
 
         $name = 'test';
         $email = 'test' . $time . '@ify.com';

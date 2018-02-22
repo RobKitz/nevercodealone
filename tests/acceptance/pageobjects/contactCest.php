@@ -15,7 +15,7 @@ class contactCest
     // tests
     public function checkValidFormSending(AcceptanceTester $I)
     {
-        $time = time();
+        $time = microtime();
 
         $name = 'test';
         $email = 'test' . $time . '@ify.com';
