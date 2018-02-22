@@ -38,7 +38,7 @@ class messagesCest
     {
         $time = microtime();
 
-        $name = 'test';
+        $name = 'test:' . $time;
         $email = 'test@ify.com';
         $message = 'This is a test:' . $time;
 
@@ -72,7 +72,7 @@ class messagesCest
     {
         $time = microtime();
 
-        $name = 'test';
+        $name = 'test:' . $time;
         $email = 'test@ify.com';
         $message = 'This is a test:' . $time;
 
