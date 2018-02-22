@@ -1,15 +1,15 @@
 <?php
 namespace NCATesting\pageobjects;
 use NCATesting\AcceptanceTester;
+use NCATesting\Page\startpage;
 
 class contactCest
 {
-    public function _before(AcceptanceTester $I)
+    public function _before(AcceptanceTester $I, startpage $startpage)
     {
         $I->amOnPage('/');
-        $contactDiv = '.tz-contact-content';
-        $I->waitForElement($contactDiv);
-        $I->scrollTo($contactDiv);
+        $I->waitForPageLoad();
+        $I->scrollTo($startpage::$formContact);
     }
 
     // tests
@@ -18,7 +18,7 @@ class contactCest
         $time = microtime();
 
         $name = 'test';
-        $email = 'test' . $time . '@ify.com';
+        $email = 'test@ify.com';
         $message = 'CC message:' . $time;
 
         $messagePost = [
