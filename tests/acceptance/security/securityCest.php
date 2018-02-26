@@ -1,5 +1,5 @@
 <?php
-namespace NCATesting;
+namespace NCATesting\security;
 use NCATesting\AcceptanceTester;
 
 class securityCest
