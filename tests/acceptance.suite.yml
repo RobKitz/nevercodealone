@@ -15,10 +15,6 @@ modules:
           url: 'http://localhost:8000'
           browser: chrome
           window_size: 1600x1000
-        Db:
-          dsn: 'mysql:localhost=db;dbname=nevercodealone'
-          user: 'root'
-          password: 'root'
 env:
     phantomjs:
         modules:
