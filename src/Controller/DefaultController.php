@@ -21,6 +21,15 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/nca-paas/")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function ncapaas()
+    {
+        return $this->render('pages/nca-paas.html.twig');
+    }
+
+    /**
      * @Route("/vorverkauf/")
      */
     public function vorverkauf()
