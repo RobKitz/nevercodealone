@@ -1,0 +1,16 @@
+/* Overwrites */
+
+.spinner {
+    background-color: #5fbb28;
+}
+
+@media (max-width: 768px) and (min-width: 320px) {
+    header.home-36 {
+        position: relative;
+    }
+}
+
+/* New styles */
+.nca-color, .home-36 .footer-09 .row1 .have-a-project span {
+    color: #5fbb28;
+}
