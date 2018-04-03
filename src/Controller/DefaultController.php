@@ -26,7 +26,14 @@ class DefaultController extends Controller
      */
     public function ncapaas()
     {
-        return $this->render('pages/nca-paas.html.twig');
+        return $this->render(
+            'pages/nca-paas.html.twig',
+            [
+                'title' => '#NCAPaaS - Pipeline as a service - Sachverstand und Infrastruktur für Software-Qualität',
+                'description' => 'Continuous Integration Pipeline as a service mit Sachverstand, Infrastruktur, Codestandards, Codereviews, automatisterten Tests und Builds',
+                'smImage' => 'https://nevercodealone.de/unity/nca-paas/nca-paas.jpg'
+            ]
+        );
     }
 
     /**
@@ -42,7 +49,9 @@ class DefaultController extends Controller
      */
     public function influnecerDB()
     {
-        return $this->render('pages/influencer-db.html.twig');
+        return $this->render(
+            'pages/influencer-db.html.twig'
+        );
     }
 
     /**
