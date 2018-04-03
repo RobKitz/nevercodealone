@@ -1,0 +1,1 @@
+GRANT ALL PRIVILEGES ON * . * TO 'nca_dev_user';
