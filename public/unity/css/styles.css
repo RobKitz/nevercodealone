@@ -10,6 +10,14 @@
     }
 }
 
+#show, #hide {
+    background: #5fbb28;
+}
+
+.scrollup {
+    background-color: #5fbb28;
+}
+
 /* New styles */
 .nca-color, .home-36 .footer-09 .row1 .have-a-project span {
     color: #5fbb28;

@@ -198,6 +198,15 @@
             </div>
         </div>
     </div>
+    <div class="container-fluid our-ideology bg">
+        <div class="row no-gutter-5">
+            <div class="col-lg-7 herotext">
+                <h2 class="animated" data-animation="fadeInUp" data-animation-delay="400">Sachverstand für Projekte</h2>
+                <h1 class="animated" data-animation="fadeInUp" data-animation-delay="600">Was passiert im Hintergrund bei der Entwicklung meiner Software.</h1>
+            </div>
+            <div class="col-lg-5 picture animated" data-animation="fadeInLeft" data-animation-delay="200"><img src="/unity/nca-paas/nca-paas.jpg" alt="NCA PaaS" title="NCA PaaS" class="img-responsive"></div>
+        </div>
+    </div>
     <!-- ./ OUR IDEALOGY ENDS
         ========================================================================= -->
 </div>
@@ -397,10 +406,45 @@
 </div>
 <!-- FOOTER 09 ENDS
     ========================================================================= -->
-<!-- TO TOP STARTS
-    ========================================================================= -->
+
+<div id="switch">
+    <div class="content-switcher">
+        <h3>Discover More Demos</h3>
+        <div>
+            <div class="row no-gutter-6 demo-thumbz-2">
+                    <form  class="ContactForm-03>
+                        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="name" placeholder="Full Name *">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" name="email" placeholder="Email *">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="phone" placeholder="Phone">
+                            </div>
+                            <div class="form-group">
+                                <textarea rows="5" class="form-control" style="height:196px" name="comment" placeholder="Comments"></textarea>
+                            </div>
+                            <div class="button"><button type="submit" class="btn btn-default submitf-03" value='SUBMIT' name='submitf-03'>Submit Message</button></div>
+                            <div class='message_post-03'></div>
+                        </div>
+                    </form>
+            </div>
+            <h3>Hero Headers</h3>
+        </div>
+        <div class="button2"><a href="index.html#heroheaders" class="no-fill-black">VIEW ALL</a></div>
+    </div>
+    <div class="clear"></div>
+    <div id="hide"><i class="fa fa-times"></i></div>
+</div>
+<div id="show" style="display: block;">
+    <div id="setting"><i class="fa fa-comment"></i></div>
+</div>
 <a href="#" class="scrollup">Scroll</a>
 <!-- /. TO TOP ENDS
+    ========================================================================= -->
+<!-- STYLE SWITCHER PANEL STARTS
     ========================================================================= -->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -532,6 +576,30 @@
                 }
             });
         }
+
+        $("#hide, #show").click(function() {
+            if ($("#show").is(":visible")) {
+
+                $("#show").animate({
+                    "margin-right": "-400px"
+                }, 500, function() {
+                    $(this).hide();
+                });
+
+                $("#switch").animate({
+                    "margin-right": "0px"
+                }, 500).show();
+            } else {
+                $("#switch").animate({
+                    "margin-right": "-400px"
+                }, 500, function() {
+                    $(this).hide();
+                });
+                $("#show").show().animate({
+                    "margin-right": "0"
+                }, 500);
+            }
+        });
     });	/*ready*/
 </script>
 <!-- Parallax -->

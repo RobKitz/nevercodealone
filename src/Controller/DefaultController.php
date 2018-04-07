@@ -21,13 +21,13 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/nca-paas/")
+     * @Route("/nca-paas-startup/")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function ncapaas()
     {
         return $this->render(
-            'pages/nca-paas.html.twig',
+            'pages/nca-paas-startup.html.twig',
             [
                 'title' => '#NCAPaaS - Pipeline as a service - Sachverstand und Infrastruktur für Software-Qualität',
                 'description' => 'Continuous Integration Pipeline as a service mit Sachverstand, Infrastruktur, Codestandards, Codereviews, automatisterten Tests und Builds',
