@@ -5,6 +5,36 @@ $(document).ready(function() {
 
     /************************************************************************************ CAROUSEL SLIDER STARTS */
 
+    $("#frm_contact").submit(function(e) {
+        e.preventDefault();
+        var url = "/api/messages"; // the script where you handle the form input.
+
+        var message = $('#reason').val() + '|' + $('#phone').val() + '|' + $('#message').val();
+
+        var data = JSON.stringify(
+            {
+                "name":     $('#name').val(),
+                "email":    $('#email').val(),
+                "message":  message
+            }
+        );
+
+        console.log(data);
+        $.ajax({
+            type: "POST",
+            url: url,
+            contentType:"application/json",
+            dataType:"json",
+            data:data,
+        }).done(function(data) {
+            $("#frm_contact").html("<div class='successMessage'>Danke wir melden uns</div>");
+        }).fail(function(data) {
+
+        });
+
+        return false;
+    });
+
     var owl = $('.single-image-carousel');
     owl.owlCarousel({
 

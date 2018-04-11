@@ -22,3 +22,7 @@
 .nca-color, .home-36 .footer-09 .row1 .have-a-project span, .ncagreen, a {
     color: #5fbb28 !important;
 }
+
+.no-margin-right {
+    margin-right: 0px;
+}
