@@ -29,7 +29,7 @@ class DefaultController extends Controller
         return $this->render(
             'pages/nca-paas-startup.html.twig',
             [
-                'title' => '#NCAPaaS - Pipeline as a service - Sachverstand und Infrastruktur für Software-Qualität',
+                'title' => '#NCAPaaS - Pipeline as a Service - Sachverstand und Infrastruktur für Software-Qualität',
                 'description' => 'Continuous Integration Pipeline as a service mit Sachverstand, Infrastruktur, Codestandards, Codereviews, automatisterten Tests und Builds',
                 'smImage' => 'https://nevercodealone.de/unity/nca-paas/nca-paas.jpg'
             ]
