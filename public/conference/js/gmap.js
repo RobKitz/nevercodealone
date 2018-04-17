@@ -1,4 +1,4 @@
-var mapLocation = new google.maps.LatLng(51.938609, 7.627828); //change coordinates here
+var mapLocation = new google.maps.LatLng(51.987297, 7.618975); //change coordinates here
 var marker;
 var map;
 
@@ -6,7 +6,8 @@ function initialize() {
     var mapOptions = {
         zoom: 17, //change zoom here
         center: mapLocation,
-				scrollwheel: false
+        scrollwheel: true,
+        mapTypeId: 'satellite'
     };
     
     map = new google.maps.Map(document.getElementById('map-canvas'), 
