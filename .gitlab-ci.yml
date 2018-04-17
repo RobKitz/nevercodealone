@@ -2,6 +2,7 @@
 stages:
   - build
   - cleanup
+  - test
   - deploy
 
 build:
@@ -42,6 +43,35 @@ deploy_develop:
     - master
     - staging
 
+testing:
+  stage: test
+  image: composer
+  script:
+    - composer install
+    - ./vendor/bin/codecept run acceptance --html
+  artifacts:
+    paths:
+      - tests/_output
+      - .gitlabenv/rancher
+    expire_in: 3 days
+
+deploy_testing:
+  stage: test
+  environment:
+    name: test_output
+    url: http://output.${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}
+  image: identt/rancher-compose
+  variables:
+    GIT_STRATEGY: none
+    TRAEFIK_DOMAIN: "develop.nevercodealone.de"
+    TRAEFIK_URL: "output.${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
+  script:
+    - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG up -d
+  tags:
+    - docker-executor
+  dependencies:
+    - testing
+
 teardown:
   stage: deploy
   image: identt/rancher-compose
@@ -50,4 +80,3 @@ teardown:
   tags:
     - docker-executor
   when: manual
-

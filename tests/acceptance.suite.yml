@@ -12,9 +12,11 @@ modules:
         - Db
     config:
         WebDriver:
-          url: 'http://localhost:8000'
+          url: 'https://nevercodealone.de'
           browser: chrome
           window_size: 1600x1000
+          hub: http://selenium.stage.nevercodealone.de/
+          port: 80
 env:
     phantomjs:
         modules:
