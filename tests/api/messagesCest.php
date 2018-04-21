@@ -29,7 +29,7 @@ class messagesCest
 
         $response = json_decode($I->grabResponse(), true);
 
-        $I->assertEquals('doRegistration', $response);
+        $I->assertEquals('messagesAction', $response);
         $I->seeResponseCodeIs(200);
         $I->seeNumRecords(1, 'message', $messagePost);
     }

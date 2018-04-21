@@ -65,7 +65,7 @@ class DefaultController extends Controller
 
         if(!isset($data['name']) || !isset($data['email']) || !isset($data['message'])) {
             return new JsonResponse(
-                'doRegistration has not set values',
+                'messagesAction has not set values',
                 401
             );
         }
@@ -76,7 +76,7 @@ class DefaultController extends Controller
 
         if($name === '' || $email === '' || $message === '') {
             return new JsonResponse(
-                'doRegistration has empty values',
+                'messagesAction has empty values',
                 400
             );
         }
@@ -99,7 +99,7 @@ class DefaultController extends Controller
         }
 
         return new JsonResponse(
-            'doRegistration',
+            'messagesAction',
             $status
         );
     }
