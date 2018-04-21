@@ -1,0 +1,53 @@
+---
+stages:
+  - build
+  - cleanup
+  - deploy
+
+build:
+  stage: build
+  image: docker
+  before_script:
+    - docker info
+    - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
+  script:
+    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:latest .
+    - docker tag $CI_REGISTRY/$CI_PROJECT_PATH:latest $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:latest
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
+  tags:
+    - docker-executor
+
+cleanup:
+  stage: cleanup
+  image: identt/rancher-compose
+  script:
+    - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
+  tags:
+    - docker-executor
+  except:
+    - master
+
+deploy_develop:
+  stage: deploy
+  image: identt/rancher-compose
+  variables:
+    TRAEFIK_DOMAIN: "develop.nevercodealone.de"
+    TRAEFIK_URL: "${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
+  script:
+    - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG up -d
+  tags:
+    - docker-executor
+  except:
+    - master
+    - staging
+
+teardown:
+  stage: deploy
+  image: identt/rancher-compose
+  script:
+    - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
+  tags:
+    - docker-executor
+  when: manual
+

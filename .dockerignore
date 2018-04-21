@@ -1,0 +1,6 @@
+.dockerignore
+.gitlab-ci.yml
+.git
+.gitignore
+Dockerfile
+README.md

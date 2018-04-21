@@ -4540,7 +4540,7 @@ div.tz-event-content-style-1 > span{
     background:rgb(255, 255, 255);
     border: 1px solid rgb(238, 238, 238);
     height: 47px;
-    left: 8%;
+    left: 5%;
     position: absolute;
     top: 50%;
     width: 47px;
@@ -4549,14 +4549,14 @@ div.tz-event-content-style-1 > span{
     background:rgb(255, 255, 255);
     border: 1px solid rgb(238, 238, 238);
     height: 47px;
-    right: 8%;
+    right: 5%;
     position: absolute;
     top: 50%;
     width: 47px;
 }
 .tz-last-event-prev i,
 .tz-last-event-next i{
-    color: #eaeaea;
+    color: #000000;
     font-size: 30px;
 }
 
