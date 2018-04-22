@@ -26,7 +26,7 @@ class SpamProtection
         return true;
     }
 
-    private function validateIp(string $ip)
+    public function validateIp(string $ip)
     {
         if(!filter_var($ip, FILTER_VALIDATE_IP)) {
             return false;
