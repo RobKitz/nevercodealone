@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -54,53 +53,4 @@ class DefaultController extends Controller
         );
     }
 
-    /**
-     * @Route("/api/messages")
-     * @Method("POST")
-     */
-    public function messagesAction(Request $request)
-    {
-
-        $data = json_decode($request->getContent(), true);
-
-        if(!isset($data['name']) || !isset($data['email']) || !isset($data['message'])) {
-            return new JsonResponse(
-                'messagesAction has not set values',
-                401
-            );
-        }
-
-        $name = $data['name'];
-        $email = $data['email'];
-        $message = $data['message'];
-
-        if($name === '' || $email === '' || $message === '') {
-            return new JsonResponse(
-                'messagesAction has empty values',
-                400
-            );
-        }
-
-        $messageEntity = new Message();
-        $messageEntity->setName($name);
-        $messageEntity->setEmail($email);
-        $messageEntity->setMessage($message);
-        $messageEntity->setIp($request->server->get('REMOTE_ADDR'));
-
-        try {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($messageEntity);
-            $em->flush($messageEntity);
-
-            mail('rolandgolla@gmail.com', 'Kontakt NCA', $email . ' ' . $message);
-            $status = 200;
-        } catch (\Exception $exception) {
-            $status = 500;
-        }
-
-        return new JsonResponse(
-            'messagesAction',
-            $status
-        );
-    }
 }

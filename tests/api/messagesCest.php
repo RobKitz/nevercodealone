@@ -15,7 +15,8 @@ class messagesCest
         $messagePost = [
             'name'    => $name,
             'email'   => $email,
-            'message' => $message
+            'message' => $message,
+            'ip'      => '172.217.23.133'
         ];
 
 
@@ -45,7 +46,8 @@ class messagesCest
         $messagePost = [
             'name'    => $name,
             'email'   => $email,
-            'message' => $message
+            'message' => $message,
+            'ip'      => '172.217.23.133'
         ];
 
         foreach ($messagePost as $key => $value) {
@@ -79,7 +81,8 @@ class messagesCest
         $messagePost = [
             'name'    => $name,
             'email'   => $email,
-            'message' => $message
+            'message' => $message,
+            'ip'      => '172.217.23.133'
         ];
 
         foreach ($messagePost as $key => $value) {
