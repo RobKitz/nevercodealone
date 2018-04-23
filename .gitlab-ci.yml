@@ -46,7 +46,7 @@ deploy_develop:
 
 testing:
   stage: run_test
-  image: composer
+  image: registry.nevercodealone.de/nevercodealone/docker_composer_mysql
   script:
     - composer install
     - ./vendor/bin/codecept run acceptance --html
