@@ -19,8 +19,8 @@ modules:
           port: 80
         Db:
           dsn: 'mysql:host=localhost;dbname=nca'
-          user: 'root'
-          password: 'root'
+          user: 'nca'
+          password: 'nca'
 env:
     phantomjs:
         modules:
