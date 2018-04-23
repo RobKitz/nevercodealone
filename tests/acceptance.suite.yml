@@ -14,7 +14,7 @@ modules:
           url: 'https://nevercodealone.de'
           browser: chrome
           window_size: 1600x1000
-          host: http://selenium.stage.nevercodealone.de/
+          host: 'http://selenium.stage.nevercodealone.de/'
           port: 80
 env:
     phantomjs:
