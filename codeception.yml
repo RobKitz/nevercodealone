@@ -17,6 +17,6 @@ extensions:
 modules:
     config:
         Db:
-            dsn: 'mysql:localhost=db;dbname=nca'
+            dsn: 'mysql:host=db;dbname=nca'
             user: 'root'
             password: 'root'
