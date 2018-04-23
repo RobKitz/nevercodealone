@@ -17,7 +17,7 @@ class SpamProtection
             return false;
         }
 
-        // Validate post limit
+        //@todo Validate post limit
 
         // Validate message
 
