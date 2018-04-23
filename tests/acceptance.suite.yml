@@ -9,7 +9,6 @@ modules:
     enabled:
         - WebDriver
         - Asserts
-        - Db
     config:
         WebDriver:
           url: 'https://nevercodealone.de'
