@@ -12,11 +12,11 @@ settings:
     memory_limit: 1024M
     shuffle: true
 extensions:
-    enabled:
-        - Codeception\Extension\RunFailed
+  enabled:
+    - Codeception\Extension\RunFailed
 modules:
-    config:
-        Db:
-            dsn: 'mysql:localhost=db;dbname=nca'
-            user: 'root'
-            password: 'root'
+  config:
+    Db:
+      dsn: 'mysql:host=localhost;dbname=nca'
+      user: 'nca'
+      password: 'nca'
