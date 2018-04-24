@@ -49,6 +49,7 @@ testing:
   image: registry.nevercodealone.de/nevercodealone/docker_composer_mysql
   script:
     - composer install
+    - codecept build
     - codecept run -vvv acceptance --html
   artifacts:
     paths:
