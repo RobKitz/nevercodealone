@@ -14,3 +14,9 @@ settings:
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
+modules:
+    config:
+        Db:
+            dsn: 'mysql:localhost=db;dbname=nca'
+            user: 'root'
+            password: 'root'
