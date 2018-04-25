@@ -11,7 +11,7 @@ modules:
     - Asserts
   config:
     WebDriver:
-      url: 'https://nevercodealone.de'
+      url: '%URL%'
       browser: chrome
       window_size: 1600x1000
       host: selenium.stage.nevercodealone.de

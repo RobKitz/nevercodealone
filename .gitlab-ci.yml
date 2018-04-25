@@ -48,6 +48,9 @@ testing:
   stage: run_test
   image: registry.nevercodealone.de/nevercodealone/docker_composer_mysql
   script:
+    - export URL=http://${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}
+    - export DBUSER=nca
+    - export DBPASS=nca
     - composer install
     - vendor/bin/codecept build
     - vendor/bin/codecept run -vvv --html
