@@ -6,24 +6,23 @@
 
 class_name: AcceptanceTester
 modules:
-  enabled:
-    - WebDriver
-    - Asserts
-  config:
-    WebDriver:
-      url: '%URL%'
-      browser: chrome
-      window_size: 1600x1000
-      host: selenium.stage.nevercodealone.de
-      port: 80
+    enabled:
+        - WebDriver
+        - Asserts
+        - Db
+    config:
+        WebDriver:
+          url: '%URL%'
+          browser: chrome
+          window_size: 1600x1000
 env:
-  phantomjs:
-    modules:
-      config:
-        WebDriver:
-          browser: 'phantomjs'
-  firefox:
-    modules:
-      config:
-        WebDriver:
-          browser: 'firefox'
+    phantomjs:
+        modules:
+          config:
+            WebDriver:
+              browser: 'phantomjs'
+    firefox:
+        modules:
+          config:
+            WebDriver:
+              browser: 'firefox'
