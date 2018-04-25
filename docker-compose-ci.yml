@@ -1,0 +1,29 @@
+---
+version: '2'
+services:
+  server:
+    image: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
+    environment:
+      APP_ENV: $APP_ENV
+      APP_SECRET: $APP_SECRET
+      CORS_ALLOW_ORIGIN: '^https?://(.*\.)?nevercodealone.de:?[0-9]*$$'
+    links:
+      - db
+    labels:
+      io.rancher.container.pull_image: always
+      traefik.frontend.rule: 'Host:${TRAEFIK_URL}'
+      traefik.domain: '${TRAEFIK_DOMAIN}'
+      traefik.enable: 'true'
+      traefik.port: '80'
+    restart: always
+  db:
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: nca
+      MYSQL_PASSWORD: nca
+      MYSQL_ROOT_PASSWORD: nca
+      MYSQL_USER: nca
+    labels:
+      io.rancher.container.pull_image: always
+    restart: always
+

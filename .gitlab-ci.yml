@@ -24,7 +24,7 @@ cleanup:
   stage: cleanup
   image: identt/rancher-compose
   script:
-    - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
+    - rancher-compose -f docker-compose-ci.yml -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
   tags:
     - docker-executor
   except:
@@ -37,7 +37,7 @@ deploy_develop:
     TRAEFIK_DOMAIN: "develop.nevercodealone.de"
     TRAEFIK_URL: "${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
   script:
-    - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG up -d
+    - rancher-compose -f docker-compose-ci.yml -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG up -d
   tags:
     - docker-executor
   except:
@@ -72,7 +72,7 @@ deploy_testing:
     DBPASS: nca
     URLCC: http://${CI_COMMIT_REF_SLUG}.nevercodealone.de
   script:
-    - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG up -d
+    - rancher-compose -f docker-compose-ci.yml -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG up -d
   tags:
     - docker-executor
   dependencies:
@@ -82,7 +82,7 @@ teardown:
   stage: deploy
   image: identt/rancher-compose
   script:
-    - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
+    - rancher-compose -f docker-compose-ci.yml -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
   tags:
     - docker-executor
   when: manual
