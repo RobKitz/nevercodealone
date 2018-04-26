@@ -5,8 +5,7 @@ then
     COMPOSER_FLAGS='--no-dev'
 fi
 
-composer install $COMPOSER_FLAGS
-chown -R www-data: /var/www/symfony
+sudo -u www-data composer install $COMPOSER_FLAGS
 
 /usr/sbin/apachectl -DFOREGROUND
 

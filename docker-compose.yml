@@ -2,9 +2,19 @@
 version: '3.2'
 services:
   server:
-    image: registry.nevercodealone.de/nevercodealone/docker_composer_mysql
-    volumes:
-        - '.:/var/www/symfony'
+    image: registry.nevercodealone.de/nevercodealone/nevercodealone
+    environment:
+      APP_ENV: dev
+      APP_SECRET: insecure
+      BROWSER_URL: http://127.0.0.1
+      CORS_ALLOW_ORIGIN: '^https?://(.*\.)?nevercodealone.de:?[0-9]*$$'
+      DB_HOST: db
+      DB_NAME: nca
+      DB_USER: nca
+      DB_PASS: nca
+      WEBDRIVER_URL: http://selenium.develop.nevercodealone.de
+    ports:
+      - 8080:80
     restart: always
   db:
     image: mariadb

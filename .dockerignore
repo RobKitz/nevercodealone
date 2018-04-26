@@ -1,6 +1,8 @@
-.dockerignore
-.gitlab-ci.yml
-.git
-.gitignore
-Dockerfile
-README.md
+/.dockerignore
+/.gitlab-ci.yml
+/.git
+/.gitignore
+/.gitlabenv
+/docker-compose*
+/Dockerfile
+/README.md
