@@ -6,16 +6,19 @@ services:
     environment:
       APP_ENV: dev
       APP_SECRET: insecure
-      BROWSER_URL: http://127.0.0.1
-      CORS_ALLOW_ORIGIN: '^https?://(.*\.)?nevercodealone.de:?[0-9]*$$'
+      BROWSER_URL: http://server
+      CORS_ALLOW_ORIGIN: '^https?://(.*\.)?server:?[0-9]*$$'
+      DATABASE_URL: mysql://nca:nca@db/nca
       DB_HOST: db
       DB_NAME: nca
       DB_USER: nca
       DB_PASS: nca
-      WEBDRIVER_URL: http://selenium.develop.nevercodealone.de
+      WEBDRIVER_URL: hub
     ports:
       - 8080:80
     restart: always
+
+  # database
   db:
     image: mariadb
     environment:
@@ -24,4 +27,24 @@ services:
       MYSQL_ROOT_PASSWORD: nca
       MYSQL_USER: nca
     restart: always
+
+  # selenium container
+  chrome:
+    image: selenium/node-chrome
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - hub
+    environment:
+      HUB_HOST: hub
+  firefox:
+    image: selenium/node-firefox
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - hub
+    environment:
+      HUB_HOST: hub
+  hub:
+    image: selenium/hub
 

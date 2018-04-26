@@ -57,6 +57,7 @@ RUN chown -R www-data: .
 COPY .docker/apache.conf /etc/apache2/sites-available/symfony.conf
 RUN a2dissite 000-default \
  && a2ensite symfony
+RUN a2enmod rewrite
 
 COPY .docker/check.sh /check.sh
 RUN chmod +x /check.sh
