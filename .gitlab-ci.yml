@@ -49,6 +49,7 @@ testing:
   image: registry.nevercodealone.de/nevercodealone/docker_composer_mysql
   script:
     - export URL=http://${CI_COMMIT_REF_SLUG}.nevercodealone.de
+    - export DBHOST=db
     - export DBUSER=nca
     - export DBPASS=nca
     - composer install
