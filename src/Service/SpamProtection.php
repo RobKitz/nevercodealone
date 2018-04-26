@@ -26,15 +26,34 @@ class SpamProtection
         return true;
     }
 
-    public function validateIp(string $ip)
+    protected function validateIp(string $ip)
     {
         if(!filter_var($ip, FILTER_VALIDATE_IP)) {
             return false;
         }
 
+        if(strpos($ip, '192') !== false) {
+            return false;
+        }
+
         // Europe
+        if(!$this->isIpFromDe($ip)) {
+            return false;
+        }
+
         return true;
 
+    }
+
+    protected function isIpFromDe(string $ip) {
+        $url = 'https://ipinfo.io/' . $ip;
+
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $data = json_decode(curl_exec($curl), true);
+        curl_close($curl);
+
+        return $data['country'] === 'DE';
     }
 
 }
