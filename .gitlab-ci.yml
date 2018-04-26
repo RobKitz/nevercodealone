@@ -62,15 +62,15 @@ deploy_testing:
   environment:
     name: test_output
     url: http://output.${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}
-    DBHOST: db
-    DBUSER: nca
-    DBPASS: nca
-    URLCC: http://${CI_COMMIT_REF_SLUG}.nevercodealone.de
   image: identt/rancher-compose
   variables:
     GIT_STRATEGY: none
     TRAEFIK_DOMAIN: "develop.nevercodealone.de"
     TRAEFIK_URL: "output.${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
+    DBHOST: db
+    DBUSER: nca
+    DBPASS: nca
+    URLCC: http://${CI_COMMIT_REF_SLUG}.nevercodealone.de
   script:
     - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG up -d
   tags:
