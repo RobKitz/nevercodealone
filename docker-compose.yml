@@ -1,21 +1,19 @@
 ---
 version: '3.2'
 services:
+
+  # website
   server:
     image: registry.nevercodealone.de/nevercodealone/nevercodealone
     environment:
-      APP_ENV: dev
-      APP_SECRET: insecure
-      BROWSER_URL: http://127.0.0.1
-      CORS_ALLOW_ORIGIN: '^https?://(.*\.)?nevercodealone.de:?[0-9]*$$'
-      DB_HOST: db
-      DB_NAME: nca
-      DB_USER: nca
-      DB_PASS: nca
-      WEBDRIVER_URL: http://selenium.develop.nevercodealone.de
+      DATABASE_URL: mysql://nca:nca@db/nca
     ports:
-      - 8080:80
+      - '8080:80'
+    volumes:
+      - application:/var/www/symfony
     restart: always
+
+  # database
   db:
     image: mariadb
     environment:
@@ -24,4 +22,31 @@ services:
       MYSQL_ROOT_PASSWORD: nca
       MYSQL_USER: nca
     restart: always
+
+  # webdriver container
+  webdriver:
+   image: selenium/standalone-chrome
+   volumes:
+     - '/dev/shm:/dev/shm'
+
+  # codeception
+  codeception:
+    image: registry.nevercodealone.de/nevercodealone/docker-codeception
+    environment:
+      DB_HOST: db
+      DB_NAME: nca
+      DB_USER: nca
+      DB_PASS: nca
+      WEBSITE_IP: server
+      WEBDRIVER_URL: webdriver
+      WEBSITE_URL: http://server
+    command: tail -f /dev/null
+    ports:
+      - '8081:80'
+    volumes:
+      - application:/project
+    restart: always
+
+volumes:
+  application:
 
