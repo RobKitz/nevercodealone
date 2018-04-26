@@ -12,7 +12,7 @@ modules:
         - Db
     config:
         WebDriver:
-          url: '%URL%'
+          url: '%URLCC%'
           browser: chrome
           window_size: 1600x1000
 env:

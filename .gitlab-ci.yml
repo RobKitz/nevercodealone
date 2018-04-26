@@ -48,10 +48,6 @@ testing:
   stage: run_test
   image: registry.nevercodealone.de/nevercodealone/docker_composer_mysql
   script:
-    - export URL=http://${CI_COMMIT_REF_SLUG}.nevercodealone.de
-    - export DBHOST=db
-    - export DBUSER=nca
-    - export DBPASS=nca
     - composer install
     - vendor/bin/codecept build
     - vendor/bin/codecept run -vvv --html
@@ -66,6 +62,10 @@ deploy_testing:
   environment:
     name: test_output
     url: http://output.${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}
+    DBHOST: db
+    DBUSER: nca
+    DBPASS: nca
+    URLCC: http://${CI_COMMIT_REF_SLUG}.nevercodealone.de
   image: identt/rancher-compose
   variables:
     GIT_STRATEGY: none
