@@ -1,88 +1,66 @@
 ---
+#--- STAGES ---------------------------------------------------------------------------------------
+# build:      create docker images and dependencies
+# test:       deploy staging environment to container host and run tests
+# deploy:     deploy application to production
+# teardown:   remove application (trigger: manual)
 stages:
   - build
-  - cleanup
-  - run_test
-  - deploy_test
+  - test
   - deploy
+  - teardown
 
-build:
-  stage: build
-  image: docker
-  before_script:
-    - docker info
-    - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
-  script:
-    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:latest .
-    - docker tag $CI_REGISTRY/$CI_PROJECT_PATH:latest $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
-    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:latest
-    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
-  tags:
-    - docker-executor
 
-cleanup:
-  stage: cleanup
+#--- JOBS -----------------------------------------------------------------------------------------
+
+#build:
+# stage: build
+# image: docker
+# before_script:
+#   - docker info
+#   - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY
+# script:
+#   - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:latest .
+#   - docker tag $CI_REGISTRY/$CI_PROJECT_PATH:latest $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
+#   - docker push $CI_REGISTRY/$CI_PROJECT_PATH:latest
+#   - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
+# tags:
+#   - docker-executor
+
+deploy:staging:
+  stage: test
   image: identt/rancher-compose
-  script:
-    - rancher-compose -f docker-compose-ci.yml -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
-  tags:
-    - docker-executor
-  except:
-    - master
-
-deploy_develop:
-  stage: deploy
-  image: identt/rancher-compose
+  environment:
+    name: staging
+    url: "output.${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
   variables:
+    CORS_ALLOW_ORIGIN: '^https?://(.*\.)?nevercodealone.de:?[0-9]*$$'
+    DATABASE_URL: mysql://nca:nca@db/nca
+    DATABASE_HOST: db
+    DATABASE_NAME: nca
+    DATABASE_USER: nca
+    DATABASE_PASS: nca
     TRAEFIK_DOMAIN: "develop.nevercodealone.de"
     TRAEFIK_URL: "${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
+    BROWSER_URL: "${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
+    OUTPUT_URL: "output.${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
+    WEBDRIVER_URL: selenium.stage.nevercodealone.de
   script:
+    - rancher-compose -f docker-compose-ci.yml -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
     - rancher-compose -f docker-compose-ci.yml -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG up -d
+    - sleep 10
+    - curl -sSL "output.${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}/runtest"
   tags:
     - docker-executor
   except:
     - master
-    - staging
-
-testing:
-  stage: run_test
-  image: registry.nevercodealone.de/nevercodealone/docker_composer_mysql
-  script:
-    - composer install
-    - vendor/bin/codecept build
-    - vendor/bin/codecept run -vvv --html
-  artifacts:
-    paths:
-      - tests/_output
-      - .gitlabenv/rancher
-    expire_in: 3 days
-
-deploy_testing:
-  stage: deploy_test
-  environment:
-    name: test_output
-    url: http://output.${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}
-  image: identt/rancher-compose
-  variables:
-    GIT_STRATEGY: none
-    TRAEFIK_DOMAIN: "develop.nevercodealone.de"
-    TRAEFIK_URL: "output.${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
-    DBHOST: db
-    DBUSER: nca
-    DBPASS: nca
-    URLCC: http://${CI_COMMIT_REF_SLUG}.nevercodealone.de
-  script:
-    - rancher-compose -f docker-compose-ci.yml -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG up -d
-  tags:
-    - docker-executor
-  dependencies:
-    - testing
 
 teardown:
-  stage: deploy
+  stage: teardown
   image: identt/rancher-compose
   script:
     - rancher-compose -f docker-compose-ci.yml -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
   tags:
     - docker-executor
   when: manual
+
