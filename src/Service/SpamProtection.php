@@ -11,17 +11,26 @@ namespace App\Service;
 
 class SpamProtection
 {
+    public $spamWords = [
+        'viagra',
+        'script',
+        'href'
+    ];
     public function validateUserInputs(array $data) {
-        // Validate IP
+        // Validate ip
         if(!$this->validateIp($data['ip'])) {
             return false;
         }
 
-        //@todo Validate post limit
+        // Validate email
+        if(!$this->validateEmail($data['email'])) {
+            return false;
+        }
 
         // Validate message
-
-        // Validate Email
+        if(!$this->validateMessage($data['message'])) {
+            return false;
+        }
 
         return true;
     }
@@ -55,5 +64,33 @@ class SpamProtection
 
         return $data['country'] === 'DE';
     }
+
+    protected function validateEmail(string $email) {
+        if($email === '') {
+            return false;
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+           return false;
+        }
+
+        return true;
+    }
+
+    protected function validateMessage(string $message) {
+        if($message === '') {
+            return false;
+        }
+
+        $message = strtolower($message);
+        foreach ($this->spamWords as $spamWord) {
+            if (strpos($message, $spamWord) !== false) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 
 }

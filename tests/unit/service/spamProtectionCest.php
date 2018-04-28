@@ -22,12 +22,16 @@ class spamProtectionCest
         $this->fixture = Stub::make(
             $this->fixture,
             [
-                'validateIp' => true
+                'validateIp' => true,
+                'validateEmail' => true,
+                'validateMessage' => true
             ]
         );
 
         $data = [
-            'ip' => ''
+            'ip' => '',
+            'email' => '',
+            'message' => ''
         ];
 
         $I->assertTrue($this->fixture->validateUserInputs($data));
@@ -36,7 +40,7 @@ class spamProtectionCest
     /**
      * @dataProvider invalidIpsProvider
      */
-    public function validateIpWithInvalidIpsReturnFalse(UnitTester $I, \Codeception\Example $data)
+    public function validateIpWithInvalidIpsReturnFalse(UnitTester $I, Example $data)
     {
         $ip = $data[0];
         $methodReturn = $this->getMethodReturn('validateIp', $ip);
@@ -57,7 +61,7 @@ class spamProtectionCest
     /**
      * @dataProvider validIpsProvider
      */
-    public function validateIpWithValidIpsReturnFalse(UnitTester $I, \Codeception\Example $data)
+    public function validateIpWithValidIpsReturnFalse(UnitTester $I, Example $data)
     {
         $this->fixture = Stub::make(
             $this->fixture,
@@ -82,6 +86,55 @@ class spamProtectionCest
         ];
     }
 
+    public function validateEmailEmptyStringReturnFalse(UnitTester $I)
+    {
+        $methodReturn = $this->getMethodReturn('validateEmail', '');
+        $I->assertFalse($methodReturn);
+    }
+
+    public function validateEmailNotValidEmailReturnFalse(UnitTester $I)
+    {
+        $methodReturn = $this->getMethodReturn('validateEmail', 'testify');
+        $I->assertFalse($methodReturn);
+    }
+
+    public function validateEmailValidEmailReturnTrue(UnitTester $I)
+    {
+        $methodReturn = $this->getMethodReturn('validateEmail', 'test@testify.com');
+        $I->assertTrue($methodReturn);
+    }
+
+    public function validateMessageEmptyReturnFalse(UnitTester $I)
+    {
+        $methodReturn = $this->getMethodReturn('validateMessage', '');
+        $I->assertFalse($methodReturn);
+    }
+
+    public function validateMessageSpamWordsReturnFalse(UnitTester $I)
+    {
+        $spamProtection = new SpamProtection();
+        $spamWords = $spamProtection->spamWords;
+
+        foreach ($spamWords as $spamWord) {
+            $methodReturn = $this->getMethodReturn('validateMessage', $spamWord);
+            $I->assertFalse($methodReturn, $spamWord);
+        }
+    }
+
+    public function validateMessageWithLowerUpperMixSpamWords(UnitTester $I)
+    {
+        $spamWords = [
+            'VIAGRA',
+            'ViAgRa',
+            'VIAgra'
+        ];
+
+        foreach ($spamWords as $spamWord) {
+            $methodReturn = $this->getMethodReturn('validateMessage', $spamWord);
+            $I->assertFalse($methodReturn, $spamWord);
+        }
+    }
+
     /**
      * @throws \ReflectionException
      */
@@ -93,6 +146,7 @@ class spamProtectionCest
         $methodReturn = $method->invoke($this->fixture, $param);
         return $methodReturn;
     }
+
 
 
 }
