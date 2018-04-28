@@ -17,6 +17,11 @@ class SpamProtection
         'href'
     ];
     public function validateUserInputs(array $data) {
+        // Validate name
+        if(!$this->validateName($data['name'])) {
+            return false;
+        }
+
         // Validate ip
         if(!$this->validateIp($data['ip'])) {
             return false;
@@ -29,6 +34,18 @@ class SpamProtection
 
         // Validate message
         if(!$this->validateMessage($data['message'])) {
+            return false;
+        }
+
+        return true;
+    }
+
+    protected function validateName(string $name) {
+        if($this->isEmptyString($name)) {
+            return false;
+        }
+
+        if($this->isSpamString($name)) {
             return false;
         }
 
@@ -78,19 +95,30 @@ class SpamProtection
     }
 
     protected function validateMessage(string $message) {
-        if($message === '') {
+        if($this->isEmptyString($message)) {
             return false;
         }
 
-        $message = strtolower($message);
-        foreach ($this->spamWords as $spamWord) {
-            if (strpos($message, $spamWord) !== false) {
-                return false;
-            }
+        if($this->isSpamString($message)) {
+            return false;
         }
 
         return true;
     }
 
+    private function isEmptyString(string $string) {
+        return $string === '';
+    }
+
+    private function isSpamString(string $string) {
+        $string = strtolower($string);
+        foreach ($this->spamWords as $spamWord) {
+            if (strpos($string, $spamWord) !== false) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 }

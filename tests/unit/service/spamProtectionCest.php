@@ -22,19 +22,33 @@ class spamProtectionCest
         $this->fixture = Stub::make(
             $this->fixture,
             [
-                'validateIp' => true,
+                'validateName' => true,
                 'validateEmail' => true,
-                'validateMessage' => true
+                'validateMessage' => true,
+                'validateIp' => true
             ]
         );
 
         $data = [
-            'ip' => '',
+            'name' => '',
             'email' => '',
-            'message' => ''
+            'message' => '',
+            'ip' => ''
         ];
 
         $I->assertTrue($this->fixture->validateUserInputs($data));
+    }
+
+    public function validateNameEmptyIsFalse(UnitTester $I)
+    {
+        $methodReturn = $this->getMethodReturn('validateName', '');
+        $I->assertFalse($methodReturn);
+    }
+
+    public function validateNameIsSpam(UnitTester $I)
+    {
+        $methodReturn = $this->getMethodReturn('validateName', 'viagra');
+        $I->assertFalse($methodReturn);
     }
 
     /**
