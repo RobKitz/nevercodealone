@@ -15,7 +15,8 @@ $(document).ready(function() {
             {
                 "name":     $('#name').val(),
                 "email":    $('#email').val(),
-                "message":  message
+                "message":  message,
+                "ip": window.location.host
             }
         );
 

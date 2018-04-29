@@ -6,16 +6,17 @@ class messagesCest
 {
     public function addMessageWithValidNameAndEmail(ApiTester $I)
     {
-        $time = microtime();
+        $microtime = microtime();
 
         $name = 'test';
-        $email = 'test' . $time . '@ify.com';
-        $message = 'CC message:' . $time;
+        $email = 'test' . time() . '@ify.com';
+        $message = 'CC message:' . $microtime;
 
         $messagePost = [
             'name'    => $name,
             'email'   => $email,
-            'message' => $message
+            'message' => $message,
+            'ip'      => '2.175.255.255'
         ];
 
 
@@ -29,7 +30,7 @@ class messagesCest
 
         $response = json_decode($I->grabResponse(), true);
 
-        $I->assertEquals('doRegistration', $response);
+        $I->assertEquals('messagesAction', $response);
         $I->seeResponseCodeIs(200);
         $I->seeNumRecords(1, 'message', $messagePost);
     }
@@ -45,7 +46,8 @@ class messagesCest
         $messagePost = [
             'name'    => $name,
             'email'   => $email,
-            'message' => $message
+            'message' => $message,
+            'ip'      => '172.217.23.133'
         ];
 
         foreach ($messagePost as $key => $value) {
@@ -79,7 +81,8 @@ class messagesCest
         $messagePost = [
             'name'    => $name,
             'email'   => $email,
-            'message' => $message
+            'message' => $message,
+            'ip'      => '172.217.23.133'
         ];
 
         foreach ($messagePost as $key => $value) {

@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -15,7 +14,7 @@ class DefaultController extends Controller
     /**
      * @Route("/")
      */
-    public function index()
+    public function indexAction()
     {
         return $this->render('pages/startpage.html.twig');
     }
@@ -24,7 +23,7 @@ class DefaultController extends Controller
      * @Route("/nca-paas-startup/")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function ncapaas()
+    public function ncapaasAction()
     {
         return $this->render(
             'pages/nca-paas-startup.html.twig',
@@ -39,7 +38,7 @@ class DefaultController extends Controller
     /**
      * @Route("/vorverkauf/")
      */
-    public function vorverkauf()
+    public function vorverkaufAction()
     {
         return $this->render('pages/vorverkauf.html.twig');
     }
@@ -47,60 +46,10 @@ class DefaultController extends Controller
     /**
      * @Route("/influencerdb/")
      */
-    public function influnecerDB()
+    public function influnecerDBAction()
     {
         return $this->render(
             'pages/influencer-db.html.twig'
-        );
-    }
-
-    /**
-     * @Route("/api/messages")
-     * @Method("POST")
-     */
-    public function messagesAction(Request $request)
-    {
-
-        $data = json_decode($request->getContent(), true);
-
-        if(!isset($data['name']) || !isset($data['email']) || !isset($data['message'])) {
-            return new JsonResponse(
-                'doRegistration has not set values',
-                401
-            );
-        }
-
-        $name = $data['name'];
-        $email = $data['email'];
-        $message = $data['message'];
-
-        if($name === '' || $email === '' || $message === '') {
-            return new JsonResponse(
-                'doRegistration has empty values',
-                400
-            );
-        }
-
-        $messageEntity = new Message();
-        $messageEntity->setName($name);
-        $messageEntity->setEmail($email);
-        $messageEntity->setMessage($message);
-        $messageEntity->setIp($request->server->get('REMOTE_ADDR'));
-
-        try {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($messageEntity);
-            $em->flush($messageEntity);
-
-            mail('rolandgolla@gmail.com', 'Kontakt NCA', $email . ' ' . $message);
-            $status = 200;
-        } catch (\Exception $exception) {
-            $status = 500;
-        }
-
-        return new JsonResponse(
-            'doRegistration',
-            $status
         );
     }
 }
