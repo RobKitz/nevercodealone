@@ -52,5 +52,4 @@ class DefaultController extends Controller
             'pages/influencer-db.html.twig'
         );
     }
-
 }
