@@ -54,6 +54,10 @@ class SpamProtection
 
     protected function validateIp(string $ip)
     {
+        if(strpos($ip, '127.0.0.1') !== false || strpos($ip, 'localhost') !== false) {
+            return true;
+        }
+
         if(!filter_var($ip, FILTER_VALIDATE_IP)) {
             return false;
         }

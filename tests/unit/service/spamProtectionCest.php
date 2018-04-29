@@ -67,7 +67,6 @@ class spamProtectionCest
     {
         return [
             [123],
-            ['localhost'],
             ['192.168.0.1']
         ];
     }

@@ -37,7 +37,8 @@ $(function() {
             {
                 "name":     $('#name').val(),
                 "email":    $('#email').val(),
-                "message":  $('#message').val()
+                "message":  $('#message').val(),
+                "ip": window.location.host
             }
         );
 

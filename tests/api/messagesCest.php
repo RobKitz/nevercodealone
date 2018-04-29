@@ -6,17 +6,17 @@ class messagesCest
 {
     public function addMessageWithValidNameAndEmail(ApiTester $I)
     {
-        $time = microtime();
+        $microtime = microtime();
 
         $name = 'test';
-        $email = 'test' . $time . '@ify.com';
-        $message = 'CC message:' . $time;
+        $email = 'test' . time() . '@ify.com';
+        $message = 'CC message:' . $microtime;
 
         $messagePost = [
             'name'    => $name,
             'email'   => $email,
             'message' => $message,
-            'ip'      => '172.217.23.133'
+            'ip'      => '2.175.255.255'
         ];
 
 
