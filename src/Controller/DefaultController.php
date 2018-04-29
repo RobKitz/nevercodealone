@@ -14,7 +14,7 @@ class DefaultController extends Controller
     /**
      * @Route("/")
      */
-    public function index()
+    public function indexAction()
     {
         return $this->render('pages/startpage.html.twig');
     }
@@ -23,7 +23,7 @@ class DefaultController extends Controller
      * @Route("/nca-paas-startup/")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function ncapaas()
+    public function ncapaasAction()
     {
         return $this->render(
             'pages/nca-paas-startup.html.twig',
@@ -38,7 +38,7 @@ class DefaultController extends Controller
     /**
      * @Route("/vorverkauf/")
      */
-    public function vorverkauf()
+    public function vorverkaufAction()
     {
         return $this->render('pages/vorverkauf.html.twig');
     }
@@ -46,7 +46,7 @@ class DefaultController extends Controller
     /**
      * @Route("/influencerdb/")
      */
-    public function influnecerDB()
+    public function influnecerDBAction()
     {
         return $this->render(
             'pages/influencer-db.html.twig'
