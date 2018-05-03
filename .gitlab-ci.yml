@@ -47,9 +47,11 @@ test:app:
     MYSQL_USER: nca
     WEBDRIVER_URL: http://selenium/
   script:
-    - sleep 10
+    - sleep 8
+    - curl -IL $BROWSER_URL
+    - mysql -h $DB_HOST -u $DB_USER -p$DB_PASS -e "use $DB_NAME; show tables;"
     - codecept build
-    - codecept run -v
+    - codecept run
 
 #deploy:staging:
 #  stage: test
