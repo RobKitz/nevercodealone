@@ -53,7 +53,7 @@ test:app:
   script:
     - sleep 8
     - codecept build
-    - codecept run
+    - codecept run -vvv --html
 
 #deploy:staging:
 #  stage: test
