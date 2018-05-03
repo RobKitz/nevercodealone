@@ -45,7 +45,7 @@ test:app:
     MYSQL_PASSWORD: nca
     MYSQL_ROOT_PASSWORD: nca
     MYSQL_USER: nca
-    WEBDRIVER_URL: http://selenium/
+    WEBDRIVER_URL: selenium
   script:
     - sleep 8
     - codecept build
