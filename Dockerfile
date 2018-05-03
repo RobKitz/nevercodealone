@@ -25,9 +25,9 @@ RUN chmod +x /entrypoint.sh
 
 # project setup
 WORKDIR /var/www/symfony
+VOLUME /var/www/symfony
 COPY . .
 RUN chown -R www-data: .
-VOLUME /var/www/symfony
 
 EXPOSE 80
 ENTRYPOINT ["/entrypoint.sh"]
