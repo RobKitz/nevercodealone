@@ -28,6 +28,8 @@ services:
   # selenium container
   selenium:
     image: selenium/standalone-chrome
+    volumes:
+      - '/dev/shm:/dev/shm'
 
   # codeception
   codeception:
