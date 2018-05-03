@@ -13,54 +13,78 @@ stages:
 
 #--- JOBS -----------------------------------------------------------------------------------------
 
-#build:
-# stage: build
-# image: docker
-# before_script:
-#   - docker info
-#   - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY
-# script:
-#   - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:latest .
-#   - docker tag $CI_REGISTRY/$CI_PROJECT_PATH:latest $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
-#   - docker push $CI_REGISTRY/$CI_PROJECT_PATH:latest
-#   - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
-# tags:
-#   - docker-executor
+build:branch:
+ stage: build
+ image: docker
+ before_script:
+   - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY
+ script:
+   - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REG_SLUG .
+   - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
+ tags:
+   - docker-executor
 
-deploy:staging:
+test:app:
   stage: test
-  image: identt/rancher-compose
-  environment:
-    name: staging
-    url: "output.${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
+  image: registry.nevercodealone.de/nevercodealone/docker-codeception:gitlab-ci-integrated
+  services:
+    - name: mariadb
+      alias: db
+    - name: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
+      alias: nevercodealone
+    - name: selenium/standalone-chrome
+      alias: selenium
   variables:
-    CORS_ALLOW_ORIGIN: '^https?://(.*\.)?nevercodealone.de:?[0-9]*$$'
+    BROWSER_URL: http://nevercodealone
     DATABASE_URL: mysql://nca:nca@db/nca
-    DATABASE_HOST: db
-    DATABASE_NAME: nca
-    DATABASE_USER: nca
-    DATABASE_PASS: nca
-    TRAEFIK_DOMAIN: "develop.nevercodealone.de"
-    TRAEFIK_URL: "${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
-    BROWSER_URL: "${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
-    OUTPUT_URL: "output.${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
-    WEBDRIVER_URL: selenium.stage.nevercodealone.de
+    DB_HOST: db
+    DB_NAME: nca
+    DB_USER: nca
+    DB_PASS: nca
+    MYSQL_DATABASE: nca
+    MYSQL_PASSWORD: nca
+    MYSQL_ROOT_PASSWORD: nca
+    MYSQL_USER: nca
+    WEBDRIVER_URL: selenium:4444/wd/hub
   script:
-    - rancher-compose -f docker-compose-ci.yml -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
-    - rancher-compose -f docker-compose-ci.yml -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG up -d
-    - sleep 10
-    - curl -sSL "output.${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}/runtest"
-  tags:
-    - docker-executor
-  except:
-    - master
+    - sleep 5
+    - codecept build
+    - codecept run -vvv
 
-teardown:
-  stage: teardown
-  image: identt/rancher-compose
-  script:
-    - rancher-compose -f docker-compose-ci.yml -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
-  tags:
-    - docker-executor
-  when: manual
+#deploy:staging:
+#  stage: test
+#  image: identt/rancher-compose
+#  environment:
+#    name: staging
+#    url: "output.${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
+#  variables:
+#    CORS_ALLOW_ORIGIN: '^https?://(.*\.)?nevercodealone.de:?[0-9]*$$'
+#    DATABASE_URL: mysql://nca:nca@db/nca
+#    DATABASE_HOST: db
+#    DATABASE_NAME: nca
+#    DATABASE_USER: nca
+#    DATABASE_PASS: nca
+#    TRAEFIK_DOMAIN: "develop.nevercodealone.de"
+#    TRAEFIK_URL: "${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
+#    BROWSER_URL: "${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
+#    OUTPUT_URL: "output.${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
+#    WEBDRIVER_URL: selenium.stage.nevercodealone.de
+#  script:
+#    - rancher-compose -f docker-compose-ci.yml -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
+#    - rancher-compose -f docker-compose-ci.yml -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG up -d
+#    - sleep 10
+#    - curl -sSL "output.${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}/runtest"
+#  tags:
+#    - docker-executor
+#  except:
+#    - master
+
+#teardown:
+#  stage: teardown
+#  image: identt/rancher-compose
+#  script:
+#    - rancher-compose -f docker-compose-ci.yml -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
+#  tags:
+#    - docker-executor
+#  when: manual
 
