@@ -11,8 +11,6 @@ services:
       - '8080:80'
     volumes:
       - application:/var/www/symfony
-    depends_on:
-      - db
     restart: always
 
   # database
@@ -25,31 +23,28 @@ services:
       MYSQL_USER: nca
     restart: always
 
-  # selenium container
-  selenium:
-    image: selenium/standalone-chrome
-    volumes:
-      - '/dev/shm:/dev/shm'
+  # webdriver container
+  webdriver:
+   image: selenium/standalone-chrome
+   volumes:
+     - '/dev/shm:/dev/shm'
 
   # codeception
   codeception:
     image: registry.nevercodealone.de/nevercodealone/docker-codeception
     environment:
-      BROWSER_URL: http://server
       DB_HOST: db
       DB_NAME: nca
       DB_USER: nca
       DB_PASS: nca
-      WEBDRIVER_URL: selenium
+      WEBSITE_IP: server
+      WEBDRIVER_URL: webdriver
+      WEBSITE_URL: http://server
     command: tail -f /dev/null
     ports:
       - '8081:80'
     volumes:
       - application:/project
-    depends_on:
-      - server
-      - db
-      - selenium
     restart: always
 
 volumes:

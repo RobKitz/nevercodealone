@@ -33,7 +33,7 @@ test:app:
     - name: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
       alias: website
     - name: selenium/standalone-chrome
-      alias: selenium
+      alias: webdriver
   variables:
     DATABASE_URL: mysql://nca:nca@db/nca
     DB_HOST: db
@@ -44,7 +44,7 @@ test:app:
     MYSQL_PASSWORD: nca
     MYSQL_ROOT_PASSWORD: nca
     MYSQL_USER: nca
-    WEBDRIVER_URL: selenium
+    WEBDRIVER_URL: webdriver
     WEBSITE_URL: http://website
   before_script:
     # services don't know each other so we have to export their IP address
