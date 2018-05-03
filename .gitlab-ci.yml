@@ -31,7 +31,7 @@ test:app:
     - name: mariadb
       alias: db
     - name: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
-      alias: nevercodealone
+      alias: website
     - name: selenium/standalone-chrome
       alias: selenium
   variables:
@@ -45,11 +45,11 @@ test:app:
     MYSQL_ROOT_PASSWORD: nca
     MYSQL_USER: nca
     WEBDRIVER_URL: selenium
-    WEBSITE_URL: http://nevercodealone
+    WEBSITE_URL: http://website
   before_script:
     # services don't know each other so we have to export their IP address
     # if they need to reach each other
-    - export WEBSITE_IP=$(grep 'nevercodealone' /etc/hosts | awk '{print $1}')
+    - export WEBSITE_IP=$(grep 'website' /etc/hosts | awk '{print $1}')
   script:
     - cat /etc/hosts
     - echo $WEBSITE_IP
