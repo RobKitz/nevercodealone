@@ -6,7 +6,6 @@ services:
   server:
     image: registry.nevercodealone.de/nevercodealone/nevercodealone
     environment:
-      CORS_ALLOW_ORIGIN: '^https?://(.*\.)?server:?[0-9]*$$'
       DATABASE_URL: mysql://nca:nca@db/nca
     ports:
       - '8080:80'
