@@ -57,6 +57,8 @@ test:app:
   artifacts:
     paths:
       - test/_output/*
+  tags:
+    - docker-executor
 
 #deploy:staging:
 #  stage: test
