@@ -48,7 +48,7 @@ test:app:
   before_script:
     # services don't know each other so we have to export their IP address
     # if they need to reach each other
-    - export WEBSITE_URL="http://$(grep 'nevercodealone' /etc/hosts | awk '{print $1}')""
+    - export WEBSITE_URL="http://$(grep 'nevercodealone' /etc/hosts | awk '{print $1}')"
   script:
     - sleep 8
     - codecept build
