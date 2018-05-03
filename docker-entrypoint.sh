@@ -1,5 +1,7 @@
 #!/bin/bash
 
+chown -R www-data: /var/www
+
 if [[ $APP_ENV == 'prod' ]]; then
     COMPOSER_FLAGS='--no-dev'
 fi
