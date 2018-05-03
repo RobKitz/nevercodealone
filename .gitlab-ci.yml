@@ -35,7 +35,6 @@ test:app:
     - name: selenium/standalone-chrome
       alias: selenium
   variables:
-    BROWSER_URL: http://nevercodealone/
     DATABASE_URL: mysql://nca:nca@db/nca
     DB_HOST: db
     DB_NAME: nca
@@ -46,6 +45,10 @@ test:app:
     MYSQL_ROOT_PASSWORD: nca
     MYSQL_USER: nca
     WEBDRIVER_URL: selenium
+  before_script:
+    # services don't know each other so we have to export their IP address
+    # if they need to reach each other
+    - export WEBSITE_URL=$(grep 'nevercodealone' /etc/hosts | awk '{print $1}')
   script:
     - sleep 8
     - codecept build

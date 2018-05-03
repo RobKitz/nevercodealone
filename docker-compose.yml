@@ -26,24 +26,8 @@ services:
     restart: always
 
   # selenium container
-  chrome:
-    image: selenium/node-chrome
-    volumes:
-      - /dev/shm:/dev/shm
-    depends_on:
-      - hub
-    environment:
-      HUB_HOST: hub
-#  firefox:
-#    image: selenium/node-firefox
-#    volumes:
-#      - /dev/shm:/dev/shm
-#    depends_on:
-#      - hub
-#    environment:
-#      HUB_HOST: hub
-  hub:
-    image: selenium/hub
+  selenium:
+    image: selenium/standalone-chrome
 
   # codeception
   codeception:
@@ -54,7 +38,7 @@ services:
       DB_NAME: nca
       DB_USER: nca
       DB_PASS: nca
-      WEBDRIVER_URL: hubbroken
+      WEBDRIVER_URL: selenium
     command: tail -f /dev/null
     ports:
       - '8081:80'
@@ -63,7 +47,7 @@ services:
     depends_on:
       - server
       - db
-      - hub
+      - selenium
     restart: always
 
 volumes:
