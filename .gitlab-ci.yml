@@ -14,15 +14,15 @@ stages:
 #--- JOBS -----------------------------------------------------------------------------------------
 
 build:branch:
-stage: build
-image: docker
-before_script:
-  - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
-script:
-  - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG .
-  - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
-tags:
-  - docker-executor
+  stage: build
+  image: docker
+  before_script:
+    - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
+  script:
+    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG .
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
+  tags:
+    - docker-executor
 
 test:app:
   stage: test
