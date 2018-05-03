@@ -14,7 +14,7 @@ modules:
         WebDriver:
           host: '%WEBDRIVER_URL%'
           url: 'http://%WEBSITE_IP%'
-          browser: firefox
+          browser: chrome
           window_size: 1600x1000
           connection_timeout: 3
           request_timeout: 5

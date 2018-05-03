@@ -13,16 +13,16 @@ stages:
 
 #--- JOBS -----------------------------------------------------------------------------------------
 
-#build:branch:
-# stage: build
-# image: docker
-# before_script:
-#   - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
-# script:
-#   - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG .
-#   - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
-# tags:
-#   - docker-executor
+build:branch:
+stage: build
+image: docker
+before_script:
+  - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
+script:
+  - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG .
+  - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
+tags:
+  - docker-executor
 
 test:app:
   stage: test
@@ -32,7 +32,7 @@ test:app:
       alias: db
     - name: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
       alias: website
-    - name: selenium/standalone-firefox
+    - name: selenium/standalone-chrome
       alias: selenium
   variables:
     DATABASE_URL: mysql://nca:nca@db/nca
