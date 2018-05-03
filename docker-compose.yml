@@ -34,14 +34,14 @@ services:
       - hub
     environment:
       HUB_HOST: hub
-  firefox:
-    image: selenium/node-firefox
-    volumes:
-      - /dev/shm:/dev/shm
-    depends_on:
-      - hub
-    environment:
-      HUB_HOST: hub
+#  firefox:
+#    image: selenium/node-firefox
+#    volumes:
+#      - /dev/shm:/dev/shm
+#    depends_on:
+#      - hub
+#    environment:
+#      HUB_HOST: hub
   hub:
     image: selenium/hub
 
@@ -54,7 +54,8 @@ services:
       DB_NAME: nca
       DB_USER: nca
       DB_PASS: nca
-      WEBDRIVER_URL: hub
+      WEBDRIVER_URL: hubbroken
+    command: tail -f /dev/null
     ports:
       - '8081:80'
     volumes:

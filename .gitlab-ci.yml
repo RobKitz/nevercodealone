@@ -49,7 +49,7 @@ test:app:
   script:
     - sleep 8
     - codecept build
-    - codecept run -vvv --report
+    - codecept run
 
 #deploy:staging:
 #  stage: test

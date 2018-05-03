@@ -16,6 +16,8 @@ modules:
           url: '%BROWSER_URL%'
           browser: chrome
           window_size: 1600x1000
+          connection_timeout: 5
+          request_timeout: 5
 env:
     phantomjs:
         modules:
