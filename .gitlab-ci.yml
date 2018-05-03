@@ -32,7 +32,7 @@ test:app:
       alias: db
     - name: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
       alias: website
-    - name: selenium/standalone-chrome
+    - name: selenium/standalone-firefox
       alias: selenium
   variables:
     DATABASE_URL: mysql://nca:nca@db/nca
@@ -54,6 +54,9 @@ test:app:
     - sleep 8
     - codecept build
     - codecept run -vvv --html
+  artifacts:
+    paths:
+      - test/_output/*
 
 #deploy:staging:
 #  stage: test
