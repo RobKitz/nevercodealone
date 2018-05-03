@@ -16,18 +16,17 @@ RUN sudo -u www-data composer install \
 # apache setup
 COPY apache.conf /etc/apache2/sites-available/symfony.conf
 RUN a2dissite 000-default \
- && a2ensite symfony
-RUN a2enmod rewrite
+ && a2ensite symfony \
+ && a2enmod rewrite
 
 # entrypoint
 COPY docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
 
 # project setup
 WORKDIR /var/www/symfony
-VOLUME /var/www/symfony
 COPY . .
 RUN chown -R www-data: .
+VOLUME /var/www/symfony
 
 EXPOSE 80
 ENTRYPOINT ["/docker-entrypoint.sh"]
