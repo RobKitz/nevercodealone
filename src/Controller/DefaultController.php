@@ -36,6 +36,22 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/ncaevents/")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function ncaeventsAction()
+    {
+        return $this->render(
+            'pages/nca-events.html.twig',
+            [
+                'title' => '#NCAEvents - Employer Branding für Webdevelopment Jobs als Community Event',
+                'description' => 'Gute Webdeveloper suchen gute Arbeitgeber und möchten einen persönlichen Eindruck vom Team und der Technologie bekommen.',
+                'smImage' => 'https://nevercodealone.de/unity/nca-paas/nca-paas.jpg'
+            ]
+        );
+    }
+
+    /**
      * @Route("/vorverkauf/")
      */
     public function vorverkaufAction()
