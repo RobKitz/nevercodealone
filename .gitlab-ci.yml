@@ -13,16 +13,16 @@ stages:
 
 #--- JOBS -----------------------------------------------------------------------------------------
 
-build:branch:
-  stage: build
-  image: docker
-  before_script:
-    - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
-  script:
-    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG .
-    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
-  tags:
-    - docker-executor
+#build:branch:
+#  stage: build
+#  image: docker
+#  before_script:
+#    - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
+#  script:
+#    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG .
+#    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
+#  tags:
+#    - docker-executor
 
 test:app:
   stage: test
@@ -37,7 +37,6 @@ test:app:
       alias: selenium
   variables:
     APP_ENV: dev
-    DATABASE_URL: mysql://nca:nca@db/nca
     DB_HOST: db
     DB_NAME: nca
     DB_USER: nca
@@ -52,9 +51,11 @@ test:app:
     # services don't know each other so we have to export their IP address
     # if they need to reach each other
     - export WEBSITE_IP=$(grep 'website' /etc/hosts | awk '{print $1}')
+    - export DATABASE_IP=$(grep 'db' /etc/hosts | awk '{print $1}')
+    - export DATABASE_URL="mysql://nca:nca@${DATABASE_IP}/nca"
   script:
     - 'echo "APP_ENV: ${APP_ENV}"'
-    - sleep 20
+    - sleep 10
     - mysql -h db -u nca -pnca -e "use nca; show tables;"
     #- codecept build
     #- codecept run -vvv --html
