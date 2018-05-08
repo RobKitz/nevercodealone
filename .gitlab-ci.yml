@@ -33,7 +33,7 @@ test:app:
     - name: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
       alias: website
     - name: selenium/standalone-chrome
-      alias: webdriver
+      alias: selenium
   variables:
     DATABASE_URL: mysql://nca:nca@db/nca
     DB_HOST: db
@@ -44,14 +44,14 @@ test:app:
     MYSQL_PASSWORD: nca
     MYSQL_ROOT_PASSWORD: nca
     MYSQL_USER: nca
-    WEBDRIVER_URL: webdriver
+    WEBDRIVER_URL: selenium
     WEBSITE_URL: http://website
   before_script:
     # services don't know each other so we have to export their IP address
     # if they need to reach each other
     - export WEBSITE_IP=$(grep 'website' /etc/hosts | awk '{print $1}')
   script:
-    - sleep 8
+    - sleep 10
     - codecept build
     - codecept run -vvv --html
   artifacts:
