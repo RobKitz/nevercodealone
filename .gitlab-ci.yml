@@ -27,9 +27,9 @@ stages:
 test:app:
   stage: test
   #image: registry.nevercodealone.de/nevercodealone/docker-codeception:gitlab-ci-integrated
-  image: mariadatabase
+  image: mariadb
   services:
-    - name: mariadatabase
+    - name: mariadb
       alias: database
     - name: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
       alias: website
