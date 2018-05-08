@@ -30,14 +30,14 @@ test:app:
   image: mariadb
   services:
     - name: mariadb
-      alias: db
+      alias: database
     - name: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
       alias: website
     - name: selenium/standalone-chrome
       alias: selenium
   variables:
     APP_ENV: dev
-    DB_HOST: db
+    DB_HOST: database
     DB_NAME: nca
     DB_USER: nca
     DB_PASS: nca
@@ -51,7 +51,7 @@ test:app:
     # services don't know each other so we have to export their IP address
     # if they need to reach each other
     - export WEBSITE_IP=$(grep 'website' /etc/hosts | awk '{print $1}')
-    - export DATABASE_IP=$(grep 'db' /etc/hosts | awk '{print $1}')
+    - export DATABASE_IP=$(grep 'database' /etc/hosts | awk '{print $1}')
     - export DATABASE_URL="mysql://nca:nca@${DATABASE_IP}/nca"
   script:
     - 'echo "APP_ENV: ${APP_ENV}"'
