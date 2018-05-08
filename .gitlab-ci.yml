@@ -13,21 +13,20 @@ stages:
 
 #--- JOBS -----------------------------------------------------------------------------------------
 
-#build:branch:
-#  stage: build
-#  image: docker
-#  before_script:
-#    - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
-#  script:
-#    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG .
-#    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
-#  tags:
-#    - docker-executor
+build:branch:
+  stage: build
+  image: docker
+  before_script:
+    - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
+  script:
+    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG .
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
+  tags:
+    - docker-executor
 
 test:app:
   stage: test
-  #image: registry.nevercodealone.de/nevercodealone/docker-codeception:gitlab-ci-integrated
-  image: mariadb
+  image: registry.nevercodealone.de/nevercodealone/docker-codeception:gitlab-ci-integrated
   services:
     - name: mariadb
       alias: db
@@ -36,6 +35,7 @@ test:app:
     - name: selenium/standalone-chrome
       alias: selenium
   variables:
+    APP_ENV: dev
     DATABASE_URL: mysql://nca:nca@db/nca
     DB_HOST: db
     DB_NAME: nca
@@ -52,11 +52,10 @@ test:app:
     # if they need to reach each other
     - export WEBSITE_IP=$(grep 'website' /etc/hosts | awk '{print $1}')
   script:
-    - echo $APP_ENV
-    - sleep 20
-    - mysql -h db -u nca -pnca -e "show databases; use nca; show tables;"
-    #- codecept build
-    #- codecept run -vvv --html
+    - echo "APP_ENV: ${APP_ENV}"
+    - sleep 10
+    - codecept build
+    - codecept run -vvv --html
   artifacts:
     when: always
     paths:
