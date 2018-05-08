@@ -52,7 +52,7 @@ test:app:
     # if they need to reach each other
     - export WEBSITE_IP=$(grep 'website' /etc/hosts | awk '{print $1}')
   script:
-    - echo "APP_ENV: ${APP_ENV}"
+    - 'echo "APP_ENV: ${APP_ENV}"'
     - sleep 10
     - codecept build
     - codecept run -vvv --html
