@@ -26,7 +26,8 @@ build:branch:
 
 test:app:
   stage: test
-  image: registry.nevercodealone.de/nevercodealone/docker-codeception:gitlab-ci-integrated
+  #image: registry.nevercodealone.de/nevercodealone/docker-codeception:gitlab-ci-integrated
+  image: mariadb
   services:
     - name: mariadb
       alias: db
@@ -52,8 +53,9 @@ test:app:
     - export WEBSITE_IP=$(grep 'website' /etc/hosts | awk '{print $1}')
   script:
     - sleep 20
-    - codecept build
-    - codecept run -vvv --html
+    - mysql -h db -u nca -pnca -e "show databases; use nca; show tables;"
+    #- codecept build
+    #- codecept run -vvv --html
   artifacts:
     when: always
     paths:

@@ -2,13 +2,13 @@ class_name: ApiTester
 modules:
     enabled:
        - PhpBrowser:
-             url: 'http://%WEBSITE_IP%'
+             url: '%WEBSITE_URL%'
              clear_cookies: false
              restart: false
              curl:
                CURLOPT_RETURNTRANSFER: true
        - REST:
-             url: 'http://%WEBSITE_IP%'
+             url: '%WEBSITE_URL%'
              depends: PhpBrowser
              part: Json
        - Asserts
