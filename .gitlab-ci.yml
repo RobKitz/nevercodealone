@@ -55,6 +55,19 @@ test:app:
     - export DATABASE_URL="mysql://nca:nca@${DATABASE_IP}/nca"
   script:
     - 'echo "APP_ENV: ${APP_ENV}"'
+    - 'echo "WEBSITE_IP: ${WEBSITE_IP}"'
+    - 'echo "DATABASE_IP: ${DATABASE_IP}"'
+    - 'echo "DATABASE_URL: ${DATABASE_URL}"'
+    - sleep 10
+    - mysql -h db -u nca -pnca -e "use nca; show tables;"
+    - sleep 10
+    - mysql -h db -u nca -pnca -e "use nca; show tables;"
+    - sleep 10
+    - mysql -h db -u nca -pnca -e "use nca; show tables;"
+    - sleep 10
+    - mysql -h db -u nca -pnca -e "use nca; show tables;"
+    - sleep 10
+    - mysql -h db -u nca -pnca -e "use nca; show tables;"
     - sleep 10
     - mysql -h db -u nca -pnca -e "use nca; show tables;"
     #- codecept build
