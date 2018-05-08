@@ -55,6 +55,7 @@ test:app:
     - codecept build
     - codecept run -vvv --html
   artifacts:
+    when: always
     paths:
       - test/_output/*
   tags:
