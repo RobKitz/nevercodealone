@@ -51,7 +51,7 @@ test:app:
     # if they need to reach each other
     - export WEBSITE_IP=$(grep 'website' /etc/hosts | awk '{print $1}')
   script:
-    - sleep 10
+    - sleep 20
     - codecept build
     - codecept run -vvv --html
   artifacts:
