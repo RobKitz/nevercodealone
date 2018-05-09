@@ -53,6 +53,7 @@ test:app:
   script:
     - cat /etc/hosts
     - 'echo "APP_ENV: ${APP_ENV}"'
+    - composer install
     - bin/console doctrine:schema:create
     - mysql -h database -u nca -pnca -e "use nca; show tables;"
     - /usr/sbin/apachectl
