@@ -9,7 +9,8 @@ sudo -u www-data composer install $COMPOSER_FLAGS
 if [[ $APP_ENV == 'dev' ]]; then
 #    sleep 5
 #    bin/console doctrine:schema:create
-    exec "$@"
+    /usr/sbin/apachectl start
+    sudo -u www-data exec "$@"
 else
     /usr/sbin/apachectl -DFOREGROUND
 fi

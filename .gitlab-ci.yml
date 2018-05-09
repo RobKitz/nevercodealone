@@ -52,9 +52,7 @@ test:app:
     - export WEBSITE_IP=$(tail -n1 /etc/hosts | awk '{print $1}')
   script:
     - 'echo "APP_ENV: ${APP_ENV}"'
-    - composer install
     - bin/console doctrine:schema:create
-    - /usr/sbin/apachectl start
     - codecept build
     - codecept run -vvv --html
   artifacts:
