@@ -13,63 +13,50 @@ stages:
 
 #--- JOBS -----------------------------------------------------------------------------------------
 
-#build:branch:
-#  stage: build
-#  image: docker
-#  before_script:
-#    - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
-#  script:
-#    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG .
-#    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
-#  tags:
-#    - docker-executor
+build:branch:
+  stage: build
+  image: docker
+  before_script:
+    - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
+  script:
+    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG .
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
+  tags:
+    - docker-executor
 
 test:app:
   stage: test
-  #image: registry.nevercodealone.de/nevercodealone/docker-codeception:gitlab-ci-integrated
-  image: mariadb
+#  image: $CI_REGISTRY/nevercodealone/docker-codeception:gitlab-ci-integrated
+  image: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
   services:
     - name: mariadb
       alias: database
-    - name: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
-      alias: website
     - name: selenium/standalone-chrome
       alias: selenium
   variables:
     APP_ENV: dev
-    DB_HOST: database
-    DB_NAME: nca
-    DB_USER: nca
-    DB_PASS: nca
+    DATABASE_URL: mysql://nca:nca@database/nca
+    DATABASE_HOST: database
+    DATABASE_NAME: nca
+    DATABASE_USER: nca
+    DATABASE_PASS: nca
     MYSQL_DATABASE: nca
     MYSQL_PASSWORD: nca
     MYSQL_ROOT_PASSWORD: nca
     MYSQL_USER: nca
     WEBDRIVER_URL: selenium
-    WEBSITE_URL: http://website
+    WEBSITE_URL: http://127.0.0.1
   before_script:
     # services don't know each other so we have to export their IP address
     # if they need to reach each other
     - export WEBSITE_IP=$(grep 'website' /etc/hosts | awk '{print $1}')
-    - export DATABASE_IP=$(grep 'database' /etc/hosts | awk '{print $1}')
-    - export DATABASE_URL="mysql://nca:nca@${DATABASE_IP}/nca"
   script:
+    - cat /etc/hosts
     - 'echo "APP_ENV: ${APP_ENV}"'
-    - 'echo "WEBSITE_IP: ${WEBSITE_IP}"'
-    - 'echo "DATABASE_IP: ${DATABASE_IP}"'
-    - 'echo "DATABASE_URL: ${DATABASE_URL}"'
-    - sleep 10
+    - bin/console doctrine:schema:create
     - mysql -h database -u nca -pnca -e "use nca; show tables;"
-    - sleep 10
-    - mysql -h database -u nca -pnca -e "use nca; show tables;"
-    - sleep 10
-    - mysql -h database -u nca -pnca -e "use nca; show tables;"
-    - sleep 10
-    - mysql -h database -u nca -pnca -e "use nca; show tables;"
-    - sleep 10
-    - mysql -h database -u nca -pnca -e "use nca; show tables;"
-    - sleep 10
-    - mysql -h database -u nca -pnca -e "use nca; show tables;"
+    - /usr/sbin/apachectl
+    - curl -vL $WEBSITE_URL
     #- codecept build
     #- codecept run -vvv --html
   artifacts:
