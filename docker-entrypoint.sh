@@ -10,6 +10,7 @@ if [[ $APP_ENV == 'dev' ]]; then
 #    sleep 5
 #    bin/console doctrine:schema:create
     /usr/sbin/apachectl start
+    sudo -u www-data bash -c "$@"
 else
     /usr/sbin/apachectl -DFOREGROUND
 fi

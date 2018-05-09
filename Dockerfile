@@ -30,5 +30,4 @@ VOLUME /var/www/symfony
 
 EXPOSE 80
 ENTRYPOINT ["/docker-entrypoint.sh"]
-USER www-data
 
