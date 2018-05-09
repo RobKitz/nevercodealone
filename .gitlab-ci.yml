@@ -49,13 +49,13 @@ test:app:
   before_script:
     # services don't know each other so we have to export their IP address
     # if they need to reach each other
-    - export WEBSITE_IP=$(grep 'website' /etc/hosts | awk '{print $1}')
+    - export WEBSITE_IP=$(tail -n1 /etc/hosts | awk '{print $1}')
   script:
     - cat /etc/hosts
     - 'echo "APP_ENV: ${APP_ENV}"'
     - composer install
     - bin/console doctrine:schema:create
-    - /usr/sbin/apachectl
+    - /usr/sbin/apachectl start
     - curl -vL $WEBSITE_URL
     #- codecept build
     #- codecept run -vvv --html
