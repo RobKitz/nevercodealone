@@ -22,6 +22,7 @@
 
 .parallax-40 {
     background-image: url("/img/kontakt.jpg");
+    background-color: #5e5e5e;
 }
 
 #trigger-overlay span:before, #trigger-overlay span:after {
