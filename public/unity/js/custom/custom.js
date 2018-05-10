@@ -57,8 +57,6 @@ $(document).ready(function() {
                 "margin-right": "0"
             }, 500);
         }
-
-        e.preventDefault();
     });
 
     var owl = $('.single-image-carousel');
