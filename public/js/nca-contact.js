@@ -30,4 +30,28 @@ $(function() {
 
         return false;
     });
-}
+
+    $("#hide, #show, .nca-contact").click(function(e) {
+        if ($("#show").is(":visible")) {
+
+            $("#show").animate({
+                "margin-right": "-400px"
+            }, 500, function() {
+                $(this).hide();
+            });
+
+            $("#switch").animate({
+                "margin-right": "0px"
+            }, 500).show();
+        } else {
+            $("#switch").animate({
+                "margin-right": "-400px"
+            }, 500, function() {
+                $(this).hide();
+            });
+            $("#show").show().animate({
+                "margin-right": "0"
+            }, 500);
+        }
+    });
+});
