@@ -52,6 +52,22 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/impressum/")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function impressumAction()
+    {
+        return $this->render(
+            'pages/impressum.html.twig',
+            [
+                'title' => 'Impressum Never Code Alone',
+                'description' => 'Das Impressum von Never Code Alone mit Anschrift, Kontakt und Inhalt.',
+                'smImage' => 'https://nevercodealone.de/unity/nca-paas/nca-paas.jpg'
+            ]
+        );
+    }
+
+    /**
      * @Route("/vorverkauf/")
      */
     public function vorverkaufAction()
