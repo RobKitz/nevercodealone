@@ -94,8 +94,7 @@ class spamProtectionCest
     protected function validIpsProvider() // alternatively, if you want the function to be public, be sure to prefix it with `_`
     {
         return [
-            ['176.95.142.6'], // DE
-            ['72.229.28.185'] // USA
+            ['176.95.142.6'] // DE
         ];
     }
 

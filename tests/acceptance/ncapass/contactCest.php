@@ -27,7 +27,7 @@ class contactCest
         $I->fillField('#phone', '112');
         $I->fillField('#message', $inputData['message']);
 
-        $I->click('#frm_contact > div > div.button > button');
+        $I->click('#nca-form > div > div.button > button');
         $I->waitForText('Danke wir melden uns');
 
         $inputData['message'] = 'email|112|Testify right here';

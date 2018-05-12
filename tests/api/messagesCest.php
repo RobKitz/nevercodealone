@@ -16,7 +16,7 @@ class messagesCest
             'name'    => $name,
             'email'   => $email,
             'message' => $message,
-            'ip'      => '2.175.255.255'
+            'ip'      => '176.95.142.6'
         ];
 
 

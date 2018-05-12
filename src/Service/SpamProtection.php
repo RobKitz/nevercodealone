@@ -9,6 +9,8 @@
 namespace App\Service;
 
 
+use DavidePastore\Ipinfo\Ipinfo;
+
 class SpamProtection
 {
     public $spamWords = [
@@ -76,14 +78,7 @@ class SpamProtection
     }
 
     protected function isIpFromDe(string $ip) {
-        $url = 'https://ipinfo.io/' . $ip;
-
-        $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        $data = json_decode(curl_exec($curl), true);
-        curl_close($curl);
-
-        return $data['country'] === 'DE';
+        return true;
     }
 
     protected function validateEmail(string $email) {
