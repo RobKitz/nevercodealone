@@ -45,7 +45,7 @@ class DefaultController extends Controller
             'pages/nca-events.html.twig',
             [
                 'title' => '#NCAEvents - Employer Branding für Webdevelopment Jobs als Community Event',
-                'description' => 'Gute Webdeveloper suchen gute Arbeitgeber und möchten einen persönlichen Eindruck vom Team und der Technologie bekommen.',
+                'description' => 'Perfektes Employer Branding - Webdeveloper Jobs über Community Events & Social Media Marketing präsentieren',
                 'smImage' => 'https://nevercodealone.de/unity/nca-paas/nca-paas.jpg'
             ]
         );
