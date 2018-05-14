@@ -22,7 +22,7 @@ class MessagesController extends Controller
 
         $data = json_decode($request->getContent(), true);
 
-        if(!isset($data['name']) || !isset($data['email']) || !isset($data['message']) || !isset($data['ip'])) {
+        if(!isset($data['name']) || !isset($data['email']) || !isset($data['message'])) {
             return new JsonResponse(
                 'messagesAction has not set values',
                 401
@@ -32,7 +32,7 @@ class MessagesController extends Controller
         $name = $data['name'];
         $email = $data['email'];
         $message = $data['message'];
-        $ip = $data['ip'];
+        $ip = $request->getClientIp();;
 
         if($name === '' || $email === '' || $message === '' || $ip === '') {
             return new JsonResponse(
