@@ -2,5 +2,5 @@
     <meta name="twitter:title" content="{{ title }}" />
     <meta name="twitter:description" content="{{ description }}" />
     <meta name="twitter:site" content="@nevercodealone" />
-    <meta name="twitter:image" content="{{ smImage }}" />
+    <meta name="twitter:image" content="{% if smTwitter is defined %}{{ smTwitter }}{% else %}{{ smImage }}{% endif %}" />
     <meta name="twitter:creator" content="@nevercodealone" />
