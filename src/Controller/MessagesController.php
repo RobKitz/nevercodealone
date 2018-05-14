@@ -32,7 +32,7 @@ class MessagesController extends Controller
         $name = $data['name'];
         $email = $data['email'];
         $message = $data['message'];
-        $ip = $request->getClientIp();;
+        $ip = $data['ip'] = $request->getClientIp();;
 
         if($name === '' || $email === '' || $message === '' || $ip === '') {
             return new JsonResponse(

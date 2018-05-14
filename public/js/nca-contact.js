@@ -5,16 +5,16 @@ $(function() {
         e.preventDefault();
         var url = "/api/messages"; // the script where you handle the form input.
 
-        var message = $('#reason').val() + '|' + $('#phone').val() + '|' + $('#message').val();
+        var message = $('#reason').val() + '|' + $('#phone').val() + '|' + $('#messagefield').val();
 
         var data = JSON.stringify(
             {
-                "name": $('#name').val(),
-                "email": $('#email').val(),
+                "name": $("#namefield").val(),
+                "email": $('#emailfield').val(),
                 "message": message
             }
         );
-
+        console.log('data', data);
         $.ajax({
             type: "POST",
             url: url,

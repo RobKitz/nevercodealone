@@ -22,10 +22,10 @@ class contactCest
 
         $I->click('#setting > i');
         $I->wait(1);
-        $I->fillField('#name', $inputData['name']);
-        $I->fillField('#email', $inputData['email']);
+        $I->fillField('#namefield', $inputData['name']);
+        $I->fillField('#emailfield', $inputData['email']);
         $I->fillField('#phone', '112');
-        $I->fillField('#message', $inputData['message']);
+        $I->fillField('#messagefield', $inputData['message']);
 
         $I->click('#nca-form > div > div.button > button');
         $I->waitForText('Danke wir melden uns');
