@@ -36,13 +36,13 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/ncaevents/")
+     * @Route("/employer-branding/")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function ncaeventsAction()
+    public function employerbrandingAction()
     {
         return $this->render(
-            'pages/nca-events.html.twig',
+            'pages/employer-branding.html.twig',
             [
                 'title' => '#NCAEvents - Employer Branding für Webdevelopment Jobs als Community Event',
                 'description' => 'Perfektes Employer Branding - Webdeveloper Jobs über Community Events & Social Media Marketing präsentieren',
