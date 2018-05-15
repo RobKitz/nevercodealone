@@ -8,10 +8,6 @@
     background-color: unset;
 }
 
-.description {
-    font-size: 25px;
-}
-
 .parallax-33 {
     background-image: url("/img/zufriedene-kunden.jpg");
 }
@@ -23,6 +19,10 @@
 .parallax-40 {
     background-image: url("/img/kontakt.jpg");
     background-color: #5e5e5e;
+}
+
+.testimonial-03 .description {
+    font-size: 25px;
 }
 
 #trigger-overlay span:before, #trigger-overlay span:after {
@@ -45,6 +45,10 @@
 @media (max-width: 768px) and (min-width: 320px) {
     header.home-36 {
         position: relative;
+    }
+
+    .testimonial-03 .description {
+        font-size: 16px;
     }
 }
 
