@@ -46,7 +46,7 @@ class DefaultController extends Controller
             [
                 'title' => '#NCAEvents - Employer Branding für Webdevelopment Jobs als Community Event',
                 'description' => 'Perfektes Employer Branding - Webdeveloper Jobs über Community Events & Social Media Marketing präsentieren',
-                'smImage' => 'https://nevercodealone.de/img/employer-branding-facebook.jpg',
+                'smImage' => 'https://nevercodealone.de/img/employer-branding-facebook-new.jpg',
                 'smTwitter' => 'https://nevercodealone.de/img/employer-branding-twitter.jpg'
             ]
         );
