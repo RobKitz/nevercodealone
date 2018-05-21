@@ -1,101 +1,46 @@
----
 #--- STAGES ---------------------------------------------------------------------------------------
-# build:      create docker images and dependencies
-# test:       deploy staging environment to container host and run tests
-# deploy:     deploy application to production
-# teardown:   remove application (trigger: manual)
+# build:        create docker data image
+# static_test:  run static tests in data container
+# deploy:       deploy application to staging
+# dynamic_test: test deployed staging environment
+image: docker:latest
+
 stages:
   - build
-  - test
-  - deploy
-  - teardown
-
 
 #--- JOBS -----------------------------------------------------------------------------------------
-
-build:branch:
+build:production:
   stage: build
-  image: docker
+  image: composer
   before_script:
-    - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
+    - composer selfupdate
   script:
-    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG .
-    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
-  tags:
-    - docker-executor
-
-test:app:
-  stage: test
-#  image: $CI_REGISTRY/nevercodealone/docker-codeception:gitlab-ci-integrated
-  image: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
-  services:
-    - name: mariadb
-      alias: database
-    - name: selenium/standalone-chrome
-      alias: selenium
-  variables:
-    APP_ENV: dev
-    DATABASE_URL: mysql://nca:nca@database/nca
-    DATABASE_HOST: database
-    DATABASE_NAME: nca
-    DATABASE_USER: nca
-    DATABASE_PASS: nca
-    MYSQL_DATABASE: nca
-    MYSQL_PASSWORD: nca
-    MYSQL_ROOT_PASSWORD: nca
-    MYSQL_USER: nca
-    WEBDRIVER_URL: selenium
-    WEBSITE_URL: http://127.0.0.1
-  before_script:
-    # services don't know each other so we have to export their IP address
-    # if they need to reach each other
-    - export WEBSITE_IP=$(tail -n1 /etc/hosts | awk '{print $1}')
-  script:
-    - 'echo "APP_ENV: ${APP_ENV}"'
-    - bin/console doctrine:schema:create
-    - codecept build
-    - codecept run -vvv --html
+    - composer install -d $CI_PROJECT_DIR --optimize-autoloader --no-dev
   artifacts:
-    when: always
     paths:
-      - tests/_output/*
+    - $CI_PROJECT_DIR
+    expire_in: 3 days
+    when: on_success
   tags:
+    - build
     - docker-executor
+  only:
+    - master
 
-#deploy:staging:
-#  stage: test
-#  image: identt/rancher-compose
-#  environment:
-#    name: staging
-#    url: "output.${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
-#  variables:
-#    CORS_ALLOW_ORIGIN: '^https?://(.*\.)?nevercodealone.de:?[0-9]*$$'
-#    DATABASE_URL: mysql://nca:nca@database/nca
-#    DATABASE_HOST: database
-#    DATABASE_NAME: nca
-#    DATABASE_USER: nca
-#    DATABASE_PASS: nca
-#    TRAEFIK_DOMAIN: "develop.nevercodealone.de"
-#    TRAEFIK_URL: "${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
-#    BROWSER_URL: "${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
-#    OUTPUT_URL: "output.${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
-#    WEBDRIVER_URL: selenium.stage.nevercodealone.de
-#  script:
-#    - rancher-compose -f docker-compose-ci.yml -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
-#    - rancher-compose -f docker-compose-ci.yml -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG up -d
-#    - sleep 10
-#    - curl -sSL "output.${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}/runtest"
-#  tags:
-#    - docker-executor
-#  except:
-#    - master
-
-#teardown:
-#  stage: teardown
-#  image: identt/rancher-compose
-#  script:
-#    - rancher-compose -f docker-compose-ci.yml -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
-#  tags:
-#    - docker-executor
-#  when: manual
-
+build:develop:
+  stage: build
+  image: composer
+  before_script:
+    - composer selfupdate
+  script:
+    - composer install -d $CI_PROJECT_DIR
+  artifacts:
+    paths:
+    - $CI_PROJECT_DIR
+    expire_in: 3 days
+    when: on_success
+  tags:
+    - build
+    - docker-executor
+  only:
+    - develop
