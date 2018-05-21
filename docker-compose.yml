@@ -1,18 +1,22 @@
----
-version: '3.2'
+version: '2'
 services:
-
   # website
   server:
     image: registry.nevercodealone.de/nevercodealone/nevercodealone
     environment:
       DATABASE_URL: mysql://nca:nca@db/nca
-    ports:
-      - '8080:80'
     volumes:
       - application:/var/www/symfony
     restart: always
-
+    labels:
+      traefik.domain: develop.nevercodealone.de,
+      traefik.enable: true,
+      traefik.port: 80,
+      traefik.docker.network: proxy,
+      traefik.frontend.redirect.entryPoint: https,
+      traefik.frontend.passHostHeader: true,
+      traefik.acme: true,
+      traefik.frontend.entryPoints: http,https
   # database
   db:
     image: mariadb
@@ -22,25 +26,12 @@ services:
       MYSQL_ROOT_PASSWORD: nca
       MYSQL_USER: nca
     restart: always
-
   # toolbox
   toolbox:
     image: registry.nevercodealone.de/nevercodealone/docker-toolbox
-    environment:
-      DB_HOST: db
-      DB_NAME: nca
-      DB_USER: nca
-      DB_PASS: nca
-      WEBSITE_IP: server
-      WEBDRIVER_URL: webdriver
-      WEBSITE_URL: http://server
     command: tail -f /dev/null
-    ports:
-      - '8081:80'
     volumes:
       - application:/project
     restart: always
-
 volumes:
   application:
-

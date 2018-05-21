@@ -86,6 +86,7 @@ create:branch:
   tags:
     - docker-executor
   when: manual
+
 cleanup:branch:
   stage: create_infrastructure
   image: identt/rancher-compose
@@ -95,6 +96,7 @@ cleanup:branch:
     - docker-executor
   except:
     - master
+  when: manual
 
 deploy:branch:
   stage: deploy_branch
@@ -109,14 +111,6 @@ deploy:branch:
   except:
     - master
     - staging
-
-delete:branch:
-  stage: teardown_infrastructure
-  image: identt/rancher-compose
-  script:
-    - rancher-compose -f docker-compose-ci.yml -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
-  tags:
-    - docker-executor
   when: manual
 
 test:branch:
@@ -126,3 +120,12 @@ test:branch:
     - ssh root@feature-enablessh.develop.nevercodealone.de "ls -dt"
   tags:
      - docker-executor
+
+delete:branch:
+  stage: teardown_infrastructure
+  image: identt/rancher-compose
+  script:
+    - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
+  tags:
+    - docker-executor
+  when: manual
