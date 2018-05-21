@@ -23,15 +23,9 @@ services:
       MYSQL_USER: nca
     restart: always
 
-  # webdriver container
-  webdriver:
-   image: selenium/standalone-chrome
-   volumes:
-     - '/dev/shm:/dev/shm'
-
-  # codeception
-  codeception:
-    image: registry.nevercodealone.de/nevercodealone/docker-codeception
+  # toolbox
+  toolbox:
+    image: registry.nevercodealone.de/nevercodealone/docker-toolbox
     environment:
       DB_HOST: db
       DB_NAME: nca
