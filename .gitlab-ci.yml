@@ -16,6 +16,8 @@ build:production:
     - composer selfupdate
   script:
     - composer install -d $CI_PROJECT_DIR --optimize-autoloader --no-dev
+    - rm -rf .git
+    - rm -rf .gitlabenv
   artifacts:
     paths:
     - $CI_PROJECT_DIR
@@ -34,6 +36,8 @@ build:develop:
     - composer selfupdate
   script:
     - composer install -d $CI_PROJECT_DIR
+    - rm -rf .git
+    - rm -rf .gitlabenv
   artifacts:
     paths:
     - $CI_PROJECT_DIR
