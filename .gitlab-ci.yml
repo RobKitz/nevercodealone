@@ -123,7 +123,7 @@ test:branch:
   variables:
     GIT_STRATEGY: none
   script:
-    - ssh -vvv root@feature-enablessh.develop.nevercodealone.de "ls -dt"
+    - ssh -vvv root@feature-enablessh.develop.nevercodealone.de -p $SSH_PORT_DEVELOP "ls -dt"
   tags:
      - docker-executor
   dependencies: []
