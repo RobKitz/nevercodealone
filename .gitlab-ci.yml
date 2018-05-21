@@ -10,6 +10,7 @@ stages:
   - static_test
   - create_infrastructure
   - deploy_branch
+  - dynamic_test
   - teardown_infrastructure
 
 #--- JOBS -----------------------------------------------------------------------------------------
@@ -85,15 +86,29 @@ create:branch:
   tags:
     - docker-executor
   when: manual
+cleanup:branch:
+  stage: create_infrastructure
+  image: identt/rancher-compose
+  script:
+    - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
+  tags:
+    - docker-executor
+  except:
+    - master
 
 deploy:branch:
   stage: deploy_branch
-  image: registry.nevercodealone.de/nevercodealone/docker-toolbox
+  image: identt/rancher-compose
+  variables:
+    TRAEFIK_DOMAIN: "develop.nevercodealone.de"
+    TRAEFIK_URL: "${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
   script:
-    - ssh root@feature-enablessh.develop.nevercodealone.de "ls -dt"
+    - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG up -d
   tags:
-     - docker-executor
-
+    - docker-executor
+  except:
+    - master
+    - staging
 
 delete:branch:
   stage: teardown_infrastructure
@@ -103,3 +118,11 @@ delete:branch:
   tags:
     - docker-executor
   when: manual
+
+test:branch:
+  stage: dynamic_test
+  image: registry.nevercodealone.de/nevercodealone/docker-toolbox
+  script:
+    - ssh root@feature-enablessh.develop.nevercodealone.de "ls -dt"
+  tags:
+     - docker-executor
