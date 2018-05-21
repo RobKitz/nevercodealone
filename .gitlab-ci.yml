@@ -123,9 +123,10 @@ test:branch:
   variables:
     GIT_STRATEGY: none
   script:
-    - ssh root@feature-enablessh.develop.nevercodealone.de "ls -dt"
+    - ssh -vvv root@feature-enablessh.develop.nevercodealone.de "ls -dt"
   tags:
      - docker-executor
+  dependencies: []
 
 delete:branch:
   stage: teardown_infrastructure
