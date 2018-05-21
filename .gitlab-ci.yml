@@ -44,3 +44,4 @@ build:develop:
     - docker-executor
   only:
     - develop
+    - enable_ssh
