@@ -90,6 +90,8 @@ create:branch:
 cleanup:branch:
   stage: create_infrastructure
   image: identt/rancher-compose
+  variables:
+    GIT_STRATEGY: none
   script:
     - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
   tags:
@@ -101,6 +103,8 @@ cleanup:branch:
 deploy:branch:
   stage: deploy_branch
   image: identt/rancher-compose
+  variables:
+    GIT_STRATEGY: none
   variables:
     TRAEFIK_DOMAIN: "develop.nevercodealone.de"
     TRAEFIK_URL: "${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
@@ -116,6 +120,8 @@ deploy:branch:
 test:branch:
   stage: dynamic_test
   image: registry.nevercodealone.de/nevercodealone/docker-toolbox
+  variables:
+    GIT_STRATEGY: none
   script:
     - ssh root@feature-enablessh.develop.nevercodealone.de "ls -dt"
   tags:
@@ -124,6 +130,8 @@ test:branch:
 delete:branch:
   stage: teardown_infrastructure
   image: identt/rancher-compose
+  variables:
+    GIT_STRATEGY: none
   script:
     - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
   tags:
