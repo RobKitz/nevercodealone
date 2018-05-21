@@ -7,6 +7,7 @@ image: docker:latest
 
 stages:
   - build
+  - static_test
 
 #--- JOBS -----------------------------------------------------------------------------------------
 build:production:
@@ -49,3 +50,23 @@ build:develop:
   only:
     - develop
     - enable_ssh
+
+test:static:
+  stage: static_test
+  image: php:7.2
+  variables:
+    GIT_STRATEGY: none
+  before_script:
+    - php -v
+    - ./vendor/bin/phpunit --version
+  script:
+    - ./vendor/bin/codecept run unit
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR
+    expire_in: 3 days
+    when: on_success
+  dependencies:
+    - build:develop
+  tags:
+    - docker-executor
