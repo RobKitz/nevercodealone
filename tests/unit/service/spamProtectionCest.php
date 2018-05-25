@@ -63,7 +63,7 @@ class spamProtectionCest
     /**
      * @return array
      */
-    protected function invalidIpsProvider() // alternatively, if you want the function to be public, be sure to prefix it with `_`
+    protected function invalidIpsProvider()
     {
         return [
             [123],
