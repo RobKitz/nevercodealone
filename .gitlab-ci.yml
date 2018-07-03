@@ -123,7 +123,7 @@ test:branch:
   variables:
     GIT_STRATEGY: none
   script:
-    - ssh rancher.nevercodealone.de -p $SSH_PORT_DEVELOP "cd /var/www/symfony && ls -la"
+    - ssh rancher.nevercodealone.de -p $SSH_PORT_DEVELOP "cd /var/www/symfony && ./vendor/bin/codecept run acceptance --html"
   tags:
      - docker-executor
   dependencies: []
