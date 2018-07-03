@@ -1,36 +1,110 @@
----
+#--- STAGES ---------------------------------------------------------------------------------------
+# build:        create docker data image
+# static_test:  run static tests in data container
+# deploy:       deploy application to staging
+# dynamic_test: test deployed staging environment
+image: docker:latest
+
 stages:
   - build
-  - cleanup
-  - deploy
+  - static_test
+  - create_infrastructure
+  - deploy_branch
+  - dynamic_test
+  - teardown_infrastructure
 
-build:
+#--- JOBS -----------------------------------------------------------------------------------------
+build:production:
   stage: build
-  image: docker
+  image: composer
   before_script:
-    - docker info
-    - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
+    - composer selfupdate
   script:
-    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:latest .
-    - docker tag $CI_REGISTRY/$CI_PROJECT_PATH:latest $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
-    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:latest
-    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
+    - composer install -d $CI_PROJECT_DIR --optimize-autoloader --no-dev
+    - rm -rf .git
+    - rm -rf .gitlabenv
+  artifacts:
+    paths:
+    - $CI_PROJECT_DIR
+    expire_in: 3 days
+    when: on_success
+  tags:
+    - build
+    - docker-executor
+  only:
+    - master
+
+build:develop:
+  stage: build
+  image: composer
+  before_script:
+    - composer selfupdate
+  script:
+    - composer install -d $CI_PROJECT_DIR
+    - rm -rf .git
+    - rm -rf .gitlabenv
+  artifacts:
+    paths:
+    - $CI_PROJECT_DIR
+    expire_in: 3 days
+    when: on_success
+  tags:
+    - build
+    - docker-executor
+  only:
+    - develop
+    - enable_ssh
+
+test:static:
+  stage: static_test
+  image: php:7.2
+  variables:
+    GIT_STRATEGY: none
+  before_script:
+    - php -v
+    - ./vendor/bin/phpunit --version
+  script:
+    - ./vendor/bin/codecept run unit
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR
+    expire_in: 3 days
+    when: on_success
+  dependencies:
+    - build:develop
   tags:
     - docker-executor
 
-cleanup:
-  stage: cleanup
+create:branch:
+  stage: create_infrastructure
+  image: docker
+  before_script:
+    - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
+  script:
+    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG .
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
+  tags:
+    - docker-executor
+  when: manual
+
+cleanup:branch:
+  stage: create_infrastructure
   image: identt/rancher-compose
+  variables:
+    GIT_STRATEGY: none
   script:
     - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
   tags:
     - docker-executor
   except:
     - master
+  when: manual
 
-deploy_develop:
-  stage: deploy
+deploy:branch:
+  stage: deploy_branch
   image: identt/rancher-compose
+  variables:
+    GIT_STRATEGY: none
   variables:
     TRAEFIK_DOMAIN: "develop.nevercodealone.de"
     TRAEFIK_URL: "${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
@@ -41,13 +115,27 @@ deploy_develop:
   except:
     - master
     - staging
+  when: manual
 
-teardown:
-  stage: deploy
+test:branch:
+  stage: dynamic_test
+  image: registry.nevercodealone.de/nevercodealone/docker-toolbox
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - ssh rancher.nevercodealone.de -p $SSH_PORT_DEVELOP "ls -la"
+    - ssh rancher.nevercodealone.de -p $SSH_PORT_DEVELOP "cd /project"
+  tags:
+     - docker-executor
+  dependencies: []
+
+delete:branch:
+  stage: teardown_infrastructure
   image: identt/rancher-compose
+  variables:
+    GIT_STRATEGY: none
   script:
     - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
   tags:
     - docker-executor
   when: manual
-

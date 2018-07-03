@@ -2,13 +2,13 @@ class_name: ApiTester
 modules:
     enabled:
        - PhpBrowser:
-             url: http://127.0.0.1:8000
+             url: '%WEBSITE_URL%'
              clear_cookies: false
              restart: false
              curl:
                CURLOPT_RETURNTRANSFER: true
        - REST:
-             url: http://127.0.0.1:8000
+             url: '%WEBSITE_URL%'
              depends: PhpBrowser
              part: Json
        - Asserts
@@ -17,3 +17,4 @@ env:
    fast:
    debug:
    xdebug:
+

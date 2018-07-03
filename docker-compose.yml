@@ -1,21 +1,23 @@
----
 version: '2'
 services:
+  # website
   server:
-    image: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
+    image: registry.nevercodealone.de/nevercodealone/nevercodealone
     environment:
-      APP_ENV: $APP_ENV
-      APP_SECRET: $APP_SECRET
-      CORS_ALLOW_ORIGIN: '^https?://(.*\.)?nevercodealone.de:?[0-9]*$$'
-    links:
-      - db
-    labels:
-      io.rancher.container.pull_image: always
-      traefik.frontend.rule: 'Host:${TRAEFIK_URL}'
-      traefik.domain: '${TRAEFIK_DOMAIN}'
-      traefik.enable: 'true'
-      traefik.port: '80'
+      DATABASE_URL: mysql://nca:nca@db/nca
+    volumes:
+      - application:/var/www/symfony
     restart: always
+    labels:
+      traefik.domain: develop.nevercodealone.de,
+      traefik.enable: true,
+      traefik.port: 80,
+      traefik.docker.network: proxy,
+      traefik.frontend.redirect.entryPoint: https,
+      traefik.frontend.passHostHeader: true,
+      traefik.acme: true,
+      traefik.frontend.entryPoints: http,https
+  # database
   db:
     image: mariadb
     environment:
@@ -23,7 +25,13 @@ services:
       MYSQL_PASSWORD: nca
       MYSQL_ROOT_PASSWORD: nca
       MYSQL_USER: nca
-    labels:
-      io.rancher.container.pull_image: always
     restart: always
-
+  # toolbox
+  toolbox:
+    image: registry.nevercodealone.de/nevercodealone/docker-toolbox
+    command: tail -f /dev/null
+    volumes:
+      - application:/project
+    restart: always
+volumes:
+  application:

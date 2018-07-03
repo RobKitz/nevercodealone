@@ -24,6 +24,9 @@ coverage:
 modules:
     config:
         Db:
-            dsn: 'mysql:localhost=db;dbname=nca'
-            user: 'root'
-            password: 'root'
+            dsn: 'mysql:host=%DB_HOST%;dbname=%DB_NAME%'
+            user: '%DB_USER%'
+            password: '%DB_PASS%'
+params:
+  - env
+

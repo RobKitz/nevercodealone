@@ -12,9 +12,12 @@ modules:
         - Db
     config:
         WebDriver:
-          url: 'http://localhost:8000'
+          host: '%WEBDRIVER_URL%'
+          url: 'http://%WEBSITE_IP%'
           browser: chrome
           window_size: 1600x1000
+          connection_timeout: 3
+          request_timeout: 5
 env:
     phantomjs:
         modules:
@@ -26,3 +29,4 @@ env:
           config:
             WebDriver:
               browser: 'firefox'
+
