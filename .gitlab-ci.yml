@@ -124,6 +124,9 @@ test:branch:
     GIT_STRATEGY: none
   script:
     - ssh rancher.nevercodealone.de -p $SSH_PORT_DEVELOP "cd /var/www/symfony && ./vendor/bin/codecept run acceptance --html"
+  after_script:
+    - ssh rancher.nevercodealone.de -p $SSH_PORT_DEVELOP "if [ -L /var/www/symfony/public/report ] ; then unlink /var/www/symfony/public/report ; fi"
+    - ssh rancher.nevercodealone.de -p $SSH_PORT_DEVELOP "ln -s /var/www/symfony/tests/_output/ /var/www/symfony/public/report"
   tags:
      - docker-executor
   dependencies: []
