@@ -21,7 +21,7 @@ class DefaultController extends Controller
             [
                 'title' => 'PHP Schulung, Software-Qualität und soziale Open Source Projekte',
                 'description' => 'Never Code Alone Als Sachverständiger für Webdesign und Event Veranstalter Software-Qualität beim Webdesign.',
-                'smImage' => 'https://nevercodealone.de/bundles/app/img/never-code-alone-roboter-org.jpg'
+                'smImage' => 'https://nevercodealone.de/img/never-code-alone-roboter-org.jpg'
             ]
         );
     }
@@ -70,7 +70,7 @@ class DefaultController extends Controller
             [
                 'title' => 'Impressum Never Code Alone',
                 'description' => 'Das Impressum von Never Code Alone mit Anschrift, Kontakt und Inhalt.',
-                'smImage' => 'https://nevercodealone.de/bundles/app/img/never-code-alone-roboter-org.jpg'
+                'smImage' => 'https://nevercodealone.de/img/never-code-alone-roboter-org.jpg'
             ]
         );
     }
