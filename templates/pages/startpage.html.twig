@@ -6,26 +6,10 @@ Support für unsere Open Source Projekte gesucht!!
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PHP Schulung, Software-Qualität und soziale Open Source Projekte</title>
-    {% block meta %}
-    <meta name="description" content="Never Code Alone Als Sachverständiger für Webdesign und Event Veranstalter Software-Qualität beim Webdesign."/>
-    <meta property="og:locale" content="de_DE" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Open Source Community für soziale Projekte" />
-    <meta property="og:description" content="Never Code Alone fördert Webdeveloper mit sozialen Open Source Projekten und kostenlosen Workshops." />
-    <meta property="og:url" content="https://nevercodealone.de" />
-    <meta property="og:site_name" content="Never Code Alone" />
-    <meta property="article:tag" content="event" />
-    <meta property="article:tag" content="training" />
-    <meta property="article:section" content="Webdevelopment" />
-    <meta property="og:image" content="https://nevercodealone.de/bundles/app/img/never-code-alone-roboter-org.jpg" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Open Source Community für soziale Projekte" />
-    <meta name="twitter:description" content="Never Code Alone fördert Webdeveloper mit sozialen Open Source Projekten und kostenlosen Workshops." />
-    <meta name="twitter:site" content="@nevercodealone" />
-    <meta name="twitter:image" content="https://nevercodealone.de/bundles/app/img/never-code-alone-roboter-org.jpg" />
-    <meta name="twitter:creator" content="@nevercodealone" />
-    {% endblock %}
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ description }}">
+    {% include ['/partial/meta-twitter.html.twig'] %}
+    {% include ['/partial/meta-facebook.html.twig'] %}
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
     <!--[if IE 8]>

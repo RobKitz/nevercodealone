@@ -16,7 +16,14 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('pages/startpage.html.twig');
+        return $this->render(
+            'pages/startpage.html.twig',
+            [
+                'title' => 'PHP Schulung, Software-Qualität und soziale Open Source Projekte',
+                'description' => 'Never Code Alone Als Sachverständiger für Webdesign und Event Veranstalter Software-Qualität beim Webdesign.',
+                'smImage' => 'https://nevercodealone.de/bundles/app/img/never-code-alone-roboter-org.jpg'
+            ]
+        );
     }
 
     /**
@@ -28,8 +35,8 @@ class DefaultController extends Controller
         return $this->render(
             'pages/nca-paas-startup.html.twig',
             [
-                'title' => '#NCAPaaS - Pipeline as a Service - Sachverstand und Infrastruktur für Software-Qualität',
-                'description' => 'Continuous Integration Pipeline as a Service mit Sachverstand, Infrastruktur, Codestandards, Codereviews, automatisterten Tests und Builds',
+                'title' => '#NCAPaaS - Pipeline as a service - Ihr Projekt als Contributer Lösung',
+                'description' => 'Never Code Alone wird zum Code Türsteher und lässt nur noch guten Code in Ihr Projekt und stellt ein automatisertes Deployment.',
                 'smImage' => 'https://nevercodealone.de/unity/nca-paas/nca-paas.jpg'
             ]
         );
@@ -63,7 +70,7 @@ class DefaultController extends Controller
             [
                 'title' => 'Impressum Never Code Alone',
                 'description' => 'Das Impressum von Never Code Alone mit Anschrift, Kontakt und Inhalt.',
-                'smImage' => 'https://nevercodealone.de/unity/nca-paas/nca-paas.jpg'
+                'smImage' => 'https://nevercodealone.de/bundles/app/img/never-code-alone-roboter-org.jpg'
             ]
         );
     }
