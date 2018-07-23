@@ -2,36 +2,57 @@ version: '2'
 services:
   # website
   server:
-    image: registry.nevercodealone.de/nevercodealone/nevercodealone
+    image: $DOCKER_IMAGE
     environment:
-      DATABASE_URL: mysql://nca:nca@db/nca
+      DATABASE_URL: mysql://$DB_USER:$DB_PASS@$DB_HOST/$DB_NAME
+      CORS_ALLOW_ORIGIN: '^https?://(.*\.)?nevercodealone.de:?[0-9]*$$'
     volumes:
       - application:/var/www/symfony
     restart: always
     labels:
-      traefik.domain: develop.nevercodealone.de,
-      traefik.enable: true,
-      traefik.port: 80,
-      traefik.docker.network: proxy,
-      traefik.frontend.redirect.entryPoint: https,
-      traefik.frontend.passHostHeader: true,
-      traefik.acme: true,
+      io.rancher.container.pull_image: always
+      traefik.acme: true
+      traefik.docker.network: proxy
+      traefik.enable: true
       traefik.frontend.entryPoints: http,https
+      traefik.frontend.passHostHeader: true
+      # traefik.frontend.redirect.entryPoint: https
+      traefik.frontend.rule: 'Host:${TRAEFIK_URL}'
+      traefik.port: 80
   # database
   db:
     image: mariadb
     environment:
-      MYSQL_DATABASE: nca
-      MYSQL_PASSWORD: nca
-      MYSQL_ROOT_PASSWORD: nca
-      MYSQL_USER: nca
+      MYSQL_DATABASE: $DB_NAME
+      MYSQL_PASSWORD: $DB_PASS
+      MYSQL_ROOT_PASSWORD: $DB_PASS
+      MYSQL_USER: $DB_USER
     restart: always
+    labels:
+      io.rancher.container.pull_image: always
   # toolbox
   toolbox:
     image: registry.nevercodealone.de/nevercodealone/docker-toolbox
-    command: tail -f /dev/null
+    environment:
+      DATABASE_URL: mysql://$DB_USER:$DB_PASS@$DB_HOST/$DB_NAME
+      DB_HOST: $DB_HOST
+      DB_NAME: $DB_NAME
+      DB_PASS: $DB_PASS
+      DB_USER: $DB_USER
+      WEBSITE_IP: $WEBSITE_IP
+      WEBDRIVER_URL: $WEBDRIVER_URL
     volumes:
       - application:/project
     restart: always
+    labels:
+      io.rancher.container.pull_image: always
+  # ssh lb
+  ssh:
+    image: rancher/lb-service-haproxy:v0.9.1
+    ports:
+      - 22201
+    labels:
+      io.rancher.container.pull_image: always
 volumes:
   application:
+
