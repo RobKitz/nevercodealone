@@ -5,7 +5,7 @@ $(document).ready(function() {
 
     /************************************************************************************ CAROUSEL SLIDER STARTS */
 
-    $("#frm_contact").submit(function(e) {
+    $("#nca-form").submit(function(e) {
         e.preventDefault();
         var url = "/api/messages"; // the script where you handle the form input.
 
@@ -15,11 +15,11 @@ $(document).ready(function() {
             {
                 "name":     $('#name').val(),
                 "email":    $('#email').val(),
-                "message":  message
+                "message":  message,
+                "ip": window.location.host
             }
         );
 
-        console.log(data);
         $.ajax({
             type: "POST",
             url: url,
@@ -27,7 +27,7 @@ $(document).ready(function() {
             dataType:"json",
             data:data,
         }).done(function(data) {
-            $("#frm_contact").html("<div class='successMessage'>Danke wir melden uns</div>");
+            $("#nca-form").html("<div class='successMessage'>Danke wir melden uns</div>");
         }).fail(function(data) {
 
         });

@@ -6,26 +6,10 @@ Support für unsere Open Source Projekte gesucht!!
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PHP Schulung, Software-Qualität und soziale Open Source Projekte</title>
-    {% block meta %}
-    <meta name="description" content="Never Code Alone Als Sachverständiger für Webdesign und Event Veranstalter Software-Qualität beim Webdesign."/>
-    <meta property="og:locale" content="de_DE" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Open Source Community für soziale Projekte" />
-    <meta property="og:description" content="Never Code Alone fördert Webdeveloper mit sozialen Open Source Projekten und kostenlosen Workshops." />
-    <meta property="og:url" content="https://nevercodealone.de" />
-    <meta property="og:site_name" content="Never Code Alone" />
-    <meta property="article:tag" content="event" />
-    <meta property="article:tag" content="training" />
-    <meta property="article:section" content="Webdevelopment" />
-    <meta property="og:image" content="https://nevercodealone.de/bundles/app/img/never-code-alone-roboter-org.jpg" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Open Source Community für soziale Projekte" />
-    <meta name="twitter:description" content="Never Code Alone fördert Webdeveloper mit sozialen Open Source Projekten und kostenlosen Workshops." />
-    <meta name="twitter:site" content="@nevercodealone" />
-    <meta name="twitter:image" content="https://nevercodealone.de/bundles/app/img/never-code-alone-roboter-org.jpg" />
-    <meta name="twitter:creator" content="@nevercodealone" />
-    {% endblock %}
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ description }}">
+    {% include ['/partial/meta-twitter.html.twig'] %}
+    {% include ['/partial/meta-facebook.html.twig'] %}
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
     <!--[if IE 8]>
@@ -42,6 +26,7 @@ Support für unsere Open Source Projekte gesucht!!
     <link href='//cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.css' rel='stylesheet' type='text/css'>
     <link href='/ethic/css/owl.theme.css' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
+    <link href='/css/nca-contact.css' rel='stylesheet' type='text/css'>
     <link href="/ethic/style.css" rel="stylesheet"/>
 </head>
 <body>
@@ -75,10 +60,10 @@ Support für unsere Open Source Projekte gesucht!!
                                 <a href="/nca-paas-startup/" class="btn btn-success">#NCAPaaS</a>
                             </li>
                             <li>
-                                <a href="#">HOME</a>
+                                <a href="/employer-branding/">Employer Branding</a>
                             </li>
                             <li>
-                                <a href="/vorverkauf/">Vorverkauf</a>
+                                <a href="/">Home</a>
                             </li>
                         </ul>
                     </div>
@@ -113,6 +98,29 @@ Support für unsere Open Source Projekte gesucht!!
     <!-- Begin class banner style-3 -->
     <div class="tz-banner-style4">
         <div class="tz-slider-banner">
+            <div class="tz-items">
+                <div class="tz-slider-images">
+                    <img src="/img/never-code-alone-event.jpg"
+                         alt="#NCAEvents Employer Branding">
+                </div>
+                <div class="tz-banner-content">
+                    <div class="container">
+                        <small>40 gute Webdeveloper kennenlernen</small>
+                        <h1>#NCAEvents Employer Branding</h1>
+                        <span class="tz-under-line"></span>
+                        <h6>Kontakt zu sehr guten Entwicklern aus der Region</h6>
+                        <a class="tz-item-more-details" href="/employer-branding/">
+                            <span><i class="fa fa-thumbs-o-up"></i>#NCASvents</span>
+                        </a>
+                    </div>
+                </div>
+                <button class="tz-button-left">
+                    <i class="fa fa-angle-left"></i>
+                </button>
+                <button class="tz-button-right">
+                    <i class="fa fa-angle-right"></i>
+                </button>
+            </div>
             <div class="tz-items">
                 <div class="tz-slider-images">
                     <img src="/img/sachverstaendiger-sachverstand-webdesign.png"
@@ -620,7 +628,7 @@ Support für unsere Open Source Projekte gesucht!!
                         <strong>23 September 2017 @ 9:00 am</strong>
                         <img src="/ethic/images/check-01-home1.png" alt="CHECK24 NCA Event">
                         <p>
-                            <strong><a href="https://blog.nevercodealone.de/" target="_blank">Nachbericht</a></strong>
+                            <strong><a href="https://blog.nevercodealone.de/move-elevator-fuers-coden-zum-aquarium/" target="_blank">Nachbericht</a></strong>
                             TYPO3 Extension mit Extbase und Fluid, Domain Driven Design. PHPUnit Test Driven Development, Symfony CMF<br>
                             <strong>Spende 400,- Euro<br> <a href="https://friedensdorf.de/" target="_blank">FRIEDENSDORF INTERNATIONAL</a></strong>
                         </p>
@@ -948,11 +956,11 @@ Support für unsere Open Source Projekte gesucht!!
     <div class="tz-footer-address-site">
         <address>Never Code Alone, Mercatorstr. 120 47051 Duisburg, Deutschland | Telefon: <a href="tel:+4917624747727">+49
                 (0)176 24 74 77 27</a></address>
-        <address>Never Code Alone gehört Rogoit Webdesign. Es gilt das <a href="http://www.rogoit.de/impressum/"
-                                                                          target="_blank">Impressum</a>.
+        <address>Never Code Alone gehört Rogoit Webdesign. Es gilt das <a href="/impressum/">Impressum</a>.
         </address>
     </div>
 </footer>
+{% include '/partial/nca-contact.html.twig' %}
 <!-- End Footer -->
 <script>
     var Desktop = 5,
@@ -971,6 +979,7 @@ Support für unsere Open Source Projekte gesucht!!
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax-min.js"></script>
 <script src="/ethic/js/custom.js"></script>
 <script src="/js/main.js"></script>
-{% include 'google-analytics.html' %}
+<script src="/js/nca-contact.js"></script>
+{% include '/partial/google-analytics.html.twig' %}
 </body>
 </html>

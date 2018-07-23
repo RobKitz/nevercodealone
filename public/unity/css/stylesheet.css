@@ -8334,7 +8334,7 @@ header[role="banner25"] .nav-contact ul li a:hover {
     padding-bottom: 10px;
     border-bottom-width: 2px;
     border-bottom-style: solid;
-    border-bottom-color: #ed2437;
+    border-bottom-color: #5fbb28;
 }
 .home-19 .call-to-action-03 .herotext {
     text-align: center;
@@ -8365,8 +8365,8 @@ header[role="banner25"] .nav-contact ul li a:hover {
     color: #fff;
     text-align: center;
     width: 100%;
-    border: 2px solid #ed2437;
-    background-color: #ed2437;
+    border: 2px solid #5fbb28;
+    background-color: #5fbb28;
     padding-top: 12px;
     padding-right: 30px;
     padding-bottom: 12px;
@@ -8378,13 +8378,13 @@ header[role="banner25"] .nav-contact ul li a:hover {
 }
 .home-19 .call-to-action-03 .button a.fill:hover {
     text-decoration: none;
-    border: 2px solid #ed2437;
-    color: #ed2437;
+    border: 2px solid #5fbb28;
+    color: #5fbb28;
     background-color: transparent;
 }
 .home-19 .call-to-action-03 .owl-theme .owl-dots .owl-dot.active span,
 .home-19 .call-to-action-03 .owl-theme .owl-dots .owl-dot:hover span {
-    background: #ed2437;
+    background: #5fbb28;
 }
 .home-19 .tab-style-13 {
     padding-top: 40px;
@@ -8461,7 +8461,7 @@ header[role="banner25"] .nav-contact ul li a:hover {
     color: #fff;
     border-bottom-width: 3px;
     border-bottom-style: solid;
-    border-bottom-color: #ed2437;
+    border-bottom-color: #5fbb28;
 }
 .home-19 .video {
     padding-top: 100px;
@@ -8541,22 +8541,22 @@ header[role="banner25"] .nav-contact ul li a:hover {
 }
 .home-19 .team-style-06 .block ul.social-icons li a:hover {
     color: #fff;
-    background-color: #ed2437;
+    background-color: #5fbb28;
 }
 .home-19 .team-style-06 .block .info {
     padding-top: 20px;
     padding-bottom: 20px;
     border-bottom-width: 2px;
     border-bottom-style: solid;
-    border-bottom-color: #ed2437;
+    border-bottom-color: #5fbb28;
 }
 .home-19 .team-style-06 .block:hover .info {
     border-bottom-width: 2px;
     border-bottom-style: solid;
-    border-bottom-color: #ed2437;
+    border-bottom-color: #5fbb28;
 }
 .home-19 .team-style-06 .block:hover .info .designation {
-    color: #ed2437;
+    color: #5fbb28;
 }
 .home-19 .team-style-06 .block .info .name {
     font-size: 18px;
@@ -8585,7 +8585,7 @@ header[role="banner25"] .nav-contact ul li a:hover {
     -ms-transition: all 0.3s;
     -o-transition: all 0.3s;
     transition: all 0.3s;
-    background-color: #ed2437;
+    background-color: #5fbb28;
     border-radius: 4px;
     padding: 4px;
     margin: 0px;
@@ -8613,15 +8613,15 @@ header[role="banner25"] .nav-contact ul li a:hover {
 .home-19 .contact-05 .herotext .description {
     font-size: 26px;
     line-height: 36px;
-    color: #ed2437;
+    color: #5fbb28;
 }
 .home-19 .contact-05 .block a {
-    color: #ed2437;
+    color: #5fbb28;
 }
 .home-19 .contact-05 form .btn-default {
     color: #fff;
-    background-color: #ed2437;
-    border-color: #ed2437;
+    background-color: #5fbb28;
+    border-color: #5fbb28;
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -25903,7 +25903,7 @@ section {
 }
 .pricing-table-08 .block .circle.bg4 {
     color: #fff;
-    background-color: #ed2437;
+    background-color: #5fbb28;
 }
 .pricing-table-08 .block.best {
     color: #fff;
@@ -26132,17 +26132,17 @@ section {
 }
 .pricing-table-10 .most-popular .popular {
     font-size: 13px;
-    color: #ed2437;
+    color: #5fbb28;
     letter-spacing: 3px;
     text-transform: uppercase;
     font-weight: 400;
     text-align: center;
 }
 .pricing-table-10 .most-popular .block .head {
-    background-color: #ed2437;
+    background-color: #5fbb28;
 }
 .pricing-table-10 .block .bar2 {
-    background: linear-gradient(to right bottom, #ed2437 50%, #ffffff 50%);
+    background: linear-gradient(to right bottom, #5fbb28 50%, #ffffff 50%);
     height: 30px;
 }
 .pricing-table-10 .block .package {
@@ -26234,13 +26234,13 @@ section {
 }
 .pricing-table-10 .most-popular .block .button a {
     color: #fff;
-    background-color: #ed2437;
-    border: 2px solid #ed2437;
+    background-color: #5fbb28;
+    border: 2px solid #5fbb28;
 }
 .pricing-table-10 .most-popular .block .button a:hover {
-    color: #ed2437;
+    color: #5fbb28;
     background-color: transparent;
-    border: 2px solid #ed2437;
+    border: 2px solid #5fbb28;
 }
 /* ------------------------------------------------------ PRICING TABLE 10 ENDS  ------------------ */
 /* ------------------------------------------------------ PRICING TABLE 11 STARTS  ------------------ */
@@ -26358,13 +26358,13 @@ section {
 }
 .pricing-table-11 .most-popular .block .button a {
     color: #fff;
-    background-color: #ed2437;
-    border: 2px solid #ed2437;
+    background-color: #5fbb28;
+    border: 2px solid #5fbb28;
 }
 .pricing-table-11 .most-popular .block .button a:hover {
-    color: #ed2437;
+    color: #5fbb28;
     background-color: transparent;
-    border: 2px solid #ed2437;
+    border: 2px solid #5fbb28;
 }
 /* ------------------------------------------------------ PRICING TABLE 11 ENDS  ------------------ */
 /* ------------------------------------------------------ PRICING TABLE 12 STARTS  ------------------ */
@@ -33183,7 +33183,7 @@ section {
 /* ------------------------------------------------------ COLORED TEXT AND BG STARTS ------------------ */
 
 .red-text {
-    color: #ed2437;
+    color: #5fbb28;
 }
 .green-text {
     color: #24ed8c;
