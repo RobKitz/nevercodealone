@@ -5,4 +5,5 @@
 /.gitlabenv
 /docker-compose*
 /Dockerfile
+/rancher-compose.yml
 /README.md

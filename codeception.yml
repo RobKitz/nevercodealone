@@ -24,9 +24,9 @@ coverage:
 modules:
     config:
         Db:
-            dsn: 'mysql:host=%DB_HOST%;dbname=%DB_NAME%'
-            user: '%DB_USER%'
-            password: '%DB_PASS%'
+            dsn: 'mysql:host=%CODECEPT_DB_HOST%;dbname=%CODECEPT_DB_NAME%'
+            user: '%CODECEPT_DB_USER%'
+            password: '%CODECEPT_DB_PASS%'
 params:
   - env
 

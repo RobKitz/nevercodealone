@@ -4,7 +4,7 @@ services:
   server:
     image: $DOCKER_IMAGE
     environment:
-      DATABASE_URL: mysql://$DB_USER:$DB_PASS@$DB_HOST/$DB_NAME
+      DATABASE_URL: mysql://$DB_USER:$DB_PASS@db/$DB_NAME
       CORS_ALLOW_ORIGIN: '^https?://(.*\.)?nevercodealone.de:?[0-9]*$$'
     volumes:
       - application:/var/www/symfony
@@ -32,17 +32,16 @@ services:
       io.rancher.container.pull_image: always
   # toolbox
   toolbox:
-    image: registry.nevercodealone.de/nevercodealone/docker-toolbox
+    image: registry.nevercodealone.de/nevercodealone/docker-toolbox:next
     environment:
-      DATABASE_URL: mysql://$DB_USER:$DB_PASS@$DB_HOST/$DB_NAME
-      DB_HOST: $DB_HOST
-      DB_NAME: $DB_NAME
-      DB_PASS: $DB_PASS
-      DB_USER: $DB_USER
-      WEBSITE_IP: $WEBSITE_IP
-      WEBDRIVER_URL: $WEBDRIVER_URL
+      CODECEPT_DB_HOST: db
+      CODECEPT_DB_NAME: $DB_NAME
+      CODECEPT_DB_PASS: $DB_PASS
+      CODECEPT_DB_USER: $DB_USER
+      CODECEPT_WEBDRIVER_URL: $WEBDRIVER_URL
+      CODECEPT_WEBSITE_URL: $WEBSITE_URL
     volumes:
-      - application:/project
+      - application:/home/www-data/symfony
     restart: always
     labels:
       io.rancher.container.pull_image: always

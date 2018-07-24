@@ -12,12 +12,12 @@ modules:
         - Db
     config:
         WebDriver:
-          host: '%WEBDRIVER_URL%'
-          url: 'http://%WEBSITE_IP%'
+          host: '%CODECEPT_WEBDRIVER_URL%'
+          url: 'http://%CODECEPT_WEBSITE_URL%'
           browser: chrome
           window_size: 1600x1000
-          connection_timeout: 3
-          request_timeout: 5
+          connection_timeout: 5
+          request_timeout: 30
 env:
     phantomjs:
         modules:

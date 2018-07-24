@@ -21,11 +21,12 @@ composer:production:
     - composer selfupdate
   script:
     - composer install -d $CI_PROJECT_DIR --optimize-autoloader --no-dev
-    - rm -rf .git
-    - rm -rf .gitlabenv
   artifacts:
     paths:
-      - $CI_PROJECT_DIR
+      - $CI_PROJECT_DIR/.env
+      - $CI_PROJECT_DIR/public/bundles
+      - $CI_PROJECT_DIR/var
+      - $CI_PROJECT_DIR/vendor
     expire_in: 3 days
     when: on_success
   tags:
@@ -41,11 +42,12 @@ composer:staging:
     - composer selfupdate
   script:
     - composer install -d $CI_PROJECT_DIR --optimize-autoloader --no-dev
-    - rm -rf .git
-    - rm -rf .gitlabenv
   artifacts:
     paths:
-      - $CI_PROJECT_DIR
+      - $CI_PROJECT_DIR/.env
+      - $CI_PROJECT_DIR/public/bundles
+      - $CI_PROJECT_DIR/var
+      - $CI_PROJECT_DIR/vendor
     expire_in: 3 days
     when: on_success
   tags:
@@ -61,11 +63,12 @@ composer:development:
     - composer selfupdate
   script:
     - composer install -d $CI_PROJECT_DIR
-    - rm -rf .git
-    - rm -rf .gitlabenv
   artifacts:
     paths:
-      - $CI_PROJECT_DIR
+      - $CI_PROJECT_DIR/.env
+      - $CI_PROJECT_DIR/public/bundles
+      - $CI_PROJECT_DIR/var
+      - $CI_PROJECT_DIR/vendor
     expire_in: 3 days
     when: on_success
   tags:
@@ -89,11 +92,11 @@ build:branch:
 
 cleanup:nonproduction:
   stage: build
-  image: identt/rancher-compose
+  image: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/docker-rancher-cli:v0.6.9
   variables:
     GIT_STRATEGY: none
   script:
-    - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
+    - rancher rm --type stack --stop $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG
   tags:
     - docker-executor
   except:
@@ -101,19 +104,18 @@ cleanup:nonproduction:
 
 deploy:nonproduction:
   stage: deploy
-  image: identt/rancher-compose
+  image: identt/rancher-compose:0.12.5
   variables:
     GIT_STRATEGY: none
   variables:
-    DB_HOST: db
     DB_NAME: nca
     DB_PASS: nca
     DB_USER: nca
     DOCKER_IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
     TRAEFIK_DOMAIN: "develop.nevercodealone.de"
     TRAEFIK_URL: ${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}
-    WEBSITE_IP: ${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}
     WEBDRIVER_URL: zalenium.zalenium.rancher.internal
+    WEBSITE_URL: ${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}
   script:
     - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG up -d
   tags:
@@ -128,10 +130,10 @@ test:nonproduction:
   variables:
     GIT_STRATEGY: none
   script:
-    - ssh rancher.nevercodealone.de -p $SSH_PORT_DEVELOP "cd /project && ./vendor/bin/codecept run acceptance --html"
+    - ssh rancher.nevercodealone.de -p $SSH_PORT_DEVELOP "cd ~/symfony && ./vendor/bin/codecept run acceptance --html"
   after_script:
-    - ssh rancher.nevercodealone.de -p $SSH_PORT_DEVELOP "if [ -L /project/public/report ] ; then unlink /project/public/report ; fi"
-    - ssh rancher.nevercodealone.de -p $SSH_PORT_DEVELOP "ln -s /project/tests/_output/ /project/public/report"
+    - ssh rancher.nevercodealone.de -p $SSH_PORT_DEVELOP "if [ -L ~/symfony/public/report ] ; then unlink ~/symfony/public/report ; fi"
+    - ssh rancher.nevercodealone.de -p $SSH_PORT_DEVELOP "ln -s ~/symfony/tests/_output/ ~/symfony/public/report"
   tags:
      - docker-executor
   dependencies: []
@@ -140,11 +142,11 @@ test:nonproduction:
 
 teardown:branch:
   stage: teardown
-  image: identt/rancher-compose
+  image: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/docker-rancher-cli:v0.6.9
   variables:
     GIT_STRATEGY: none
   script:
-    - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
+    - rancher rm --type stack --stop $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG
   tags:
     - docker-executor
   when: manual
