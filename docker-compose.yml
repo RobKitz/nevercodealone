@@ -42,14 +42,9 @@ services:
       CODECEPT_WEBSITE_URL: $WEBSITE_URL
     volumes:
       - application:/home/www-data/symfony
-    restart: always
-    labels:
-      io.rancher.container.pull_image: always
-  # ssh lb
-  ssh:
-    image: rancher/lb-service-haproxy:v0.9.1
     ports:
-      - 22201
+      - 22
+    restart: always
     labels:
       io.rancher.container.pull_image: always
 volumes:

@@ -96,7 +96,7 @@ cleanup:nonproduction:
   variables:
     GIT_STRATEGY: none
   script:
-    - rancher rm --type stack --stop $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG
+    - rancher rm --type stack --stop $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG || exit 0
   tags:
     - docker-executor
   except:
@@ -129,11 +129,15 @@ test:nonproduction:
   image: registry.nevercodealone.de/nevercodealone/docker-toolbox
   variables:
     GIT_STRATEGY: none
+  before_script:
+    - export CONTAINERID=$(rancher ps | grep $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG/toolbox | awk '{ print $1 }')
+    - export SSH_PORT_TOOLBOX=$(rancher inspect $CONTAINERID | jq -r .publicEndpoints[0].port)
+    - "echo \"TOOLBOX SSH PORT: ${SSH_PORT_TOOLBOX}\""
   script:
-    - ssh rancher.nevercodealone.de -p $SSH_PORT_DEVELOP "cd ~/symfony && ./vendor/bin/codecept run acceptance --html"
+    - ssh rancher.nevercodealone.de -p $SSH_PORT_TOOLBOX "cd ~/symfony && ./vendor/bin/codecept run acceptance --html"
   after_script:
-    - ssh rancher.nevercodealone.de -p $SSH_PORT_DEVELOP "if [ -L ~/symfony/public/report ] ; then unlink ~/symfony/public/report ; fi"
-    - ssh rancher.nevercodealone.de -p $SSH_PORT_DEVELOP "ln -s ~/symfony/tests/_output/ ~/symfony/public/report"
+    - ssh rancher.nevercodealone.de -p $SSH_PORT_TOOLBOX "if [ -L ~/symfony/public/report ] ; then unlink ~/symfony/public/report ; fi"
+    - ssh rancher.nevercodealone.de -p $SSH_PORT_TOOLBOX "ln -s ~/symfony/tests/_output/ ~/symfony/public/report"
   tags:
      - docker-executor
   dependencies: []
