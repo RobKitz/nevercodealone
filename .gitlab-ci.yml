@@ -1,39 +1,121 @@
----
-stages:
-  - build
-  - cleanup
-  - deploy
+#--- STAGES ---------------------------------------------------------------------------------------
+# pre_build:    prepare data for docker image
+# build:        build docker image
+# deploy:       deploy application to environment
+# test:         run tests on deployed environment
+# teardown:     remove environment
 
-build:
+stages:
+  - pre_build
+  - build
+  - deploy
+  - test
+  - teardown
+
+#--- JOBS -----------------------------------------------------------------------------------------
+
+composer:production:
+  stage: pre_build
+  image: composer
+  before_script:
+    - composer selfupdate
+  script:
+    - composer install -d $CI_PROJECT_DIR --optimize-autoloader --no-dev
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/.env
+      - $CI_PROJECT_DIR/public/bundles
+      - $CI_PROJECT_DIR/var
+      - $CI_PROJECT_DIR/vendor
+    expire_in: 3 days
+    when: on_success
+  tags:
+    - build
+    - docker-executor
+  only:
+    - master
+
+composer:staging:
+  stage: pre_build
+  image: composer
+  before_script:
+    - composer selfupdate
+  script:
+    - composer install -d $CI_PROJECT_DIR --optimize-autoloader --no-dev
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/.env
+      - $CI_PROJECT_DIR/public/bundles
+      - $CI_PROJECT_DIR/var
+      - $CI_PROJECT_DIR/vendor
+    expire_in: 3 days
+    when: on_success
+  tags:
+    - build
+    - docker-executor
+  only:
+    - staging
+
+composer:development:
+  stage: pre_build
+  image: composer
+  before_script:
+    - composer selfupdate
+  script:
+    - composer install -d $CI_PROJECT_DIR
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/.env
+      - $CI_PROJECT_DIR/public/bundles
+      - $CI_PROJECT_DIR/var
+      - $CI_PROJECT_DIR/vendor
+    expire_in: 3 days
+    when: on_success
+  tags:
+    - build
+    - docker-executor
+  except:
+    - master
+    - staging
+
+build:branch:
   stage: build
   image: docker
   before_script:
-    - docker info
     - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
+    - cat codeception.yml
   script:
-    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:latest .
-    - docker tag $CI_REGISTRY/$CI_PROJECT_PATH:latest $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
-    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:latest
+    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG .
     - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
   tags:
     - docker-executor
 
-cleanup:
-  stage: cleanup
-  image: identt/rancher-compose
+cleanup:nonproduction:
+  stage: build
+  image: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/docker-rancher-cli:v0.6.9
+  variables:
+    GIT_STRATEGY: none
   script:
-    - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
+    - rancher rm --type stack --stop $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG || exit 0
   tags:
     - docker-executor
   except:
     - master
 
-deploy_develop:
+deploy:nonproduction:
   stage: deploy
-  image: identt/rancher-compose
+  image: identt/rancher-compose:0.12.5
   variables:
+    GIT_STRATEGY: none
+  variables:
+    DB_NAME: nca
+    DB_PASS: nca
+    DB_USER: nca
+    DOCKER_IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
     TRAEFIK_DOMAIN: "develop.nevercodealone.de"
-    TRAEFIK_URL: "${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}"
+    TRAEFIK_URL: ${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}
+    WEBDRIVER_URL: zalenium.zalenium.rancher.internal
+    WEBSITE_URL: ${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}
   script:
     - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG up -d
   tags:
@@ -42,11 +124,33 @@ deploy_develop:
     - master
     - staging
 
-teardown:
-  stage: deploy
-  image: identt/rancher-compose
+test:nonproduction:
+  stage: test
+  image: registry.nevercodealone.de/nevercodealone/docker-toolbox
+  variables:
+    GIT_STRATEGY: none
+  before_script:
+    - export CONTAINERID=$(rancher ps | grep $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG/toolbox | awk '{ print $1 }')
+    - export SSH_PORT_TOOLBOX=$(rancher inspect $CONTAINERID | jq -r .publicEndpoints[0].port)
+    - "echo \"TOOLBOX SSH PORT: ${SSH_PORT_TOOLBOX}\""
   script:
-    - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG rm -v -f
+    - ssh rancher.nevercodealone.de -p $SSH_PORT_TOOLBOX "cd ~/symfony && ./vendor/bin/codecept run acceptance --html"
+  after_script:
+    - ssh rancher.nevercodealone.de -p $SSH_PORT_TOOLBOX "if [ -L ~/symfony/public/report ] ; then unlink ~/symfony/public/report ; fi"
+    - ssh rancher.nevercodealone.de -p $SSH_PORT_TOOLBOX "ln -s ~/symfony/tests/_output/ ~/symfony/public/report"
+  tags:
+     - docker-executor
+  dependencies: []
+  except:
+    - master
+
+teardown:branch:
+  stage: teardown
+  image: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/docker-rancher-cli:v0.6.9
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - rancher rm --type stack --stop $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG
   tags:
     - docker-executor
   when: manual
