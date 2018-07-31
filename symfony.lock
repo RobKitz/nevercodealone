@@ -86,15 +86,6 @@
     "doctrine/orm": {
         "version": "v2.6.0"
     },
-    "easycorp/easyadmin-bundle": {
-        "version": "1.17",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.17",
-            "ref": "66070ea553247b0cd5275e21d0fe5399a25f40be"
-        }
-    },
     "facebook/webdriver": {
         "version": "1.5.0"
     },
@@ -133,9 +124,6 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.1.1"
-    },
-    "pagerfanta/pagerfanta": {
-        "version": "v1.0.5"
     },
     "phar-io/manifest": {
         "version": "1.0.1"
@@ -350,9 +338,6 @@
     "symfony/orm-pack": {
         "version": "v1.0.5"
     },
-    "symfony/polyfill-ctype": {
-        "version": "v1.8.0"
-    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.6.0"
     },
@@ -451,15 +436,6 @@
     },
     "theseer/tokenizer": {
         "version": "1.1.0"
-    },
-    "twig/extensions": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "4851df0afc426b8f07204379d21fca25b6df5d68"
-        }
     },
     "twig/twig": {
         "version": "v2.4.4"
