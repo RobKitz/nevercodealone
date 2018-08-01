@@ -232,7 +232,9 @@
                                             <div class="col-md-9 col-md-pull-3">
                                                 <p>11:45 Uhr</p>
                                                 <h4>Live Coding - Using Akka Streams to write Mircoservice that supports end-to-end backpressure</h4>
-                                                <p>Der genaue Ablauf und Inhalt wird gerade abgestimmt und bald hier veröffentlicht</p>
+                                                <p>Let's write a microservice based on Akka Streams that truly handles backpressure throughout the entire application.</p>
+                                                <p>Traditionally, routes built with Akka HTTP directly interact with actors implementing domain logic. One potential issue is the lack of backpressure: when the route just fires messages at the poor domain actors, these messages pile up in the mailbox faster than they can get processed. This is especially the case when the domain actors interact with a database or external services, waiting for a response.</p>
+                                                <p>Our microservice also offers an HTTP API, accesses a database and interacts with another external service. By using Akka Streams as the processing engine, incoming HTTP calls will fail fast while a system is overloaded.</p>
                                                 <p class="event-speaker">- Mit Markus Jura</p>
                                             </div>
                                         </div>
@@ -484,14 +486,14 @@
     </div>
     <div class="cd-speaker-bio speaker-2">
         <div class="cd-bio-content">
-            <h2>Otto GmbH</h2>
-            <p>Infos folgen</p>
+            <h2>MOIA - Markus Jura</h2>
+            <p>Markus is Scala Lead at MOIA. As a Scala enthusiast, his focus is to design and build distributed systems based on Akka. He is co-organizing the Reactive Systems user group in Hamburg and shares his knowledge regularly at conferences. Markus is also the co-founder and former CTO of Y-Combinator funded startup.</p>
         </div>
     </div>
     <div class="cd-speaker-bio speaker-3">
         <div class="cd-bio-content">
-            <h2>codecentric AG Mark Keinhörster</h2>
-            <p>Mark ist im Big-Data Zoo zu Hause und bringt Erfahrungen mit Hadoop und Apache Spark mit. Außerdem beschäftigt er sich mit Docker, Microservices und Cloud-Technologien.</p>
+            <h2>Otto Gmbh</h2>
+            <p>Infos folgen</p>
         </div>
     </div>
     <div class="cd-speaker-bio speaker-4">
