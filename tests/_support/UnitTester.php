@@ -22,7 +22,15 @@ class UnitTester extends \Codeception\Actor
 {
     use UnitTesterActions;
 
-   /**
-    * Define custom actions here
-    */
+    /**
+     * @throws \ReflectionException
+     */
+    public function getMethodReturn($fixture, $method, $param)
+    {
+        $class = new \ReflectionClass($fixture);
+        $method = $class->getMethod($method);
+        $method->setAccessible(true);
+        $methodReturn = $method->invoke($fixture, $param);
+        return $methodReturn;
+    }
 }
