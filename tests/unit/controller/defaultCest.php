@@ -2,6 +2,7 @@
 namespace NCATesting\controller;
 use App\Controller\DefaultController;
 use NCATesting\UnitTester;
+use Mockery as m;
 
 class defaultCest
 {
@@ -14,7 +15,11 @@ class defaultCest
 
     public function getSourceParamReturnWebsiteDefault(UnitTester $I)
     {
-        $methodReturn = $I->getMethodReturn($this->fixture,'getSourceParam', '');
+//        $request->query->get('aff');
+        $response = m::mock('Symfony\Component\HttpFoundation\Request');
+        $response->shouldReceive('query->get')->once()->andReturn('testiy');
+
+        $methodReturn = $I->getMethodReturn($this->fixture,'getSourceParam', $response);
         $I->assertContains('aff=website', $methodReturn);
     }
 }
