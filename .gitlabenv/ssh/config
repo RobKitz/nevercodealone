@@ -1,9 +1,0 @@
-Host rancher.webvisum.de
-    HostName rancher.webvisum.de
-    User www-data
-    StrictHostKeyChecking no
-    Port __SSH_PORT__
-    IdentityFile /root/.ssh/id_rsa
-    ServerAliveInterval 30
-    ServerAliveCountMax 20
-    ConnectTimeout 0
