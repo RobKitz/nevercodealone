@@ -12,7 +12,7 @@ services:
   server:
     image: $DOCKER_IMAGE
     environment:
-      DATABASE_URL: mysql://nca:nca@db/nca
+      SYMFONY_DATABASE_URL: mysql://nca:nca@db/nca
     volumes:
       - application:/var/www/symfony
     ports:

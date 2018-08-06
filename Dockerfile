@@ -1,21 +1,23 @@
 FROM registry.nevercodealone.de/nevercodealone/docker-webserver
 
-ENV APP_ENV=dev
-ENV APP_SECRET=insecure
-ENV CORS_ALLOW_ORIGIN=^https?://localhost:?[0-9]*$
-
-# application setup
-WORKDIR /var/www/symfony
-COPY . /var/www/symfony
-RUN chown -R www-data: .
-VOLUME /var/www/symfony
-
-# apache setup
-COPY apache.conf /etc/apache2/sites-available/symfony.conf
-RUN a2dissite 000-default \
- && a2ensite symfony \
- && a2enmod rewrite
+ENV SYMFONY_APP_ENV=dev
+ENV SYMFONY_APP_SECRET=insecure
+ENV SYMFONY_CORS_ALLOW_ORIGIN=^https?://localhost:?[0-9]*$
+ENV SYMFONY_DATABASE_URL=mysql://user:pass@db/database
 
 EXPOSE 80
-ENTRYPOINT ["/usr/sbin/apachectl", "-DFOREGROUND"]
+
+# application setup
+VOLUME /var/www/symfony
+WORKDIR /var/www/symfony
+COPY . /var/www/symfony
+
+# apache setup
+COPY apache.conf /etc/apache2/sites-enabled/000-default.conf
+RUN a2enmod rewrite
+
+# entrypoint
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
