@@ -1,0 +1,53 @@
+---
+version: '3'
+
+services:
+  # mysql admin
+  adminer:
+    image: adminer
+    ports:
+      - '8081:8080'
+    restart: always
+  # website
+  server:
+    image: $DOCKER_IMAGE
+    environment:
+      DATABASE_URL: mysql://nca:nca@db/nca
+    volumes:
+      - application:/var/www/symfony
+    ports:
+      - 8080:80
+    restart: always
+  # database
+  db:
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: nca
+      MYSQL_PASSWORD: nca
+      MYSQL_ROOT_PASSWORD: nca
+      MYSQL_USER: nca
+    restart: always
+  # toolbox
+  toolbox:
+    image: registry.nevercodealone.de/nevercodealone/docker-toolbox
+    environment:
+      CODECEPT_DB_HOST: db
+      CODECEPT_DB_NAME: nca
+      CODECEPT_DB_PASS: nca
+      CODECEPT_DB_USER: nca
+      CODECEPT_WEBDRIVER_URL: selenium
+      CODECEPT_WEBSITE_URL: server
+    volumes:
+      - application:/home/www-data/symfony
+    restart: always
+  selenium:
+    image: dosel/zalenium:3.10.0c
+    command: start --desiredContainers 2 --maxDockerSeleniumContainers 4 --screenWidth 800 --screenHeight 600 --timeZone Europe/Berlin --videoRecordingEnabled false --sauceLabsEnabled false --browserStackEnabled false --testingBotEnabled false --startTunnel false
+    tty: true
+    privileged: true
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+
+volumes:
+  application:
+
