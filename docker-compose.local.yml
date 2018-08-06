@@ -10,11 +10,9 @@ services:
     restart: always
   # website
   server:
-    image: $DOCKER_IMAGE
+    image: $WEBSERVER_IMAGE
     environment:
       SYMFONY_DATABASE_URL: mysql://nca:nca@db/nca
-    volumes:
-      - application:/var/www/symfony
     ports:
       - 8080:80
     restart: always
@@ -29,16 +27,16 @@ services:
     restart: always
   # toolbox
   toolbox:
-    image: registry.nevercodealone.de/nevercodealone/docker-toolbox
+    image: $TOOLBOX_IMAGE
+    command: journalctl -f
     environment:
       CODECEPT_DB_HOST: db
       CODECEPT_DB_NAME: nca
       CODECEPT_DB_PASS: nca
       CODECEPT_DB_USER: nca
+      CODECEPT_DATABASE_URL: mysql://nca:nca@db/nca
       CODECEPT_WEBDRIVER_URL: selenium
       CODECEPT_WEBSITE_URL: server
-    volumes:
-      - application:/home/www-data/symfony
     restart: always
   selenium:
     image: dosel/zalenium:3.10.0c
@@ -47,7 +45,4 @@ services:
     privileged: true
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
-
-volumes:
-  application:
 

@@ -1,9 +1,6 @@
 /.dockerignore
-/.gitlab-ci.yml
-/.git
-/.gitignore
-/.gitlabenv
+/.git*
 /docker-compose*
-/Dockerfile
+/Dockerfile*
 /rancher-compose.yml
 /README.md

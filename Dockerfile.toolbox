@@ -1,0 +1,11 @@
+FROM registry.nevercodealone.de/nevercodealone/docker-toolbox
+
+LABEL description="Shipped toolbox image for nevercodealone.de."
+LABEL maintainer="Thomas Steinert <moenka@10forge.org>"
+LABEL vendor="Never Code Alone"
+
+CMD ["/usr/sbin/sshd", "-D"]
+
+COPY . /home/www-data/symfony
+RUN chown -R www-data:www-data /home/www-data/symfony
+

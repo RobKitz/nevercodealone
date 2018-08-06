@@ -1,128 +1,163 @@
-#--- STAGES ---------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------------
+# STAGES
+#--------------------------------------------------------------------------------------------------
 # pre_build:    prepare data for docker image
 # build:        build docker image
 # deploy:       deploy application to environment
 # test:         run tests on deployed environment
-# teardown:     remove environment
+# final:        remove environment / deploy to production
 
 stages:
   - pre_build
   - build
   - deploy
   - test
-  - teardown
+  - release
+  - final
 
-#--- JOBS -----------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------
+# TEMPLATES
+#--------------------------------------------------------------------------------------------------
 
-composer:production:
+.composer_install: &composer_install
   stage: pre_build
   image: composer
-  before_script:
-    - composer selfupdate
+  variables:
+    APP_ENV: dev
+    COMPOSER_ARGS: ''
   script:
-    - composer install -d $CI_PROJECT_DIR --optimize-autoloader --no-dev
-  artifacts:
+    - composer install $COMPOSER_ARGS
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
     paths:
-      - $CI_PROJECT_DIR/.env
-      - $CI_PROJECT_DIR/public/bundles
-      - $CI_PROJECT_DIR/var
-      - $CI_PROJECT_DIR/vendor
-    expire_in: 3 days
-    when: on_success
+      - .env
+      - public/bundles
+      - var
+      - vendor
+    policy: push
   tags:
-    - build
     - docker-executor
-  only:
-    - master
 
-composer:staging:
-  stage: pre_build
-  image: composer
-  before_script:
-    - composer selfupdate
-  script:
-    - composer install -d $CI_PROJECT_DIR --optimize-autoloader --no-dev
-  artifacts:
-    paths:
-      - $CI_PROJECT_DIR/.env
-      - $CI_PROJECT_DIR/public/bundles
-      - $CI_PROJECT_DIR/var
-      - $CI_PROJECT_DIR/vendor
-    expire_in: 3 days
-    when: on_success
-  tags:
-    - build
-    - docker-executor
-  only:
-    - staging
-
-composer:development:
-  stage: pre_build
-  image: composer
-  script:
-    - composer install -d $CI_PROJECT_DIR
-  artifacts:
-    paths:
-      - $CI_PROJECT_DIR/.env
-      - $CI_PROJECT_DIR/public/bundles
-      - $CI_PROJECT_DIR/var
-      - $CI_PROJECT_DIR/vendor
-    expire_in: 3 days
-    when: on_success
-  tags:
-    - build
-    - docker-executor
-  except:
-    - master
-    - staging
-
-build:branch:
+.build_image: &build_image
   stage: build
-  image: docker
+  image: docker:stable
+  variables:
+    COMPONENT: '<webserver|toolbox>'
   before_script:
     - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
-    - cat codeception.yml
   script:
-    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG .
-    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
+    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH/$COMPONENT:$CI_COMMIT_REF_SLUG --pull -f Dockerfile.$COMPONENT .
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH/$COMPONENT:$CI_COMMIT_REF_SLUG
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - .env
+      - public/bundles
+      - var
+      - vendor
+    policy: pull
   tags:
     - docker-executor
 
-cleanup:nonproduction:
-  stage: build
-  image: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/docker-rancher-cli:v0.6.9
-  variables:
-    GIT_STRATEGY: none
-  script:
-    - rancher rm --type stack --stop $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG || exit 0
-  tags:
-    - docker-executor
-  except:
-    - master
-
-deploy:nonproduction:
+.deploy_environment: &deploy_environment
   stage: deploy
-  image: identt/rancher-compose:0.12.5
+  image: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/docker-rancher-cli
   variables:
-    GIT_STRATEGY: none
-  variables:
+    APP_ENV: dev
+    APP_SECRET: secret
+    CORS_ALLOW_ORIGIN: ^https?://localhost:?[0-9]*$
     DB_NAME: nca
     DB_PASS: nca
+    DB_ROOT_PASS: nca
     DB_USER: nca
-    DOCKER_IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
-    TRAEFIK_DOMAIN: "develop.nevercodealone.de"
-    TRAEFIK_URL: ${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}
-    WEBDRIVER_URL: zalenium.zalenium.rancher.internal
-    WEBSITE_URL: ${CI_COMMIT_REF_SLUG}.${TRAEFIK_DOMAIN}
+    HTTP_DOMAIN: "develop.nevercodealone.de"
+    HTTP_URL: "$CI_COMMIT_REF_SLUG.$HTTP_DOMAIN"
+    RANCHER_COMPOSE_FILES: -f docker-compose.yml -f docker-compose.toolbox.yml
+    RANCHER_PROJECT_NAME: $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG
+    TOOLBOX_IMAGE: "$CI_REGISTRY/$CI_PROJECT_PATH/toolbox:$CI_COMMIT_REF_SLUG"
+    WEBSERVER_IMAGE: "$CI_REGISTRY/$CI_PROJECT_PATH/webserver:$CI_COMMIT_REF_SLUG"
   script:
-    - rancher-compose -p $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG up -d
+    - rancher-compose -p $RANCHER_PROJECT_NAME $RANCHER_COMPOSE_FILES up -d --pull --upgrade
   tags:
     - docker-executor
+
+#--------------------------------------------------------------------------------------------------
+# JOBS
+#--------------------------------------------------------------------------------------------------
+
+# Stage: pre_build
+
+composer_install_for_dev:
+  <<: *composer_install
   except:
     - master
     - staging
+    - prepare-prod
 
-test:nonproduction:
+composer_install_for_prod:
+  <<: *composer_install
+  variables:
+    APP_ENV: prod
+    COMPOSER_ARGS: --optimize-autoloader --no-dev
+  only:
+    - staging
+    - prepare-prod
+
+# Stage: build
+
+build_webserver_image:
+  <<: *build_image
+  variables:
+    COMPONENT: webserver
+
+build_toolbox_image:
+  <<: *build_image
+  variables:
+    COMPONENT: toolbox
+
+# Stage: deploy
+
+deploy_to_dev:
+  <<: *deploy_environment
+  before_script:
+    - rancher rm --type stack --stop $RANCHER_PROJECT_NAME || true
+  except:
+    - master
+    - staging
+    - prepare-prod
+
+deploy_to_stage:
+  <<: *deploy_environment
+  variables:
+    APP_ENV: prod
+    HTTP_DOMAIN: "nevercodealone.de"
+    HTTP_URL: "stage.$HTTP_DOMAIN"
+  only:
+    - staging
+    - prepare-prod
+
+deploy_to_prod:
+  <<: *deploy_environment
+  variables:
+    APP_ENV: prod
+    APP_SECRET: $PROD_APP_SECRET
+    CORS_ALLOW_ORIGIN: 'TODO'
+    DB_NAME: $PROD_DB_NAME
+    DB_PASS: $PROD_DB_PASS
+    DB_ROOT_PASS: $PROD_DB_ROOT_PASS
+    DB_USER: $PROD_DB_USER
+    HTTP_DOMAIN: "nevercodealone.de"
+    HTTP_URL: "www.$HTTP_DOMAIN"
+    RANCHER_COMPOSE_FILES: ''
+    TOOLBOX_IMAGE: "$CI_REGISTRY/$CI_PROJECT_PATH/toolbox"
+    WEBSERVER_IMAGE: "$CI_REGISTRY/$CI_PROJECT_PATH/webserver"
+  only:
+    - master
+
+# Stage: test
+
+run_tests:
   stage: test
   image: registry.nevercodealone.de/nevercodealone/docker-toolbox
   variables:
@@ -132,18 +167,40 @@ test:nonproduction:
     - export SSH_PORT_TOOLBOX=$(rancher inspect $CONTAINERID | jq -r .publicEndpoints[0].port)
     - "echo \"TOOLBOX SSH PORT: ${SSH_PORT_TOOLBOX}\""
   script:
+    - ssh rancher.nevercodealone.de -p $SSH_PORT_TOOLBOX "cd ~/symfony && ./bin/console doctrine:schema:create"
     - ssh rancher.nevercodealone.de -p $SSH_PORT_TOOLBOX "cd ~/symfony && ./vendor/bin/codecept run acceptance --html"
   after_script:
     - ssh rancher.nevercodealone.de -p $SSH_PORT_TOOLBOX "if [ -L ~/symfony/public/report ] ; then unlink ~/symfony/public/report ; fi"
     - ssh rancher.nevercodealone.de -p $SSH_PORT_TOOLBOX "ln -s ~/symfony/tests/_output/ ~/symfony/public/report"
   tags:
-     - docker-executor
-  dependencies: []
+    - docker-executor
   except:
     - master
+    - stage
+    - prepare-prod
 
-teardown:branch:
-  stage: teardown
+# Stage: final
+
+release_to_prod:
+  stage: final
+  image: docker:stable
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - docker pull $CI_REGISTRY/$CI_PROJECT_PATH/toolbox:$CI_COMMIT_REF_SLUG
+    - docker tag $CI_REGISTRY/$CI_PROJECT_PATH/toolbox
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH/toolbox
+    - docker pull $CI_REGISTRY/$CI_PROJECT_PATH/webserver:$CI_COMMIT_REF_SLUG
+    - docker tag docker pull $CI_REGISTRY/$CI_PROJECT_PATH/webserver
+    - docker push docker pull $CI_REGISTRY/$CI_PROJECT_PATH/webserver
+  tags:
+    - docker-executor
+  only:
+    - stage
+  when: manual
+
+teardown_environment:
+  stage: final
   image: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/docker-rancher-cli:v0.6.9
   variables:
     GIT_STRATEGY: none
@@ -151,5 +208,8 @@ teardown:branch:
     - rancher rm --type stack --stop $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG
   tags:
     - docker-executor
+  except:
+    - master
+    - stage
   when: manual
 
