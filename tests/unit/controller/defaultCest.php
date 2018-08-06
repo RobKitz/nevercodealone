@@ -4,6 +4,8 @@ use App\Controller\DefaultController;
 use NCATesting\UnitTester;
 use Mockery as m;
 
+use Symfony\Component\HttpFoundation\Request;
+
 class defaultCest
 {
     private $fixture;
@@ -15,11 +17,17 @@ class defaultCest
 
     public function getSourceParamReturnWebsiteDefault(UnitTester $I)
     {
-//        $request->query->get('aff');
-        $response = m::mock('Symfony\Component\HttpFoundation\Request');
-        $response->shouldReceive('query->get')->once()->andReturn('testiy');
-
-        $methodReturn = $I->getMethodReturn($this->fixture,'getSourceParam', $response);
+        $request = new Request();
+        $methodReturn = $I->getMethodReturn($this->fixture,'getSourceParam', $request);
         $I->assertContains('aff=website', $methodReturn);
+    }
+
+    public function getSourceParamFromAffiliateGetParam(UnitTester $I)
+    {
+        $affiliate = 'testify';
+        $request = new Request();
+        $request->query->set('aff', $affiliate);
+        $methodReturn = $I->getMethodReturn($this->fixture,'getSourceParam', $request);
+        $I->assertContains('aff=' . $affiliate, $methodReturn);
     }
 }

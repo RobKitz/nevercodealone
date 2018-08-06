@@ -122,8 +122,10 @@ class DefaultController extends Controller
     protected function getSourceParam(Request $request): string
     {
         $aff = 'website';
-        if ($request->query->get('aff') !== null && $request->query->get('bankAccount') !== '') {
-            $aff = $request->query->get('aff');
+
+        $queryGet = $request->query->get('aff');
+        if ($queryGet !== null && $queryGet !== '') {
+            $aff = $queryGet;
         }
 
         $sourceParam = '?aff=' . $aff;
