@@ -41,13 +41,13 @@ class spamProtectionCest
 
     public function validateNameEmptyIsFalse(UnitTester $I)
     {
-        $methodReturn = $this->getMethodReturn('validateName', '');
+        $methodReturn = $I->getMethodReturn($this->fixture,'validateName', '');
         $I->assertFalse($methodReturn);
     }
 
     public function validateNameIsSpam(UnitTester $I)
     {
-        $methodReturn = $this->getMethodReturn('validateName', 'viagra');
+        $methodReturn = $I->getMethodReturn($this->fixture,'validateName', 'viagra');
         $I->assertFalse($methodReturn);
     }
 
@@ -57,7 +57,7 @@ class spamProtectionCest
     public function validateIpWithInvalidIpsReturnFalse(UnitTester $I, Example $data)
     {
         $ip = $data[0];
-        $methodReturn = $this->getMethodReturn('validateIp', $ip);
+        $methodReturn = $I->getMethodReturn($this->fixture,'validateIp', $ip);
         $I->assertFalse($methodReturn, 'IP: ' . $ip);
     }
     /**
@@ -84,7 +84,7 @@ class spamProtectionCest
         );
 
         $ip = $data[0];
-        $methodReturn = $this->getMethodReturn('validateIp', $ip);
+        $methodReturn = $I->getMethodReturn($this->fixture,'validateIp', $ip);
         $I->assertTrue($methodReturn, 'IP: ' . $ip);
     }
 
@@ -100,25 +100,25 @@ class spamProtectionCest
 
     public function validateEmailEmptyStringReturnFalse(UnitTester $I)
     {
-        $methodReturn = $this->getMethodReturn('validateEmail', '');
+        $methodReturn = $I->getMethodReturn($this->fixture,'validateEmail', '');
         $I->assertFalse($methodReturn);
     }
 
     public function validateEmailNotValidEmailReturnFalse(UnitTester $I)
     {
-        $methodReturn = $this->getMethodReturn('validateEmail', 'testify');
+        $methodReturn = $I->getMethodReturn($this->fixture,'validateEmail', 'testify');
         $I->assertFalse($methodReturn);
     }
 
     public function validateEmailValidEmailReturnTrue(UnitTester $I)
     {
-        $methodReturn = $this->getMethodReturn('validateEmail', 'test@testify.com');
+        $methodReturn = $I->getMethodReturn($this->fixture,'validateEmail', 'test@testify.com');
         $I->assertTrue($methodReturn);
     }
 
     public function validateMessageEmptyReturnFalse(UnitTester $I)
     {
-        $methodReturn = $this->getMethodReturn('validateMessage', '');
+        $methodReturn = $I->getMethodReturn($this->fixture,'validateMessage', '');
         $I->assertFalse($methodReturn);
     }
 
@@ -128,7 +128,7 @@ class spamProtectionCest
         $spamWords = $spamProtection->spamWords;
 
         foreach ($spamWords as $spamWord) {
-            $methodReturn = $this->getMethodReturn('validateMessage', $spamWord);
+            $methodReturn = $I->getMethodReturn($this->fixture,'validateMessage', $spamWord);
             $I->assertFalse($methodReturn, $spamWord);
         }
     }
@@ -142,23 +142,9 @@ class spamProtectionCest
         ];
 
         foreach ($spamWords as $spamWord) {
-            $methodReturn = $this->getMethodReturn('validateMessage', $spamWord);
+            $methodReturn = $I->getMethodReturn($this->fixture,'validateMessage', $spamWord);
             $I->assertFalse($methodReturn, $spamWord);
         }
     }
-
-    /**
-     * @throws \ReflectionException
-     */
-    private function getMethodReturn($method, $param)
-    {
-        $class = new \ReflectionClass($this->fixture);
-        $method = $class->getMethod($method);
-        $method->setAccessible(true);
-        $methodReturn = $method->invoke($this->fixture, $param);
-        return $methodReturn;
-    }
-
-
 
 }

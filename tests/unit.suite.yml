@@ -7,3 +7,4 @@ modules:
     enabled:
         - Asserts
         - NCATesting\Helper\Unit
+        - Mockery
