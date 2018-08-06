@@ -59,8 +59,6 @@ composer:staging:
 composer:development:
   stage: pre_build
   image: composer
-  before_script:
-    - composer selfupdate
   script:
     - composer install -d $CI_PROJECT_DIR
   artifacts:
