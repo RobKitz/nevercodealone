@@ -4,8 +4,8 @@ services:
   server:
     image: $DOCKER_IMAGE
     environment:
-      DATABASE_URL: mysql://$DB_USER:$DB_PASS@db/$DB_NAME
-      CORS_ALLOW_ORIGIN: '^https?://(.*\.)?nevercodealone.de:?[0-9]*$$'
+      SYMFONY_DATABASE_URL: mysql://$DB_USER:$DB_PASS@db/$DB_NAME
+      SYMFONY_CORS_ALLOW_ORIGIN: '^https?://(.*\.)?nevercodealone.de:?[0-9]*$$'
     volumes:
       - application:/var/www/symfony
     restart: always
