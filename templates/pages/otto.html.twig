@@ -30,6 +30,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#speaker">Speakers</a></li>
                         <li><a href="#schedule">Zeitplan</a></li>
+                        <li><a href="#contact">HR Kontakt</a></li>
                         <li><a href="#pricing">Preise</a></li>
                         <li><a href="#highlights">Highlights</a></li>
                         <li><a href="#venue">Location</a></li>
@@ -204,9 +205,10 @@
                                             <div class="col-md-3 text-center"><img src="/img/otto/otto-speaker.jpg" alt="Otto Speaker" data-no-retina></div>
                                             <div class="col-md-9">
                                                 <p>10:00 Uhr</p>
-                                                <h4>Akka - Framework</h4>
-                                                <p>Der genaue Inhalt wird noch bekannt gegeben und hier bald veröffentlicht.</p>
-                                                <p class="event-speaker">- Mit Otto Developer</p>
+                                                <h4>Realtime Aggregation des Otto.de Event Streams</h4>
+                                                <p>Du wolltest schon immer wissen, wie viele Produktseiten auf <a href="https://www.otto.de/" target="_blank">Otto.de</a> pro Sekunden aufgerufen werden, welcher Artikel der meisgesehenste ist oder welcher Kunde die meisten Tabs offen hat?</p>
+                                                <p>All das und noch viel mehr werden wir in dieser Mob-Programming-Session herausfinden. Nebenbei beleuchten wir diverse Aspekte einer resilienten, <a href="https://kafka.apache.org/" target="_blank">Kafka</a>-basierten Applikation.</p>
+                                                <p class="event-speaker">- Mit Sebastian und Frederik</p>
                                             </div>
                                         </div>
                                     </li>
@@ -331,6 +333,43 @@
             </div>
         </div>
     </section>
+    <section class="speaker section-spacing text-center" id="contact">
+        <div class="container">
+            <header>
+                <h2>DIGITALE ZUKUNFT GESTALTEN</h2>
+                <h3>Direkt auf dem <a href="https://www.otto.de/unternehmen/jobs/" target="_blank">OTTO-Campus</a> in Hamburg die Zukunft des E-Commerce vorantreiben. Nutze den E-Commerce-Spirit von OTTO und die Innovationskraft unseres Konzerns. Arbeite in den unterschiedlichen Teams, die otto.de erfolgreich machen und in einem der Otto Group Funktionsbereiche, die 123 nationale und internationale Einzelgesellschaften steuern. Leg los!</h3>
+            </header>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="event-speaker">
+                        <figure> <img src="/img/otto/Hannah-Wilkens.jpg" alt="Hannah Wilkens Scala Human Ressources" data-no-retina>
+                            <figcaption>
+                                <h4>Hannah Wilkens</h4>
+                                <p>Personalreferentin Recruitment</p>
+                                <ul class="social">
+                                    <li><a href="https://www.xing.com/profile/HannahElisa_Wilkens/" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                </ul>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="event-speaker">
+                        <figure> <img src="/img/otto/wibke-nagel.jpg" alt="Wibke Nagel Otto Recruitment" data-no-retina>
+                            <figcaption>
+                                <h4>Wibke Nagel</h4>
+                                <p>Referentin Recruitment</p>
+                                <ul class="social">
+                                    <li><a href="https://www.xing.com/profile/Wibke_Nagel/" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                </ul>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+    </section>
     <section class="pricing section-spacing text-center" id="pricing">
         <div class="container">
             <header>
@@ -395,9 +434,10 @@
                 <div class="col-md-5">
                     <h2>Anfahrt</h2>
                     <address>
-                        <p> <i class="fa fa-map-marker"></i> Otto GmbH • Werner-Otto-Straße 1-7 • 22179 Hamburg</p>
-                        <p><i class="fa fa-mobile"></i> 040 6461-5308 </p>
-                        <p class="map-link"><a target="_blank" href="https://www.google.de/maps/place/Otto+(GmbH+%26+Co+KG)/@53.6008086,10.0708077,15z/data=!4m5!3m4!1s0x0:0xa599db27f27c31e5!8m2!3d53.6008086!4d10.0708077">Google Maps</a></p>
+                        <p> <i class="fa fa-map-marker"></i> <a href="https://collabor8-ottogroup.de/" target="_blank">collabor8</a> • Bannwarthstraße 5 • 22179 Hamburg</p>
+                        <p><i class="fa fa-mobile"></i> Roland: 017624747727 </p>
+                        <p class="map-link"><a target="_blank" href="https://www.google.com/maps/place/Collabor8/@53.6008446,10.0735209,17z/data=!3m1!4b1!4m5!3m4!1s0x47b18962292e34a3:0x5b3b489cd9b78ae9!8m2!3d53.6008414!4d10.0757096">Google Maps</a></p>
+                        <p><a href="/img/otto/Anfahrtsskizze.pdf" target="_blank">Anfahrtsskizze</a></p>
                     </address>
                 </div>
                 <div class="col-md-7">
@@ -517,7 +557,7 @@
 <script src="/conference/js/main.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 <script>
-    var mapLocation = new google.maps.LatLng(53.6008086, 10.0708077);
+    var mapLocation = new google.maps.LatLng(53.600841, 10.075710);
 </script>
 <script src="/conference/js/gmap.js"></script>
 {% include '/partial/google-analytics.html.twig' %}
