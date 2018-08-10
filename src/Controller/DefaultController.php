@@ -107,8 +107,8 @@ class DefaultController extends Controller
         return $this->render(
             'pages/otto.html.twig',
             [
-                'title' => 'Otto Scala #NCAEvent',
-                'description' => 'Scala Live Coding Workshop im Bereich E-Commerce am 29.9. bei Otto in Hamburg',
+                'title' => 'OTTO Scala #NCAEvent',
+                'description' => 'Scala Live Coding Workshop im Bereich E-Commerce am 29.9. bei OTTO in Hamburg',
                 'smImage' => 'https://nevercodealone.de/img/otto/otto-ncaevent-hamburg.png',
                 'eventLink' => $eventLink
             ]
