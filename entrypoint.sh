@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 for i in $(env | grep -E "^SYMFONY_"); do
     echo "${i#SYMFONY_}" >> .env
     echo "${i#SYMFONY_}" >> /etc/environment

@@ -31,7 +31,6 @@ stages:
   cache:
     key: "$CI_COMMIT_REF_SLUG"
     paths:
-      - .env
       - public/bundles
       - var
       - vendor
@@ -52,7 +51,6 @@ stages:
   cache:
     key: "$CI_COMMIT_REF_SLUG"
     paths:
-      - .env
       - public/bundles
       - var
       - vendor
