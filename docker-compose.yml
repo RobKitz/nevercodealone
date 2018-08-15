@@ -2,7 +2,6 @@
 version: '2'
 
 services:
-
   webserver:
     image: $WEBSERVER_IMAGE
     environment:
@@ -10,16 +9,16 @@ services:
       SYMFONY_APP_SECRET: $APP_SECRET
       SYMFONY_DATABASE_URL: mysql://$DB_USER:$DB_PASS@db/$DB_NAME
       SYMFONY_CORS_ALLOW_ORIGIN: $CORS_ALLOW_ORIGIN
+    volumes:
+      - 'application:/var/www/html'
     restart: always
     labels:
       io.rancher.container.pull_image: always
-      # traefik.acme: true
       traefik.docker.network: proxy
       traefik.enable: true
-      traefik.frontend.entryPoints: http,https
       traefik.frontend.passHostHeader: true
-      # traefik.frontend.redirect.entryPoint: https
       traefik.frontend.rule: 'Host:$HTTP_URL'
+      traefik.frontend.entryPoints: http,https
       traefik.port: 80
 
   db:
@@ -32,4 +31,27 @@ services:
     restart: always
     labels:
       io.rancher.container.pull_image: always
+
+  toolbox:
+    image: registry.nevercodealone.de/nevercodealone/docker-toolbox
+    environment:
+      CODECEPT_DATABASE_URL: mysql://$DB_USER:$DB_PASS@db/$DB_NAME
+      CODECEPT_DB_HOST: db
+      CODECEPT_DB_NAME: $DB_NAME
+      CODECEPT_DB_PASS: $DB_PASS
+      CODECEPT_DB_USER: $DB_USER
+      CODECEPT_WEBDRIVER_URL: $WEBDRIVER_URL
+      CODECEPT_WEBSITE_URL: $HTTP_URL
+    volumes:
+      - 'application:/home/www-data/symfony'
+    ports:
+      - 22
+    depends_on:
+      - webserver
+    restart: always
+    labels:
+      io.rancher.container.pull_image: always
+
+volumes:
+  application:
 
