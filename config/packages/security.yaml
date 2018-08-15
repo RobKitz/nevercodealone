@@ -16,4 +16,4 @@ security:
             anonymous: ~
             http_basic: ~
     access_control:
-    - { path: ^/otto, roles: ROLE_ADMIN }
+#    - { path: ^/otto, roles: ROLE_ADMIN }
