@@ -155,6 +155,9 @@ run_tests:
     - ssh rancher.nevercodealone.de -p $SSH_PORT_TOOLBOX "ln -s ~/symfony/tests/_output/ ~/symfony/public/report"
   tags:
     - docker-executor
+  except:
+    - master
+    - stage
 
 # Stage: final
 
