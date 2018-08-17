@@ -35,6 +35,7 @@ services:
   toolbox:
     image: registry.nevercodealone.de/nevercodealone/docker-toolbox
     environment:
+      CODECEPT_APP_ENV: $APP_ENV
       CODECEPT_DATABASE_URL: mysql://$DB_USER:$DB_PASS@db/$DB_NAME
       CODECEPT_DB_HOST: db
       CODECEPT_DB_NAME: $DB_NAME
