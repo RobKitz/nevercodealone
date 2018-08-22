@@ -93,6 +93,21 @@
                     </div>
                     <div class="item">
                         <div class="event-speaker">
+                            <figure> <img src="/img/otto/Michael-Arndt-OTTO.jpg" alt="Michael Arndt OTTO Scala Speaker" data-no-retina>
+                                <figcaption>
+                                    <h4>Michael Arndt</h4>
+                                    <p>Senior System Developer</p>
+                                    <ul class="social">
+                                        <li><a href="https://twitter.com/marndt_" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="https://www.xing.com/profile/Michael_Arndt/cv" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                    </ul>
+                                </figcaption>
+                            </figure>
+                            <a href="#0" data-type="speaker-6" class="bttn">Profil</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="event-speaker">
                             <figure> <img src="/img/otto/frederik-otto-hamburg-entwickler.jpg" alt="Frederik OTTO Hamburg Scala Entwickler" data-no-retina>
                                 <figcaption>
                                     <h4>Frederik Mars</h4>
@@ -227,7 +242,7 @@
                                             <div class="col-md-3 col-md-push-9 text-center"><img src="/img/otto/scala-markus-jura.jpg" alt="Scala Special Speaker" data-no-retina></div>
                                             <div class="col-md-9 col-md-pull-3">
                                                 <p>11:45 Uhr</p>
-                                                <h4>Live Coding - Using Akka Streams to write Mircoservice that supports end-to-end backpressure</h4>
+                                                <h4>Live Coding - Using Akka Streams to write Microservice that supports end-to-end backpressure</h4>
                                                 <p>Let's write a microservice based on Akka Streams that truly handles backpressure throughout the entire application.</p>
                                                 <p>Traditionally, routes built with Akka HTTP directly interact with actors implementing domain logic. One potential issue is the lack of backpressure: when the route just fires messages at the poor domain actors, these messages pile up in the mailbox faster than they can get processed. This is especially the case when the domain actors interact with a database or external services, waiting for a response.</p>
                                                 <p>Our microservice also offers an HTTP API, accesses a database and interacts with another external service. By using Akka Streams as the processing engine, incoming HTTP calls will fail fast while a system is overloaded.</p>
@@ -273,12 +288,13 @@
                                     </li>
                                     <li class="event">
                                         <div class="row">
-                                            <div class="col-md-3 col-md-push-9 text-center"><img src="/img/otto/otto-speaker.jpg" alt="Scala Live Coding" data-no-retina></div>
+                                            <div class="col-md-3 col-md-push-9 text-center"><img src="/img/otto/Michael-Arndt-OTTO.jpg" alt="Scala Live Coding" data-no-retina></div>
                                             <div class="col-md-9 col-md-pull-3">
                                                 <p>14:30 Uhr</p>
-                                                <h4>Scala und Kafka im Einsatz bei OTTO</h4>
-                                                <p>Wir schauen wie genau Scala bei OTTO im Einsatz ist und wo die Reise hingeht. Ein Blick hinter die Kulissen in den Code.</p>
-                                                <p class="event-speaker">- Mit Otto Developer</p>
+                                                <h4>"Wo klemmt's?" - "Keine Ahnung..."</h4>
+                                                <p>Mit der Einführung einer Microservice-Architektur und der Kopplung per Kafka ist es uns - dem Tracking-Team@OTTO - gelungen, einen großen Schritt in Richtung Skalierbarkeit und Ausfallsicherheit zu machen. Doch wie kann ich sicher sein, dass jedes Rad im Getriebe funktioniert? Wenn Service B 2.000 Nachrichten pro Sekunde verarbeitet, dann ist das echt toll, aber nur, solange Service A nicht 4.000 pro Sekunde schreibt.</p>
+                                                <p>Backpressure über MS-Genzen hinweg ist nicht trivial, aber machbar. Voraussetzung hierfür ist ein Monitoring der Schreib- und Leseraten der einzelnen Kafka Consumer und Producer. In dieser Session werden wir uns mithilfe von Akka (mal ohne Akka-Streams; richtig handgemacht) einer möglichen Lösung nähern. Dabei steht nicht die Kafka-API im Vordergrund, sondern der geeignete Aufbau eines Aktoren-Systems, oder untechnisch ausgedrückt: echte Umsetzung von Fachlichkeit.</p>
+                                                <p class="event-speaker">- Mit Michael Arndt</p>
                                             </div>
                                         </div>
                                     </li>
@@ -554,6 +570,12 @@
         <div class="cd-bio-content">
             <h2>Otto - Matthew Aldridge</h2>
             <p>Matthew is Team Lead – Personalisation at OTTO since 2018. As agile leader, his focus is on creating and supporting high performing cross-functional teams. With an extensive background in software engineering Matthew has worked in multiple industries including telecommunications, finance, and eCommerce always with a strong focus on people.</p>
+        </div>
+    </div>
+    <div class="cd-speaker-bio speaker-6">
+        <div class="cd-bio-content">
+            <h2>Otto - Michael Arndt</h2>
+            <p>Michael ist seit über sieben Jahren Entwickler bei OTTO. Aktuell beschäftigt er sich intensiv mit Scala und Kafka basierten Microservices und ist ein echter Akka-Fan. In seinem Team werden die otto.de Bewegungsdaten in Realtime verarbeitet und einer Vielzahl von Abnehmern zur Verfügung gestellt.</p>
         </div>
     </div>
     <a href="#0" class="cd-speaker-bio-close">Close</a> </div>
