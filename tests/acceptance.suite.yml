@@ -13,7 +13,7 @@ modules:
     config:
         WebDriver:
           host: '%WEBDRIVER_URL%'
-          url: 'http://%WEBSITE_URL%'
+          url: '%WEBSITE_URL%'
           browser: chrome
           window_size: 1600x1000
           connection_timeout: 5
