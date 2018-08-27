@@ -1,0 +1,12 @@
+---
+version: '2'
+
+services:
+  db:
+    ports:
+    - 33006:3306/tcp
+
+  web:
+    ports:
+    - 8080:80/tcp
+
