@@ -1,23 +1,35 @@
-FROM registry.nevercodealone.de/nevercodealone/docker-webserver
+FROM composer AS composer
 
+ARG APP_ENV=dev
+
+COPY . /app
+RUN ([[ "$APP_ENV" != "dev" ]] && composer install --no-dev --optimize-autoloader && rm -f .env) || composer install
+
+
+
+FROM php:apache AS webserver
+
+LABEL contributor="Thomas Steinert <moenka@10forge.org>"
 LABEL description="Shipped application image for nevercodealone.de."
-LABEL maintainer="Thomas Steinert <moenka@10forge.org>"
 LABEL vendor="Never Code Alone"
 
-ENV APP_ENV=dev
-ENV APP_SECRET=insecure
-ENV CORS_ALLOW_ORIGIN=^https?://localhost:?[0-9]*$
-ENV DATABASE_URL=mysql://user:pass@db/database
+RUN DEBIAN_FRONTEND=noninteractive apt-get update \
+ && apt-get dist-upgrade -y \
+ && apt-get install -y \
+        libzip-dev \
+ && apt-get clean \
+ && rm -rf /var/cache/apt \
+ && rm -rf /var/lib/apt
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+RUN docker-php-ext-install -j$(nproc) mysqli \
+ && docker-php-ext-install -j$(nproc) pdo_mysql \
+ && docker-php-ext-install -j$(nproc) zip
 
-# Application setup
-WORKDIR /var/www/html
-COPY . /var/www/html
-
-# Apache setup
-COPY apache.conf /etc/apache2/sites-enabled/000-default.conf
 RUN a2enmod rewrite
+
+CMD ["/usr/sbin/apachectl", "-DFOREGROUND"]
+
+COPY apache.conf /etc/apache2/sites-enabled/000-default.conf
+COPY php.ini /usr/local/etc/php/php.ini
+COPY --chown=www-data:www-data --from=composer /app /var/www/html
 
