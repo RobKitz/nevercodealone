@@ -3,37 +3,53 @@ Never Code Alone
 
 Initiative für Software Qualität
 
-Getting started
----------------
+Application
+-----------
 
-Um einen kompletten Webseitenstack lokal aufzusetzen, führe im Wurzelverzeichnis des Repositories docker-compose mit der Datei `docker-compose-local.yml` aus. Dabei ist zu beachten, dass docker-compose die Umgebungsvariable `DOCKER_IMAGE` benötigt um den Stack zu starten. Um alle Images aus der Container Registry laden zu können, stell sicher, dass du in die Registry eingeloggt bist.
+... application stuff ...
 
-    docker login registry.nevercodealone.de
-    DOCKER_IMAGE=registry.nevercodealone.de/nevercodealone/nevercodealone:{branch-name} docker-compose -f docker-compose-local.yml -p nca up -d
+Development
+-----------
 
-Nachdem der Stack aufgesetzt ist, findest du die Webseite unter **http://localhost:8080**. Um die komplette Testsuite auszuführen verbinde dich  mit der Toolbox und führe die Tests als Benutzer `www-data` aus.
+## Getting started
 
-    docker exec -it nca_toolbox_1 bash
-    su - www-data
-    cd ./symfony
-    vendor/bin/codecept run acceptance
+To get a running local environment there are a few steps which need to be taken care of.
 
-Fehler im Webserver kannst du mittels `docker logs -f nca_server_1` ansehen.
+1. Copy the `.env.dist` file to `.env` .
+1. Run `docker-compose -f docker-compose.local.yml up --build -d` .
+1. Connect to the web container and initialize the database.
+    ```
+    docker exec -it nca_web_1 bash
+    root@d2694b48518b:/var/www/html# bin/console doctrine:schema:create
+    ```
 
-Projektaufbau
--------------
+Afterwards you can connect to the application on http://localhost:8080.
 
-### Komponenten
+### Using xdebug
 
-* Webserver (nca_server_1)
-* Datenbank (nca_db_1)
-* Toolbox (nca_toolbox_1)
-* WebDriver [nur lokal] (nca_selenium_1)
+Xdebug is configured to try to connect a remote debugger instead of waiting for a connection from a debugger since the ip address of the docker container can change with every deployment. Read more about the setup [here](https://blog.flavia-it.de/xdebug-im-docker-container/).
 
-### Erklärung
+### Working on the database
 
-Die eigentliche Webseite befindet sich im **nca_server_1** container. Als Basis für diesen Container wird das Image aus dem Projekt **nevercodealone/docker-webserver** genutzt. Vor jedem Deployment wird das Webserver Image mit dem aktuellen `HEAD` des Branches gebaut. Das gebaute Image wird dann auf den Rancher deployed, zusammen mit dem Datenbank und dem Toolbox Container (siehe dazu die `docker-compose.yml` für mehr Informationen). Die Webseite ist dann unter der URL **http://{branch-name}.develop.nevercodealone.de** erreichbar.
+If you want to work with the database the easiest way is to connect to adminer on http://localhost:8081 and login to the database with **nca** as username, password and database. If you want to directly connect to the database with your own tools you can reach the database port on `localhost:33006` .
 
-Der WebDriver Container wird nur bei lokalen Tests erzeugt (siehe `docker-compose-local.yml`). Nachdem die Tests abgeschlossen sind, werden die Ergebisse in einem Container im Rancher ausgerollt. Die Ergebnisse sind dann unter **http://output.{branch-name}.develop.nevercodealone.de** einsehbar.
+Structure
+---------
 
-Vor jedem neuen Deployment, nach dem Bau des Webserver-Images, wird die Rancher Umgebung für den Branch gelöscht, damit das neue Deployment in eine saubere Umgebung ausgerollt werden kann.
+The application stack consists of 2 services: the webserver containing the application (called **web**) and the database holding the data (called **db**). When the application is deployed it is configured by labels so the **traefik** proxy can forward incoming http requests on port 80 and 443 of the container host to the web container.
+
+Testing
+-------
+
+When the stack is run for testing the `docker-compose.dev.yml` file needs to be appended to the normal `docker-compose.yml` file to enable port forwarding to the network interface of the container host. This way the host running the tests can connect to the database from outside and run the database tests.
+
+For the website tests a [zalenium](http://opensource.zalando.com/zalenium/) (self managing selenium stack) is hosted typically on the development container host which can reach the http(s) traefik endpoint of the deployed development stack.
+
+### Branches
+
+Usually a branch gets deployed to the address https://<branch-name>.develop.nevercodealone.de which can be visited and tested against after the deployment job has been succeeded. The database is not initialized after deployment so this is up to the developer. You can see how to do this in the ci test job.
+
+### Master
+
+The master branch works a bit different since it needs to test how the application behaves after an container upgrade (branch deployments are purged and redeployed on every test run). This includes filesystem and database migrations. For this to work a new stack is created (cloned) from the production stack which will then be upgraded to the latest version with the tag **master**.
+

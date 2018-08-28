@@ -13,7 +13,7 @@ services:
       io.rancher.container.pull_image: always
     restart: always
     volumes:
-    - db_data::/var/lib/mysql
+    - db_data:/var/lib/mysql
 
   web:
     depends_on:
