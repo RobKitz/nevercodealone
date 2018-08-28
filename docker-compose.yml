@@ -4,14 +4,19 @@ version: '2'
 services:
   db:
     environment:
-    - MYSQL_DATABASE
-    - MYSQL_PASSWORD
-    - MYSQL_ROOT_PASSWORD
-    - MYSQL_USER
+    - MYSQL_DATABASE_FILE=/run/secrets/nca_database_name
+    - MYSQL_PASSWORD_FILE=/run/secrets/nca_database_pass
+    - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/nca_database_root_pass
+    - MYSQL_USER_FILE=/run/secrets/nca_database_user
     image: mariadb
     labels:
       io.rancher.container.pull_image: always
     restart: always
+    secrets:
+    - nca_database_name
+    - nca_database_pass
+    - nca_database_root_pass
+    - nca_database_user
     volumes:
     - db_data:/var/lib/mysql
 
@@ -19,11 +24,11 @@ services:
     depends_on:
     - db
     environment:
-    - APP_DEBUG
-    - APP_ENV
-    - APP_SECRET
-    - CORS_ALLOW_ORIGIN
-    - DATABASE_URL
+    - APP_DEBUG_FILE=/run/secrets/nca_app_debug
+    - APP_ENV_FILE=/run/secrets/nca_app_env
+    - APP_SECRET_FILE=/run/secrets/nca_app_secret
+    - CORS_ALLOW_ORIGIN_FILE=/run/secrets/nca_cors_allow_origin
+    - DATABASE_URL_FILE=/run/secrets/nca_database_url
     image: $WEB_IMAGE
     labels:
       io.rancher.container.pull_image: always
@@ -34,7 +39,33 @@ services:
       traefik.frontend.entryPoints: http,https
       traefik.port: 80
     restart: always
+    secrets:
+    - nca_app_debug
+    - nca_app_env
+    - nca_app_secret
+    - nca_cors_allow_origin
+    - nca_database_url
 
 volumes:
   db_data:
+
+secrets:
+  nca_database_name:
+    external: true
+  nca_database_pass:
+    external: true
+  nca_database_root_pass:
+    external: true
+  nca_database_user:
+    external: true
+  nca_app_debug:
+    external: true
+  nca_app_env:
+    external: true
+  nca_app_secret:
+    external: true
+  nca_cors_allow_origin:
+    external: true
+  nca_database_url:
+    external: true
 

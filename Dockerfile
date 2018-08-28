@@ -28,6 +28,9 @@ RUN docker-php-ext-install -j$(nproc) mysqli \
 
 RUN a2enmod rewrite
 
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/usr/sbin/apachectl", "-DFOREGROUND"]
 
 COPY apache.conf /etc/apache2/sites-enabled/000-default.conf
