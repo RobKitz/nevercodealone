@@ -13,23 +13,17 @@ settings:
     shuffle: true
 extensions:
     enabled:
-        - Codeception\Extension\RunFailed
+    - Codeception\Extension\RunFailed
 coverage:
     enabled: true
     include:
-        - src/*
+    - src/*
     exclude:
-        - vendor/*
-        - var/*
+    - vendor/*
+    - var/*
 modules:
-    config:
-        Db:
-            dsn: 'mysql:host=%DB_HOST%;dbname=%DB_NAME%'
-            user: '%DB_USER%'
-            password: '%DB_PASS%'
     enabled:
-    - Db
     - Asserts
 params:
-  - env
+- env
 

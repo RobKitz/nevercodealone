@@ -11,8 +11,6 @@ modules:
              url: '%WEBSITE_URL%'
              depends: PhpBrowser
              part: Json
-       - Asserts
-       - Db
 env:
    fast:
    debug:
