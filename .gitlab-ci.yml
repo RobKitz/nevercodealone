@@ -118,7 +118,8 @@ run_tests_against_dev_environment:
     - "echo \"DB_HOST=${DB_HOST}\""
   script:
     - /var/www/html/bin/console doctrine:schema:validate || /var/www/html/bin/console doctrine:schema:create
-    - /var/www/html/vendor/bin/codecept run acceptance --html
+    - /var/www/html/vendor/bin/codecept run api --html
+    - /var/www/html/vendor/bin/codecept run integration --html
   artifacts:
     paths:
       - ./tests/_output/report.html

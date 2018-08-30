@@ -8,6 +8,7 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - Asserts
+        - Db
         - WebDriver
 env:
     phantomjs:
