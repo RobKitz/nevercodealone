@@ -12,7 +12,7 @@ class contactCest
         $I->scrollTo($startpage::$formContact);
     }
 
-    public function checkValidFormSending(AcceptanceTester $I)
+    public function checkValidFormSendingInWebinterface(AcceptanceTester $I)
     {
         $time = microtime();
 
@@ -55,6 +55,8 @@ class contactCest
         $I->fillField('#email', $email);
         $I->fillField('#message', $message);
         $I->click('#send');
+
+        $I->waitForText('Danke wir melden uns');
 
         $I->seeNumRecords(1, 'message', $messagePost);
     }
