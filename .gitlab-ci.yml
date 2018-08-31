@@ -5,12 +5,14 @@
 # build:        build docker image
 # deploy:       deploy application to environment
 # test:         run tests on deployed environment
+# posttest:     confirm or rollback 
 # final:        remove environment / deploy to production
 
 stages:
   - build
   - deploy
   - test
+  - posttest
   - final
 
 variables:
@@ -93,7 +95,7 @@ deploy_production_image_to_stage:
   before_script:
     - "echo \"TODO: clone production environment for upgrade test\""
   script:
-    - rancher up -s stage-nevercodealone-de -d --pull --prune --upgrade
+    - rancher up -s stage-nevercodealone-de -d --pull --prune --force-upgrade
   tags:
     - docker-executor
   only:
@@ -117,7 +119,6 @@ run_tests_against_dev_environment:
     - export DB_HOST=$HTTP_URL:$DB_PORT
     - "echo \"DB_HOST=${DB_HOST}\""
   script:
-    - /var/www/html/bin/console doctrine:schema:validate || /var/www/html/bin/console doctrine:schema:create
     - /var/www/html/vendor/bin/codecept run api --html
     - /var/www/html/vendor/bin/codecept run integration --html
   artifacts:
@@ -147,6 +148,33 @@ run_tests_against_prod_environment:
   only:
     - stage
     - /^prestage\/.*$/
+
+# Stage: posttest
+
+confirm_upgrade:
+  stage: posttest
+  image: $TOOLBOX_IMAGE
+  script:
+    - rancher up -s stage-nevercodealone-de -d --confirm
+  tags:
+    - docker-executor
+  only:
+    - stage
+    - /^prestage\/.*$/
+  when: on_success
+
+rollback_upgrade:
+  stage: posttest
+  image: $TOOLBOX_IMAGE
+  script:
+    - rancher up -s stage-nevercodealone-de -d --rollback
+  tags:
+    - docker-executor
+  only:
+    - stage
+    - /^prestage\/.*$/
+  when: on_failure
+
 
 # Stage: final
 
