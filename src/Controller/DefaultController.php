@@ -92,4 +92,21 @@ class DefaultController extends Controller
             'pages/influencer-db.html.twig'
         );
     }
+
+    /**
+     * @Route("/otto/")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function ottoAction()
+    {
+        return $this->render(
+            'pages/otto.html.twig',
+            [
+                'title' => 'Otto Scala #NCAEvent',
+                'description' => 'Scala Live Coding Workshop im Bereich E-Commerce am 29.9. bei Otto in Hamburg',
+                'smImage' => 'https://nevercodealone.de/img/otto/otto-ncaevent-hamburg.png',
+                'eventLink' => 'https://www.eventbrite.de/e/otto-scala-never-code-alone-event-tickets-48383184407'
+            ]
+        );
+    }
 }
