@@ -285,13 +285,14 @@ deploy_production_image_to_prod:
   image: $TOOLBOX_IMAGE
   variables:
     HTTP_URL: www3.nevercodealone.de
-    WEB_IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_SHA
+    WEB_IMAGE: $PROD_WEB_IMAGE
   script:
     - rancher up -s www3-nevercodealone-de -d --pull --prune --upgrade
   tags:
     - docker-executor
   only:
     - master
+  when: manual
 
 
 # Stage: postrollout
