@@ -8,6 +8,8 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - WebDriver
+        - Asserts
+        - Db
     config:
         WebDriver:
           host: '%WEBDRIVER_URL%'
