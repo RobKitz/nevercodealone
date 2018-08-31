@@ -3,6 +3,35 @@ version: '2'
 
 services:
   db:
+    environment:
+    - MYSQL_DATABASE
+    - MYSQL_PASSWORD
+    - MYSQL_ROOT_PASSWORD
+    - MYSQL_USER
+    image: mariadb
+    labels:
+      io.rancher.container.pull_image: always
     ports:
     - 3306/tcp
+    restart: always
+
+  web:
+    depends_on:
+    - db
+    environment:
+    - APP_DEBUG
+    - APP_ENV
+    - APP_SECRET
+    - CORS_ALLOW_ORIGIN
+    - DATABASE_URL
+    image: $WEB_IMAGE
+    labels:
+      io.rancher.container.pull_image: always
+      traefik.docker.network: proxy
+      traefik.enable: true
+      traefik.frontend.passHostHeader: true
+      traefik.frontend.rule: 'Host:$HTTP_URL'
+      traefik.frontend.entryPoints: http,https
+      traefik.port: 80
+    restart: always
 

@@ -12,7 +12,6 @@ class contactCest
         $I->scrollTo($startpage::$formContact);
     }
 
-    // tests
     public function checkValidFormSending(AcceptanceTester $I)
     {
         $time = microtime();
@@ -33,6 +32,29 @@ class contactCest
         $I->click('#send');
 
         $I->waitForText('Danke wir melden uns');
+    }
+
+    /**
+     * @group db
+     */
+    public function checkValidFormSendingInDatabase(AcceptanceTester $I)
+    {
+        $time = microtime();
+
+        $name = 'test';
+        $email = 'test@ify.com';
+        $message = 'CC message:' . $time;
+
+        $messagePost = [
+            'name'    => $name,
+            'email'   => $email,
+            'message' => $message
+        ];
+
+        $I->fillField('#name', $name);
+        $I->fillField('#email', $email);
+        $I->fillField('#message', $message);
+        $I->click('#send');
 
         $I->seeNumRecords(1, 'message', $messagePost);
     }

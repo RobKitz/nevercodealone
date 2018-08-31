@@ -1,5 +1,6 @@
 /.dockerignore
 /.git*
+/.idea
 /docker-compose*
 /Dockerfile*
 /rancher-compose.yml

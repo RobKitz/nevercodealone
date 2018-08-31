@@ -1,158 +1,327 @@
 
-  #--------------------------------------------------------------------------------------------------
-  # STAGES
-  #--------------------------------------------------------------------------------------------------
-  # build:        build docker image
-  # deploy:       deploy application to environment
-  # test:         run tests on deployed environment
-  # final:        remove environment / deploy to production
+#--------------------------------------------------------------------------------------------------
+# STAGES
+#--------------------------------------------------------------------------------------------------
+# build:        build docker image
+# deploy:       deploy application to environment
+# test:         run tests on deployed environment
+# posttest:     confirm or rollback 
+# final:        remove environment / deploy to production
 
-  stages:
-    - build
-    - deploy
-    - test
-    - final
+stages:
+  - build
+  - deploy
+  - test
+  - posttest
+  - teardown
+  - release
+  - rollout
+  - postrollout
 
+variables:
+  LATEST_PROD_WEB_IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH
+  LATEST_WEB_IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH/$CI_COMMIT_REF_SLUG
+  HTTP_URL: $CI_COMMIT_REF_SLUG.develop.nevercodealone.de
+  PROD_WEB_IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_PIPELINE_IID
+  RANCHER_PROJECT_NAME: $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG
+  TOOLBOX_IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH/$CI_COMMIT_REF_SLUG/toolbox:$CI_PIPELINE_IID
+  WEB_IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH/$CI_COMMIT_REF_SLUG:$CI_PIPELINE_IID
+  WEBDRIVER_URL: rancher.nevercodealone.de
+  WEBSITE_URL: https://$CI_COMMIT_REF_SLUG.develop.nevercodealone.de
+
+
+#--------------------------------------------------------------------------------------------------
+# JOBS
+#--------------------------------------------------------------------------------------------------
+
+# Stage: build
+
+build_development_image:
+  stage: build
+  image: docker:stable
+  before_script:
+    - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
+  script:
+    - docker build -t $WEB_IMAGE --target webserver --pull .
+    - docker push $WEB_IMAGE
+  tags:
+    - docker-executor
+  except:
+    - master
+    - /^prod\/.*/
+
+build_production_image:
+  stage: build
+  image: docker:stable
+  before_script:
+    - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
+  script:
+    - docker build -t $WEB_IMAGE --target webserver --pull --build-arg APP_ENV=prod .
+    - docker tag $WEB_IMAGE $LATEST_WEB_IMAGE
+    - docker push $WEB_IMAGE
+    - docker push $LATEST_WEB_IMAGE
+  tags:
+    - docker-executor
+  only:
+    - master
+    - /^prod\/.*/
+  
+build_toolbox_image:
+  stage: build
+  image: docker:stable
+  before_script:
+    - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
+  script:
+    - docker build -t $TOOLBOX_IMAGE --target toolbox --pull .
+    - docker push $TOOLBOX_IMAGE
+  tags:
+    - docker-executor
+
+# Stage: deploy
+
+deploy_development_image_to_branch:
+  stage: deploy
+  image: $TOOLBOX_IMAGE
+  before_script:
+    - rancher rm --type stack --stop $RANCHER_PROJECT_NAME || true
+  script:
+    - rancher up -s $RANCHER_PROJECT_NAME -f docker-compose.dev.yml -e .env.dist -d --pull
+  tags:
+    - docker-executor
+  except:
+    - master
+    - /^prod\/.*/
+
+deploy_production_image_to_branch:
+  stage: deploy
+  image: $TOOLBOX_IMAGE
+  before_script:
+    - rancher rm --type stack --stop $RANCHER_PROJECT_NAME || true
+    # create the stack with the latest known working image and upgrade from there
+    # todo: actually clone the production environment with data
+    - WEB_IMAGE=$LATEST_PROD_WEB_IMAGE rancher up -s $RANCHER_PROJECT_NAME -d --pull
+  script:
+    - rancher up -s $RANCHER_PROJECT_NAME -d --pull --prune --upgrade
+  tags:
+    - docker-executor
+  only:
+    - /^prod\/.*/
+
+deploy_production_image_to_stage:
+  stage: deploy
+  image: $TOOLBOX_IMAGE
   variables:
-    HTTP_URL: $CI_COMMIT_REF_SLUG.develop.nevercodealone.de
-    RANCHER_PROJECT_NAME: $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG
-    TOOLBOX_IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH/toolbox:$CI_COMMIT_REF_SLUG
-    WEB_IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
-    WEBDRIVER_URL: rancher.nevercodealone.de
-    WEBSITE_URL: https://$CI_COMMIT_REF_SLUG.develop.nevercodealone.de
+    HTTP_URL: stage.nevercodealone.de
+  before_script:
+    - rancher rm --type stack --stop stage-nevercodealone-de || true
+    # create the stack with the latest known working image and upgrade from there
+    # todo: actually clone the production environment with data
+    - WEB_IMAGE=$LATEST_PROD_WEB_IMAGE rancher up -s stage-nevercodealone-de -d --pull
+  script:
+    - rancher up -s stage-nevercodealone-de -d --pull --prune --upgrade
+  tags:
+    - docker-executor
+  only:
+    - master
+
+# Stage: test
+
+run_tests_against_dev_environment:
+  stage: test
+  image: $TOOLBOX_IMAGE
+  variables:
+    DB_USER: nca
+    DB_NAME: nca
+    DB_PASS: nca
+  before_script:
+    - export CONTAINERID=$(rancher ps | grep $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG/db | awk '{ print $1 }')
+    - export DB_PORT=$(rancher inspect $CONTAINERID | jq -r .publicEndpoints[0].port)
+    - export DATABASE_URL=mysql://nca:nca@$HTTP_URL:$DB_PORT/nca
+    - "echo \"DATABASE_URL=${DATABASE_URL}\""
+    - export DB_HOST=$HTTP_URL:$DB_PORT
+    - "echo \"DB_HOST=${DB_HOST}\""
+  script:
+    - /var/www/html/vendor/bin/codecept run api --html
+    - /var/www/html/vendor/bin/codecept run integration --html
+  artifacts:
+    paths:
+      - ./tests/_output/report.html
+    expire_in: 1 week
+  tags:
+    - docker-executor
+  except:
+    - master
+    - /^prod\/.*/
+
+run_tests_against_prod_environment:
+  stage: test
+  image: $TOOLBOX_IMAGE
+  script:
+    - /var/www/html/vendor/bin/codecept run acceptance --html --skip-group db
+  artifacts:
+    paths:
+      - ./tests/_output/report.html
+    expire_in: 1 week
+  tags:
+    - docker-executor
+  only:
+    - /^prod\/.*/
+
+run_tests_against_final_prod_environment:
+  stage: test
+  image: $TOOLBOX_IMAGE
+  variables:
+    WEBSITE_URL: https://stage.nevercodealone.de
+  script:
+    - /var/www/html/vendor/bin/codecept run acceptance --html --skip-group db
+  artifacts:
+    paths:
+      - ./tests/_output/report.html
+    expire_in: 1 week
+  tags:
+    - docker-executor
+  only:
+    - master
 
 
-  #--------------------------------------------------------------------------------------------------
-  # JOBS
-  #--------------------------------------------------------------------------------------------------
+# Stage: posttest
 
-  # Stage: build
+confirm_stage_upgrade:
+  image: $TOOLBOX_IMAGE
+  script:
+    - rancher up -s $RANCHER_PROJECT_NAME -d $RANCHER_OPTIONS
+  tags:
+    - docker-executor
+  stage: posttest
+  variables:
+    RANCHER_OPTIONS: --confirm-upgrade
+    RANCHER_PROJECT_NAME: stage-nevercodealone-de
+  only:
+    - master
+  when: on_success
 
-  build_development_image:
-    stage: build
-    image: docker:stable
-    before_script:
-      - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
-    script:
-      - docker build -t $WEB_IMAGE --target webserver --pull .
-      - docker push $WEB_IMAGE
-    tags:
-      - docker-executor
-    except:
-      - master
-      - stage
+confirm_prod_upgrade:
+  image: $TOOLBOX_IMAGE
+  script:
+    - rancher up -s $RANCHER_PROJECT_NAME -d $RANCHER_OPTIONS
+  tags:
+    - docker-executor
+  stage: posttest
+  variables:
+    RANCHER_OPTIONS: --confirm-upgrade
+  only:
+    - /^prod\/.*/
+  when: on_success
 
-  build_production_image:
-    stage: build
-    image: docker:stable
-    before_script:
-      - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
-    script:
-      - docker build -t $WEB_IMAGE --target webserver --pull --build-arg APP_ENV=prod .
-      - docker push $WEB_IMAGE
-    tags:
-      - docker-executor
-    only:
-      - master
-      - stage
-    
-  build_toolbox_image:
-    stage: build
-    image: docker:stable
-    before_script:
-      - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
-    script:
-      - docker build -t $TOOLBOX_IMAGE --target toolbox --pull .
-      - docker push $TOOLBOX_IMAGE
-    tags:
-      - docker-executor
-    except:
-      - master
+rollback_stage_upgrade:
+  image: $TOOLBOX_IMAGE
+  script:
+    - rancher up -s $RANCHER_PROJECT_NAME -d $RANCHER_OPTIONS
+  tags:
+    - docker-executor
+  stage: posttest
+  variables:
+    RANCHER_OPTIONS: --rollback
+    RANCHER_PROJECT_NAME: stage-nevercodealone-de
+  only:
+    - master
+  when: on_failure
 
-  # Stage: deploy
+rollback_prod_upgrade:
+  image: $TOOLBOX_IMAGE
+  script:
+    - rancher up -s $RANCHER_PROJECT_NAME -d $RANCHER_OPTIONS
+  tags:
+    - docker-executor
+  stage: posttest
+  variables:
+    RANCHER_OPTIONS: --rollback
+  only:
+    - /^prod\/.*/
+  when: on_failure
 
-  deploy_development_image:
-    stage: deploy
-    image: $TOOLBOX_IMAGE
-    before_script:
-      - rancher rm --type stack --stop $RANCHER_PROJECT_NAME || true
-    script:
-      - rancher-compose -p $RANCHER_PROJECT_NAME -f docker-compose.yml -f docker-compose.dev.yml -e .env.dist up -d --pull --upgrade
-    tags:
-      - docker-executor
-    except:
-      - master
-      - stage
 
-  deploy_production_image:
-    stage: deploy
-    image: $TOOLBOX_IMAGE
-    before_script:
-      - "echo \"TODO: clone production environment for upgrade test\""
-    script:
-      - rancher-compose -p $RANCHER_PROJECT_NAME up -d --pull --upgrade
-    tags:
-      - docker-executor
-    only:
-      - master
-      - stage
+# Stage: teardown
 
-  # Stage: test
+teardown_environment:
+  stage: teardown
+  image: $TOOLBOX_IMAGE
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - rancher rm --type stack --stop $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG
+  tags:
+    - docker-executor
+  except:
+    - master
+    - /^prod\/.*/
+  when: manual
 
-  run_tests:
-    stage: test
-    image: $TOOLBOX_IMAGE
-    variables:
-      DB_USER: nca
-      DB_NAME: nca
-      DB_PASS: nca
-    before_script:
-      - export CONTAINERID=$(rancher ps | grep $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG/db | awk '{ print $1 }')
-      - export DB_PORT=$(rancher inspect $CONTAINERID | jq -r .publicEndpoints[0].port)
-      - export DATABASE_URL=mysql://nca:nca@$HTTP_URL:$DB_PORT/nca
-      - "echo \"DATABASE_URL=${DATABASE_URL}\""
-      - export DB_HOST=$HTTP_URL:$DB_PORT
-      - "echo \"DB_HOST=${DB_HOST}\""
-    script:
-      - /var/www/html/bin/console doctrine:schema:validate || /var/www/html/bin/console doctrine:schema:create
-      - /var/www/html/vendor/bin/codecept run acceptance --html
-    artifacts:
-      paths:
-        - ./tests/_output/report.html
-      expire_in: 1 week
-    tags:
-      - docker-executor
-    except:
-      - master
 
-  # Stage: final
+# Stage: release
 
-  release_image:
-    stage: final
-    image: docker:stable
-    variables:
-      GIT_STRATEGY: none
-    script:
-      - docker pull $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
-      - docker tag $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG $CI_REGISTRY/$CI_PROJECT_PATH:stable
-      - docker push $CI_REGISTRY/$CI_PROJECT_PATH:stable
-    tags:
-      - docker-executor
-    only:
-      - master
-    when: manual
+release_image:
+  stage: release
+  image: docker:stable
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - docker pull $LATEST_WEB_IMAGE
+    - docker tag $LATEST_WEB_IMAGE $LATEST_PROD_WEB_IMAGE
+    - docker tag $LATEST_WEB_IMAGE $PROD_WEB_IMAGE
+    - docker push $LATEST_PROD_WEB_IMAGE
+    - docker push $PROD_WEB_IMAGE
+  tags:
+    - docker-executor
+  only:
+    - master
+  when: manual
 
-  teardown_environment:
-    stage: final
-    image: $TOOLBOX_IMAGE
-    variables:
-      GIT_STRATEGY: none
-    script:
-      - rancher rm --type stack --stop $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG
-    tags:
-      - docker-executor
-    except:
-      - master
-      - stage
-    when: manual
+
+# Stage: rollout
+
+deploy_production_image_to_prod:
+  stage: rollout
+  image: $TOOLBOX_IMAGE
+  variables:
+    HTTP_URL: www3.nevercodealone.de
+    WEB_IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_SHA
+  script:
+    - rancher up -s www3-nevercodealone-de -d --pull --prune --upgrade
+  tags:
+    - docker-executor
+  only:
+    - master
+
+
+# Stage: postrollout
+
+
+confirm_upgrade:
+  image: $TOOLBOX_IMAGE
+  script:
+    - rancher up -s $RANCHER_PROJECT_NAME -d $RANCHER_OPTIONS
+  tags:
+    - docker-executor
+  stage: postrollout
+  variables:
+    RANCHER_OPTIONS: --confirm-upgrade
+    RANCHER_PROJECT_NAME: www3-nevercodealone-de
+  only:
+    - master
+  when: manual
+
+rollback_upgrade:
+  image: $TOOLBOX_IMAGE
+  script:
+    - rancher up -s $RANCHER_PROJECT_NAME -d $RANCHER_OPTIONS
+  tags:
+    - docker-executor
+  stage: postrollout
+  variables:
+    RANCHER_OPTIONS: --rollback
+    RANCHER_PROJECT_NAME: www3-nevercodealone-de
+  only:
+    - master
+  when: manual
 
