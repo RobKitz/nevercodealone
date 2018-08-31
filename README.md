@@ -53,3 +53,4 @@ Usually a branch gets deployed to the address https://<branch-name>.develop.neve
 
 The master branch works a bit different since it needs to test how the application behaves after an container upgrade (branch deployments are purged and redeployed on every test run). This includes filesystem and database migrations. For this to work a new stack is created (cloned) from the production stack which will then be upgraded to the latest version with the tag **master**.
 
+
