@@ -12,8 +12,7 @@ modules:
         - Db
     config:
         WebDriver:
-          host: '%CODECEPT_WEBDRIVER_URL%'
-          url: 'http://%CODECEPT_WEBSITE_URL%'
+          url: 'http://127.0.0.1:8000'
           browser: chrome
           window_size: 1600x1000
           connection_timeout: 5
