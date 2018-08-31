@@ -265,6 +265,8 @@ release_image:
   image: docker:stable
   variables:
     GIT_STRATEGY: none
+  before_script:
+    - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
   script:
     - docker pull $LATEST_WEB_IMAGE
     - docker tag $LATEST_WEB_IMAGE $LATEST_PROD_WEB_IMAGE
