@@ -1,6 +1,7 @@
 <?php
 namespace NCATesting\page;
 use NCATesting\AcceptanceTester;
+use NCATesting\Helper\Config;
 
 class seoCest
 {
@@ -15,4 +16,53 @@ class seoCest
         $meta = $I->getMeta();
         $I->assertNotEmpty($meta['title']);
     }
+
+    public function hasDescription(AcceptanceTester $I)
+    {
+        $meta = $I->getMeta(['description']);
+        $I->assertNotEmpty($meta['description']);
+    }
+
+    public function imagesHasAlt(AcceptanceTester $I)
+    {
+        $altImages = $I->grabMultiple('img', 'alt');
+        $srcImages = $I->grabMultiple('img', 'src');
+
+        foreach ($altImages as $key => $altImage) {
+            $I->assertNotEmpty($altImage, $srcImages[$key]);
+        }
+    }
+
+    public function validateInternalAndExternalLinkTargets(AcceptanceTester $I, Config $helperConfig)
+    {
+        $specialLinks = [
+            'tel:+',
+            'https://symfony.com/doc',
+            'http://symfony.com/support'
+        ];
+
+        $url = $helperConfig->getUrlFromConfigWebdriver('url');
+
+        $items = $I->grabMultiple('a', 'href');
+        $itemsTargets = $I->grabMultiple('a', 'target');
+
+        foreach ($items as $key => $item) {
+            if($item === null) {
+                continue;
+            }
+
+            if(strpos($item, $url) === false) {
+                foreach ($specialLinks as $specialLink) {
+                    if(strpos($item, $specialLink) !== false) {
+                        $I->assertSame('', $itemsTargets[$key], 'Item no blank: ' . $item);
+                        continue 2;
+                    }
+                }
+                $I->assertSame('_blank', $itemsTargets[$key], 'Item blank: ' . $item . $key);
+            } else {
+                $I->assertSame('', $itemsTargets[$key], 'Item no blank: ' . $item);
+            }
+        }
+    }
+
 }
