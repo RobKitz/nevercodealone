@@ -45,6 +45,7 @@ class seoCest
 
         $items = $I->grabMultiple('a', 'href');
         $itemsTargets = $I->grabMultiple('a', 'target');
+        $itemsRel = $I->grabMultiple('a', 'Rel');
 
         foreach ($items as $key => $item) {
             if($item === null) {
@@ -58,6 +59,8 @@ class seoCest
                         continue 2;
                     }
                 }
+//                 rel="noopener"
+                $I->assertSame('noopener', $itemsRel[$key], 'Item rel is noopener ' . $item . $key);
                 $I->assertSame('_blank', $itemsTargets[$key], 'Item blank: ' . $item . $key);
             } else {
                 $I->assertSame('', $itemsTargets[$key], 'Item no blank: ' . $item);
