@@ -20,16 +20,17 @@
 </head>
 <body>
 <main>
-    <header class="hero-section" style="background: url('/img/otto/skyline-hh.jpg') center center no-repeat fixed;">
+    <header class="hero-section" style="background: url('/img/otto/skyline-hh.jpg') center center no-repeat fixed;background-size: cover;">
         <nav class="navbar navbar-default">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                    <a href="{{ eventLink }}" class="logo-brand"><img src="/img/otto/otto-logo.png" data-at2x="/img/otto/otto-logo.png" alt="Tickets auf Eventbrite" class="logo-nav" width="250px"> </a> </div>
+                    <a href="{{ eventLink }}" class="logo-brand"><img src="/img/otto/otto-logo.png" data-at2x="/img/otto/otto-logo.png" alt="Tickets auf Eventbrite" class="logo-nav" width="148px" height="50px" style="width: 148px;height: 50px"> </a> </div>
                 <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#speaker">Speakers</a></li>
                         <li><a href="#schedule">Zeitplan</a></li>
+                        <li><a href="#contact">HR Kontakt</a></li>
                         <li><a href="#pricing">Preise</a></li>
                         <li><a href="#highlights">Highlights</a></li>
                         <li><a href="#venue">Location</a></li>
@@ -43,7 +44,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="welcome-message">
-                        <h1>Scala Workshop - Otto #NCAEvent</h1>
+                        <h1>Scala Workshop - OTTO #NCAEvent</h1>
                         <p>29. September 2018</p>
                         <p>Hamburg</p>
                     </div>
@@ -52,32 +53,10 @@
             </div>
         </div>
     </header>
-    <div class="counter text-center" id="counter">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3 col-xs-6"> <i class="fa fa-user fa-3x"></i>
-                    <h3 class="total-number-1">0</h3>
-                    <p>Speaker</p>
-                </div>
-                <div class="col-sm-3 col-xs-6"> <i class="fa fa-graduation-cap fa-3x"></i>
-                    <h3 class="total-number-2">0</h3>
-                    <p>Teilnehmer</p>
-                </div>
-                <div class="col-sm-3 col-xs-6"> <i class="fa fa-clock-o fa-3x"></i>
-                    <h3 class="total-number-3">0</h3>
-                    <p>Stunden</p>
-                </div>
-                <div class="col-sm-3 col-xs-6"> <i class="fa fa-hand-spock-o fa-3x"></i>
-                    <h3><span class="total-number-4">0</span>,- Euro</h3>
-                    <p>Spende</p>
-                </div>
-            </div>
-        </div>
-    </div>
     <section class="speaker section-spacing text-center" id="speaker">
         <div class="container">
             <header>
-                <h2>#NCAEvent 4 Speaker</h2>
+                <h2>#NCAEvent 6 Speaker</h2>
                 <h3>Übersicht der Scala Speaker beim Live-Coding Event</h3>
             </header>
             <div class="row">
@@ -114,14 +93,29 @@
                     </div>
                     <div class="item">
                         <div class="event-speaker">
-                            <figure> <img src="/img/otto/otto-speaker.jpg" alt="Otto Speaker" data-no-retina>
+                            <figure> <img src="/img/otto/Michael-Arndt-OTTO.jpg" alt="Michael Arndt OTTO Scala Speaker" data-no-retina>
                                 <figcaption>
-                                    <h4>Wird nachgereicht</h4>
-                                    <p>Otto GmbH</p>
+                                    <h4>Michael Arndt</h4>
+                                    <p>Senior System Developer</p>
                                     <ul class="social">
-                                        <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#" target="_blank"><i class="fa fa-xing"></i></a></li>
-                                        <li><a href="#" target="_blank"><i class="fa fa-github-alt"></i></a></li>
+                                        <li><a href="https://twitter.com/marndt_" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="https://www.xing.com/profile/Michael_Arndt/cv" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                    </ul>
+                                </figcaption>
+                            </figure>
+                            <a href="#0" data-type="speaker-6" class="bttn">Profil</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="event-speaker">
+                            <figure> <img src="/img/otto/frederik-otto-hamburg-entwickler.jpg" alt="Frederik OTTO Hamburg Scala Entwickler" data-no-retina>
+                                <figcaption>
+                                    <h4>Frederik Mars</h4>
+                                    <p>Software Developer</p>
+                                    <ul class="social">
+                                        <li><a href="https://twitter.com/fr3dch3n" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="https://www.xing.com/profile/Frederik_Mars/" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                        <li><a href="https://github.com/frederikmars2653" target="_blank"><i class="fa fa-github-alt"></i></a></li>
                                     </ul>
                                 </figcaption>
                             </figure>
@@ -129,18 +123,34 @@
                     </div>
                     <div class="item">
                         <div class="event-speaker">
-                            <figure> <img src="/img/otto/otto-speaker.jpg" alt="Otto Speaker" data-no-retina>
+                            <figure> <img src="/img/otto/sebastian-schroeder-scala-workshop.jpg" alt="Sebastian Schröder OTTO Speaker" data-no-retina>
                                 <figcaption>
-                                    <h4>Wird nachgereicht</h4>
-                                    <p>Otto GmbH</p>
+                                    <h4>Sebastian Schröder</h4>
+                                    <p>Technical Designer</p>
                                     <ul class="social">
-                                        <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#" target="_blank"><i class="fa fa-xing"></i></a></li>
-                                        <li><a href="#" target="_blank"><i class="fa fa-github-alt"></i></a></li>
+                                        <li><a href="https://twitter.com/Sebasti0n" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="https://www.xing.com/profile/Sebastian_Schroeder34/cv" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                        <li><a href="https://github.com/SebastianSchroeder" target="_blank"><i class="fa fa-github-alt"></i></a></li>
                                     </ul>
                                 </figcaption>
                             </figure>
                             <a href="#0" data-type="speaker-4" class="bttn">Profil</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="event-speaker">
+                            <figure> <img src="/img/otto/matthew-otto-hamburg.jpg" alt="Matthew Aldridge Otto Speaker" data-no-retina>
+                                <figcaption>
+                                    <h4>Matthew Aldridge</h4>
+                                    <p>Team Lead - Customer Data and Personalisation</p>
+                                    <ul class="social">
+                                        <li><a href="https://twitter.com/mcaldridge" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="https://www.xing.com/profile/Matthew_Aldridge/cv" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                        <li><a href="https://github.com/aldridmc" target="_blank"><i class="fa fa-github-alt"></i></a></li>
+                                    </ul>
+                                </figcaption>
+                            </figure>
+                            <a href="#0" data-type="speaker-5" class="bttn">Profil</a>
                         </div>
                     </div>
                 </div>
@@ -150,7 +160,7 @@
     <section class="about section-spacing">
         <div class="container">
             <div class="row">
-                <div class="col-md-6"> <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/U8CfIWZ3pPs?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> </div>
+                <div class="col-md-6"> <iframe width="560" height="315" src="https://www.youtube.com/embed/IOxHjWg8Ix8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> </div>
                 <div class="col-md-6">
                     <h2>Über #NCAEvents - Nerds für Nerds</h2>
                     <p>Web Developer brauchen kostenlose und gute Weiterbildung. Auf den Events lernen wir gemeinsam an der Funktastatur.</p>
@@ -201,12 +211,13 @@
                                     </li>
                                     <li class="event">
                                         <div class="row">
-                                            <div class="col-md-3 text-center"><img src="/img/otto/otto-speaker.jpg" alt="Otto Speaker" data-no-retina></div>
+                                            <div class="col-md-3 text-center"><img src="/img/otto/frederik-sebastian.jpg" alt="OTTO Frederik und Sebastian" data-no-retina></div>
                                             <div class="col-md-9">
                                                 <p>10:00 Uhr</p>
-                                                <h4>Akka - Framework</h4>
-                                                <p>Der genaue Inhalt wird noch bekannt gegeben und hier bald veröffentlicht.</p>
-                                                <p class="event-speaker">- Mit Otto Developer</p>
+                                                <h4>Realtime Aggregation des Otto.de Event Streams</h4>
+                                                <p>Du wolltest schon immer wissen, wie viele Produktseiten auf <a href="https://www.otto.de/" target="_blank">Otto.de</a> pro Sekunden aufgerufen werden, welcher Artikel der meisgesehenste ist oder welcher Kunde die meisten Tabs offen hat?</p>
+                                                <p>All das und noch viel mehr werden wir in dieser Mob-Programming-Session herausfinden. Nebenbei beleuchten wir diverse Aspekte einer resilienten, <a href="https://kafka.apache.org/" target="_blank">Kafka</a>-basierten Applikation.</p>
+                                                <p class="event-speaker">- Mit Sebastian und Frederik</p>
                                             </div>
                                         </div>
                                     </li>
@@ -231,8 +242,10 @@
                                             <div class="col-md-3 col-md-push-9 text-center"><img src="/img/otto/scala-markus-jura.jpg" alt="Scala Special Speaker" data-no-retina></div>
                                             <div class="col-md-9 col-md-pull-3">
                                                 <p>11:45 Uhr</p>
-                                                <h4>Live Coding - Using Akka Streams to write Mircoservice that supports end-to-end backpressure</h4>
-                                                <p>Der genaue Ablauf und Inhalt wird gerade abgestimmt und bald hier veröffentlicht</p>
+                                                <h4>Live Coding - Using Akka Streams to write Microservice that supports end-to-end backpressure</h4>
+                                                <p>Let's write a microservice based on Akka Streams that truly handles backpressure throughout the entire application.</p>
+                                                <p>Traditionally, routes built with Akka HTTP directly interact with actors implementing domain logic. One potential issue is the lack of backpressure: when the route just fires messages at the poor domain actors, these messages pile up in the mailbox faster than they can get processed. This is especially the case when the domain actors interact with a database or external services, waiting for a response.</p>
+                                                <p>Our microservice also offers an HTTP API, accesses a database and interacts with another external service. By using Akka Streams as the processing engine, incoming HTTP calls will fail fast while a system is overloaded.</p>
                                                 <p class="event-speaker">- Mit Markus Jura</p>
                                             </div>
                                         </div>
@@ -255,13 +268,13 @@
                                     </li>
                                     <li class="event">
                                         <div class="row">
-                                            <div class="col-md-3 text-center"><img src="/img/otto/otto-speaker.jpg" alt="Scala Lead Speaker" data-no-retina></div>
+                                            <div class="col-md-3 text-center"><img src="/img/otto/matthew-otto-hamburg.jpg" alt="OTTO Speaker Matthew " data-no-retina></div>
                                             <div class="col-md-8">
                                                 <p>14:15 Uhr</p>
-                                                <h4>Vorstellung Sponsor Otto GmbH</h4>
-                                                <p>Ein agiler und ausgezeichneter Arbeitgeber hat viel aus seinen Entwicklungsprozessen gelernt und ist Marktführer.</p>
-                                                <p>Was zeichnet einen guten Arbeitgeber für die Otto aus? Eine persönliche Vorstellung mit offener Fragerunde.</p>
-                                                <p class="event-speaker">- Mit Otto Leitung</p>
+                                                <h4>Vorstellung Sponsor OTTO</h4>
+                                                <p>OTTO ist heute der größte deutsche Onlinehändler. Wir implementieren Microservices für otto.de, eine der größten E-Commerce Plattformen Europas, die wir kontinuierlich weiterentwickeln. Wir arbeiten in selbstorganisierenden und crossfunktionalen Scrum-Teams und mit den Methoden der agilen Softwareentwicklung wie z.B. Test-Driven-Development (TDD), Pair-Programming oder Continuous Delivery.</p>
+                                                <p>Was zeichnet OTTO als Arbeitgeber für Entwickler aus? Eine persönliche Vorstellung mit offener Fragerunde.</p>
+                                                <p class="event-speaker">- Mit Matthew Aldridge</p>
                                             </div>
                                         </div>
                                     </li>
@@ -275,12 +288,13 @@
                                     </li>
                                     <li class="event">
                                         <div class="row">
-                                            <div class="col-md-3 col-md-push-9 text-center"><img src="/img/otto/otto-speaker.jpg" alt="Scala Live Coding" data-no-retina></div>
+                                            <div class="col-md-3 col-md-push-9 text-center"><img src="/img/otto/Michael-Arndt-OTTO.jpg" alt="Scala Live Coding" data-no-retina></div>
                                             <div class="col-md-9 col-md-pull-3">
                                                 <p>14:30 Uhr</p>
-                                                <h4>Scala und Kafka im Einsatz bei Otto</h4>
-                                                <p>Wir schauen wie genau Scala bei Otto im Einsatz ist und wo die Reise hingeht. Ein Blick jinter die Kulissen in den Code.</p>
-                                                <p class="event-speaker">- Mit Otto Developer</p>
+                                                <h4>"Wo klemmt's?" - "Keine Ahnung..."</h4>
+                                                <p>Mit der Einführung einer Microservice-Architektur und der Kopplung per Kafka ist es uns - dem Tracking-Team@OTTO - gelungen, einen großen Schritt in Richtung Skalierbarkeit und Ausfallsicherheit zu machen. Doch wie kann ich sicher sein, dass jedes Rad im Getriebe funktioniert? Wenn Service B 2.000 Nachrichten pro Sekunde verarbeitet, dann ist das echt toll, aber nur, solange Service A nicht 4.000 pro Sekunde schreibt.</p>
+                                                <p>Backpressure über MS-Genzen hinweg ist nicht trivial, aber machbar. Voraussetzung hierfür ist ein Monitoring der Schreib- und Leseraten der einzelnen Kafka Consumer und Producer. In dieser Session werden wir uns mithilfe von Akka (mal ohne Akka-Streams; richtig handgemacht) einer möglichen Lösung nähern. Dabei steht nicht die Kafka-API im Vordergrund, sondern der geeignete Aufbau eines Aktoren-Systems, oder untechnisch ausgedrückt: echte Umsetzung von Fachlichkeit.</p>
+                                                <p class="event-speaker">- Mit Michael Arndt</p>
                                             </div>
                                         </div>
                                     </li>
@@ -306,7 +320,7 @@
                                             <div class="col-md-8">
                                                 <p>16:15 Uhr</p>
                                                 <h4>Property-based Testing mit Scala</h4>
-                                                <p>Hier kommt noch was vom Speaker hin</p>
+                                                <p>In dieser Session wollen wir gemeinsam in die Tasten greifen und Tests schreiben, um in kleinen Programmen Fehler zu finden und deren Funktionsweise zu ergründen. Dabei werden wir verschiedene Testbibliotheken nutzen und einfache Unittest und Property-based Tests entwicklen.</p>
                                                 <p class="event-speaker">- Mit Thomas Hackbarth</p>
                                             </div>
                                         </div>
@@ -319,13 +333,65 @@
                                     <li class="event">
                                         <p>19:30 Uhr</p>
                                         <h4>Open After Event Party</h4>
-                                        <p>In dem Räumen von Otto</p>
+                                        <p>In dem Räumen von OTTO</p>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+    <section class="speaker section-spacing text-center" id="contact">
+        <div class="container">
+            <header>
+                <h2>DIGITALE ZUKUNFT GESTALTEN</h2>
+                <p>Direkt auf dem <a href="https://www.otto.de/unternehmen/jobs/" target="_blank">OTTO-Campus</a> in Hamburg die Zukunft des E-Commerce vorantreiben. Nutze den E-Commerce-Spirit von OTTO und die Innovationskraft unseres Konzerns. Arbeite in den unterschiedlichen Teams, die otto.de erfolgreich machen und in einem der Otto Group Funktionsbereiche, die 123 nationale und internationale Einzelgesellschaften steuern. Leg los!</p>
+                <div>&nbsp;</div>
+                <h2>Aktuelle Stellenangebote</h2>
+                <p>
+                    <a href="https://www.otto.de/unternehmen/jobs/jobs/00284923/Agile-Scala-Software-Developer-OTTO-de--m-w-" target="_blank">Agile Scala Software Developer OTTO.de (m/w)</a>
+                    <br>
+                    <a href="https://www.otto.de/unternehmen/jobs/jobs/00269102/Software-Developer-Functional-Programming-OTTO-de--w-m-" target="_blank">Software Developer Functional Programming OTTO.de (w/m)</a>
+                    <br>
+                    <a href="https://www.otto.de/unternehmen/jobs/jobs/00268444/Senior-Clojure-Developer-OTTO-de--w-m-" target="_blank">Senior Clojure Developer OTTO.de (w/m)</a>
+                    <br>
+                    <a href="https://www.otto.de/unternehmen/jobs/jobs/00290057/Data-Engineer-f-r-Suche---Navigation--w-m--in-OTTO-BI" target="_blank">Data Engineer für Suche & Navigation (w/m) in OTTO BI</a>
+                    <br>
+                    <a href="https://www.otto.de/unternehmen/jobs/jobs/00286502/Data-Architect--w-m--Business-Intelligence-in-der-Otto-Group" target="_blank">Data Architect (w/m) Business Intelligence in der Otto Group</a>
+                </p>
+            </header>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="event-speaker">
+                        <figure> <img src="/img/otto/Hannah-Wilkens.jpg" alt="Hannah Wilkens Scala Human Ressources" data-no-retina>
+                            <figcaption>
+                                <h4>Hannah Wilkens</h4>
+                                <p>Recruiterin IT</p>
+                                <p><a href="tel:+494064616768"><i class="fa fa-phone"></i> 040/6461-6768</a></p>
+                                <ul class="social">
+                                    <li><a href="https://www.xing.com/profile/HannahElisa_Wilkens/" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                </ul>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="event-speaker">
+                        <figure> <img src="/img/otto/wibke-nagel.jpg" alt="Wibke Nagel Otto Recruitment" data-no-retina>
+                            <figcaption>
+                                <h4>Wibke Nagel</h4>
+                                <p>Recruiterin IT</p>
+                                <p><a href="tel:+494064611497"><i class="fa fa-phone"></i> 040/6461-1497</a></p>
+                                <ul class="social">
+                                    <li><a href="https://www.xing.com/profile/Wibke_Nagel/" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                </ul>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div style="clear: both"></div>
             </div>
         </div>
     </section>
@@ -352,7 +418,7 @@
                     </div>
                 </div>
             </div>
-            <div class="action-btn-pricing"><a href="{{ title }}" target="_blank" class="bttn">Ticket kaufen</a></div>
+            <div class="action-btn-pricing"><a href="{{ eventLink }}" target="_blank" class="bttn">Ticket kaufen</a></div>
         </div>
     </section>
     <section class="hotels section-spacing text-center" id="highlights">
@@ -363,13 +429,15 @@
             </header>
             <div class="row">
                 <div class="col-md-6">
-                    <figure class="text-left"> <img src="/conference/img/specials/spende-mitmachkinder.jpg" alt="Spende Mitmachkinder" data-no-retina>
+                    <figure class="text-left"> <img src="/img/otto/sternenbruecke-hamburg.jpg" alt="Spende Sternenbrücke Hamburg" data-no-retina>
                         <figcaption>
                             <div class="hotel-details">
-                                <h4>Spende Soziale Zweck<span class="ratings five"></span></h4>
+                                <h4>Spende Sternenbrücke<span class="ratings five"></span></h4>
                                 <p class="hotel-price">400,- Euro</p>
-                                <p class="hotel-info">Wir setzen die Ticket Gebühr immer zu 100% in eine soziale Institution in der jeweiligen Stadt ein. So konnten schon fast 4.000,- Euro gesammelt werden. Ein Empfänger wird noch gesucht vorschläge gerne an uns. Die Empfänger können sich auch in einem Interview bei uns vorstellen.</p>
-                                <a class="hotel-map" href="https://www.mitmachkinder.de/" target="_blank">mitmachkinder.de</a></div>
+                                <p class="hotel-info">Wir spenden die Ticket Gebühr immer zu 100% in eine soziale Institution in der jeweiligen Stadt. Diesmal geht das Geld an die
+                                    Sternenbrücke in Hamburg. Das Kinder-Hospiz Sternenbrücke begleitet betroffene Familien im Rahmen der Entlastungspflege auf
+                                    dem langen Krankheitsweg ihrer Kinder, um ihnen eine kraftschenkende Erholungsphase zu ermöglichen.</p>
+                                <a class="hotel-map" href="https://sternenbruecke.de/home" target="_blank">sternenbruecke.de</a></div>
                         </figcaption>
                     </figure>
                 </div>
@@ -379,7 +447,7 @@
                             <div class="hotel-details">
                                 <h4>Schütteln Trinken. Wach!<span class="ratings five"></span></h4>
                                 <p class="hotel-info">Der erste natürliche & gesunde Wachmacher in Bio- und Vegan Qualität.. 27mg Koffein/100ml einzig und allein aus dem feinsten japanischen Matcha. Kombiniert mit Limette und der Süße der Agave ergibt sich ein einzigartiges erfrischendes Erlebnis und dein Fokus bleibt für bis zu 5 Stunden auf höchstem Level!
-                                    <a href="https://twitter.com/search?q=%23wachsch%C3%BCtteln" target="_blank">#wachschütteln</a></p>
+                                    <a href="https://twitter.com/search?q=%23wachsch%C3%BCtteln" target="_blank">#wachschütteln</a>. Das Getränk ist in der Entwickler Szene bereits sehr beliebt.</p>
                                 <a class="hotel-map" href="http://www.ma-tea.de/" target="_blank">[ma.tɕa]ncasozial.png</a></div>
                         </figcaption>
                     </figure>
@@ -393,9 +461,10 @@
                 <div class="col-md-5">
                     <h2>Anfahrt</h2>
                     <address>
-                        <p> <i class="fa fa-map-marker"></i> Otto GmbH • Werner-Otto-Straße 1-7 • 22179 Hamburg</p>
-                        <p><i class="fa fa-mobile"></i> 040 6461-5308 </p>
-                        <p class="map-link"><a target="_blank" href="https://www.google.de/maps/place/Otto+(GmbH+%26+Co+KG)/@53.6008086,10.0708077,15z/data=!4m5!3m4!1s0x0:0xa599db27f27c31e5!8m2!3d53.6008086!4d10.0708077">Google Maps</a></p>
+                        <p> <i class="fa fa-map-marker"></i> <a href="https://collabor8-ottogroup.de/" target="_blank">collabor8</a> • Bannwarthstraße 5 • 22179 Hamburg</p>
+                        <p><i class="fa fa-mobile"></i> Roland: 017624747727 </p>
+                        <p class="map-link"><a target="_blank" href="https://www.google.com/maps/place/Collabor8/@53.6008446,10.0735209,17z/data=!3m1!4b1!4m5!3m4!1s0x47b18962292e34a3:0x5b3b489cd9b78ae9!8m2!3d53.6008414!4d10.0757096">Google Maps</a></p>
+                        <p><a href="/img/otto/Anfahrtsskizze.pdf" target="_blank">Anfahrtsskizze</a> mit Bus und Parkplätzen</p>
                     </address>
                 </div>
                 <div class="col-md-7">
@@ -409,8 +478,7 @@
     <section class="sponsor section-spacing text-center">
         <div class="container">
             <header>
-                <h2>Der Sponsor - Otto GmbH</h2>
-                <h3>Wir finden noch raus, was der Mehrwert ist.</h3>
+                <h2>Der Sponsor - Otto (GmbH & Co KG)</h2>
             </header>
             <div class="row">
                 <div class="col-md-12">
@@ -484,20 +552,32 @@
     </div>
     <div class="cd-speaker-bio speaker-2">
         <div class="cd-bio-content">
-            <h2>Otto GmbH</h2>
-            <p>Infos folgen</p>
+            <h2>MOIA - Markus Jura</h2>
+            <p>Markus is Scala Lead at MOIA. As a Scala enthusiast, his focus is to design and build distributed systems based on Akka. He is co-organizing the Reactive Systems user group in Hamburg and shares his knowledge regularly at conferences. Markus is also the co-founder and former CTO of Y-Combinator funded startup.</p>
         </div>
     </div>
     <div class="cd-speaker-bio speaker-3">
         <div class="cd-bio-content">
-            <h2>codecentric AG Mark Keinhörster</h2>
-            <p>Mark ist im Big-Data Zoo zu Hause und bringt Erfahrungen mit Hadoop und Apache Spark mit. Außerdem beschäftigt er sich mit Docker, Microservices und Cloud-Technologien.</p>
+            <h2>OTTO - Frederik Mars</h2>
+            <p>Frederik arbeitet seit 3 Jahren bei OTTO. Dort ist er als Software-Entwickler in einem Team, das sich mit der Personalisierung von otto.de beschäftigt. Das Team arbeitet überwiegend mit Scala, Clojure und Python und setzen dabei Spark und Tensorflow ein.</p>
         </div>
     </div>
     <div class="cd-speaker-bio speaker-4">
         <div class="cd-bio-content">
-            <h2>Otto GmbH</h2>
-            <p>Infos folgen</p>
+            <h2>Otto - Sebastian Schröder</h2>
+            <p>Sebastian ist seit über sechs Jahren Entwickler bei OTTO. Aktuell beschäftigt er sich intensiv mit Scala und Kafka basierten Microservices. In seinem Team werden die otto.de Bewegungsdaten in Realtime verarbeitet und einer Vielzahl von Abnehmern zur Verfügung gestellt.</p>
+        </div>
+    </div>
+    <div class="cd-speaker-bio speaker-5">
+        <div class="cd-bio-content">
+            <h2>Otto - Matthew Aldridge</h2>
+            <p>Matthew is Team Lead – Personalisation at OTTO since 2018. As agile leader, his focus is on creating and supporting high performing cross-functional teams. With an extensive background in software engineering Matthew has worked in multiple industries including telecommunications, finance, and eCommerce always with a strong focus on people.</p>
+        </div>
+    </div>
+    <div class="cd-speaker-bio speaker-6">
+        <div class="cd-bio-content">
+            <h2>Otto - Michael Arndt</h2>
+            <p>Michael ist seit über sieben Jahren Entwickler bei OTTO. Aktuell beschäftigt er sich intensiv mit Scala und Kafka basierten Microservices und ist ein echter Akka-Fan. In seinem Team werden die otto.de Bewegungsdaten in Realtime verarbeitet und einer Vielzahl von Abnehmern zur Verfügung gestellt.</p>
         </div>
     </div>
     <a href="#0" class="cd-speaker-bio-close">Close</a> </div>
@@ -515,7 +595,7 @@
 <script src="/conference/js/main.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 <script>
-    var mapLocation = new google.maps.LatLng(53.6008086, 10.0708077);
+    var mapLocation = new google.maps.LatLng(53.600841, 10.075710);
 </script>
 <script src="/conference/js/gmap.js"></script>
 {% include '/partial/google-analytics.html.twig' %}
