@@ -17,6 +17,8 @@ modules:
           window_size: 1600x1000
           connection_timeout: 5
           request_timeout: 30
+groups:
+  page: [tests/acceptance/page/metaCest.php, tests/acceptance/page/seoCest.php]
 env:
     phantomjs:
         modules:
