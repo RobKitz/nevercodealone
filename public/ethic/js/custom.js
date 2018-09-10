@@ -162,6 +162,21 @@ $( window ).on( "load", function() {
         $(".tz-slider-banner").trigger('owl.next');
     }) ;
 
+    $('.tz-tab-slider').owlCarousel({
+        items : 1,
+        itemsDesktop : [1199,1],
+        itemsDesktopSmall : [979,1],
+        itemsTablet: [768, 1],
+        itemsMobile: [479, 1],
+        navigation: true, // Show next and prev buttons
+        slideSpeed:400,
+        paginationSpeed:800,
+        rewindSpeed:1000,
+        stopOnHover: false,
+        singleItem: true,
+        autoplay: false
+    });
+
     var $heightElement = jQuery('.tz-training-images').height();
     var $heightBanner        = jQuery('.tz-items').height();
     var $heightContentBanner = jQuery('.tz-banner-content').height();
