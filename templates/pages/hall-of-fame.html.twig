@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+
+<html lang="en" class="no-js">
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,300italic,700,400,300' rel='stylesheet'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ description }}">
+    {% include ['/partial/meta-twitter.html.twig'] %}
+    {% include ['/partial/meta-facebook.html.twig'] %}
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    <link href="/conference/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/conference/css/owl.carousel.css" rel="stylesheet">
+    <link href="/conference/css/main.css" rel="stylesheet">
+    <script src="/conference/js/modernizr.min.js"></script>
+</head>
+<body>
+<main>
+    <header class="hero-section" style="background: url('/events/hall-of-fame/nca-hall-of-fame-event-bg.jpg') center center no-repeat fixed;background-size: cover;">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                    <a href="{{ eventLink }}" class="logo-brand"><img src="/img/logo.png" data-at2x="/img/logo.png" alt="Never Code Alone Logo" class="logo-nav" width="148px" height="50px" style="width: 148px;height: 50px"> </a> </div>
+                <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#speaker">Speakers</a></li>
+                        <li><a href="#schedule">Zeitplan</a></li>
+                        <li><a href="#contact">HR Kontakt</a></li>
+                        <li><a href="#pricing">Preise</a></li>
+                        <li><a href="#highlights">Highlights</a></li>
+                        <li><a href="#venue">Location</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="{{ eventLink }}" target="_blank" class="bttn">Tickets</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="welcome-message">
+                        <h1>Hall of Fame - #NCAEvent</h1>
+                        <p>17. November 2018</p>
+                        <p>Duisburg</p>
+                    </div>
+                    <div class="action-btn"><a href="{{ eventLink }}" target="_blank" class="bttn">Tickets kaufen</a> <a href="#counter" class="bttn">Event Infos</a></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="speaker section-spacing text-center" id="speaker">
+        <div class="container">
+            <header>
+                <h2>#NCAEvent 4 Top Speaker</h2>
+                <h3>Übersicht der Hall of Fame Speaker PHP-Live-Coding Event</h3>
+            </header>
+            <div class="row">
+                <div class="speaker-slider">
+                    <div class="item">
+                        <div class="event-speaker">
+                            <figure> <img src="/events/hall-of-fame/Thomas-Weinert-PHP-Workshop.jpg" alt="Thomas Weinert PHP Workshop" data-no-retina>
+                                <figcaption>
+                                    <h4>Thomas Weinert</h4>
+                                    <p>Web Entwickler</p>
+                                    <ul class="social">
+                                        <li><a href="https://twitter.com/ThomasWeinert" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="https://www.xing.com/profile/Thomas_Weinert/" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                        <li><a href="https://github.com/ThomasWeinert" target="_blank"><i class="fa fa-github-alt"></i></a></li>
+                                    </ul>
+                                </figcaption>
+                            </figure>
+                            <a href="#0" data-type="speaker-1" class="bttn">Profil</a> </div>
+                    </div>
+                    <div class="item">
+                        <div class="event-speaker">
+                            <figure> <img src="/img/otto/scala-markus-jura.jpg" alt="Scala Workshop Markus Jura" data-no-retina>
+                                <figcaption>
+                                    <h4>Markus Jura</h4>
+                                    <p>Scala Lead</p>
+                                    <ul class="social">
+                                        <li><a href="https://twitter.com/markusjura" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="https://www.xing.com/profile/Markus_Jura/" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                        <li><a href="https://github.com/markusjura" target="_blank"><i class="fa fa-github-alt"></i></a></li>
+                                    </ul>
+                                </figcaption>
+                            </figure>
+                            <a href="#0" data-type="speaker-2" class="bttn">Profil</a> </div>
+                    </div>
+                    <div class="item">
+                        <div class="event-speaker">
+                            <figure> <img src="/img/otto/Michael-Arndt-OTTO.jpg" alt="Michael Arndt OTTO Scala Speaker" data-no-retina>
+                                <figcaption>
+                                    <h4>Michael Arndt</h4>
+                                    <p>Senior System Developer</p>
+                                    <ul class="social">
+                                        <li><a href="https://twitter.com/marndt_" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="https://www.xing.com/profile/Michael_Arndt/cv" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                    </ul>
+                                </figcaption>
+                            </figure>
+                            <a href="#0" data-type="speaker-6" class="bttn">Profil</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="event-speaker">
+                            <figure> <img src="/img/otto/frederik-otto-hamburg-entwickler.jpg" alt="Frederik OTTO Hamburg Scala Entwickler" data-no-retina>
+                                <figcaption>
+                                    <h4>Frederik Mars</h4>
+                                    <p>Software Developer</p>
+                                    <ul class="social">
+                                        <li><a href="https://twitter.com/fr3dch3n" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="https://www.xing.com/profile/Frederik_Mars/" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                        <li><a href="https://github.com/frederikmars2653" target="_blank"><i class="fa fa-github-alt"></i></a></li>
+                                    </ul>
+                                </figcaption>
+                            </figure>
+                            <a href="#0" data-type="speaker-3" class="bttn">Profil</a> </div>
+                    </div>
+                    <div class="item">
+                        <div class="event-speaker">
+                            <figure> <img src="/img/otto/sebastian-schroeder-scala-workshop.jpg" alt="Sebastian Schröder OTTO Speaker" data-no-retina>
+                                <figcaption>
+                                    <h4>Sebastian Schröder</h4>
+                                    <p>Technical Designer</p>
+                                    <ul class="social">
+                                        <li><a href="https://twitter.com/Sebasti0n" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="https://www.xing.com/profile/Sebastian_Schroeder34/cv" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                        <li><a href="https://github.com/SebastianSchroeder" target="_blank"><i class="fa fa-github-alt"></i></a></li>
+                                    </ul>
+                                </figcaption>
+                            </figure>
+                            <a href="#0" data-type="speaker-4" class="bttn">Profil</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="event-speaker">
+                            <figure> <img src="/img/otto/matthew-otto-hamburg.jpg" alt="Matthew Aldridge Otto Speaker" data-no-retina>
+                                <figcaption>
+                                    <h4>Matthew Aldridge</h4>
+                                    <p>Team Lead - Customer Data and Personalisation</p>
+                                    <ul class="social">
+                                        <li><a href="https://twitter.com/mcaldridge" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="https://www.xing.com/profile/Matthew_Aldridge/cv" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                        <li><a href="https://github.com/aldridmc" target="_blank"><i class="fa fa-github-alt"></i></a></li>
+                                    </ul>
+                                </figcaption>
+                            </figure>
+                            <a href="#0" data-type="speaker-5" class="bttn">Profil</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="about section-spacing">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6"><iframe width="560" height="315" src="https://www.youtube.com/embed/IMBu3XvGh8A" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></iframe> </div>
+                <div class="col-md-6">
+                    <h2>Über #NCAEvents - Nerds für Nerds</h2>
+                    <p>Web Developer brauchen kostenlose und gute Weiterbildung. Auf den Events lernen wir gemeinsam an der Funktastatur.</p>
+                    <p>Wir wollen Coder coden sehen und zusammen lernen. Debugging, der richtige Einsatz von Tools, Pair Programming und der Blick über den Tellerrand.</p>
+                    <p>Soziale Projekte sind uns wichtig und werden von uns mit dem Eintrittsgeld zu 100% unterstützt. Diesmal geht es an die <b>Sternenbrücke</b> in Hamburg.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="schedule section-spacing" id="schedule">
+        <div class="container">
+            <header class="text-center">
+                <h2>Zeitplan Hall of Fame #NCAEvent</h2>
+                <h3>4 mal Live Coding mit der Funktastatur und Catering</h3>
+            </header>
+            <div class="row">
+                <div class="col-md-12">
+                    <div role="tabpanel" id="schedule-days">
+                        <ul class="nav nav-tabs content-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#day-1" aria-controls="day-1" role="tab" data-toggle="tab"><i class="fa fa-calendar"></i>Samstag, 29 September</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="day-1">
+                                <ul class="timeline">
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>9:00 Uhr</p>
+                                                <h4>Frühstück</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>9:45 Uhr</p>
+                                                <h4>Begrüßung und Vorstellung - Roland Golla</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>9:55 Uhr</p>
+                                                <h4>Vorstellung Speaker</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-3 text-center"><img src="/img/otto/frederik-sebastian.jpg" alt="OTTO Frederik und Sebastian" data-no-retina></div>
+                                            <div class="col-md-9">
+                                                <p>10:00 Uhr</p>
+                                                <h4>Perl Compatible Regular Expressions</h4>
+                                                <p>Reguläre und von allen Beteiligten nachvollziehbare Ausdrücke sind für viele Webdeveloper immer noch ein Rätsel. Höchste Zeit also, dass wir den dunklen Schleier heben und gemeinsam einen Blick auf die Features und
+                                                    <a href="https://docs.microsoft.com/de-de/dotnet/standard/base-types/best-practices" target="_blank" rel="noopener">Best Practices</a> werfen.
+                                                </p>
+                                                <p>Sei dabei, wenn in diesem Vortrag bekannte Muster, Mustervorlagen, Unicode-Handling und andere erweiterte Funktionen vorgestellt werden.</p>
+                                                <p class="event-speaker">- Mit Thomas Weinert</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>11:30 Uhr</p>
+                                                <h4>Pause</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>11:40 Uhr</p>
+                                                <h4>Vorstellung Speaker</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-3 col-md-push-9 text-center"><img src="/img/otto/scala-markus-jura.jpg" alt="Scala Special Speaker" data-no-retina></div>
+                                            <div class="col-md-9 col-md-pull-3">
+                                                <p>11:45 Uhr</p>
+                                                <h4>Live Coding - Using Akka Streams to write Microservice that supports end-to-end backpressure</h4>
+                                                <p>Let's write a microservice based on Akka Streams that truly handles backpressure throughout the entire application.</p>
+                                                <p>Traditionally, routes built with Akka HTTP directly interact with actors implementing domain logic. One potential issue is the lack of backpressure: when the route just fires messages at the poor domain actors, these messages pile up in the mailbox faster than they can get processed. This is especially the case when the domain actors interact with a database or external services, waiting for a response.</p>
+                                                <p>Our microservice also offers an HTTP API, accesses a database and interacts with another external service. By using Akka Streams as the processing engine, incoming HTTP calls will fail fast while a system is overloaded.</p>
+                                                <p class="event-speaker">- Mit Markus Jura</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>13:15 Uhr</p>
+                                                <h4>Pause</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>13:30 Uhr</p>
+                                                <h4>Mittagessen</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-3 text-center"><img src="/img/otto/matthew-otto-hamburg.jpg" alt="OTTO Speaker Matthew " data-no-retina></div>
+                                            <div class="col-md-8">
+                                                <p>14:15 Uhr</p>
+                                                <h4>Vorstellung Sponsor OTTO</h4>
+                                                <p>OTTO ist heute der größte deutsche Onlinehändler. Wir implementieren Microservices für otto.de, eine der größten E-Commerce Plattformen Europas, die wir kontinuierlich weiterentwickeln. Wir arbeiten in selbstorganisierenden und crossfunktionalen Scrum-Teams und mit den Methoden der agilen Softwareentwicklung wie z.B. Test-Driven-Development (TDD), Pair-Programming oder Continuous Delivery.</p>
+                                                <p>Was zeichnet OTTO als Arbeitgeber für Entwickler aus? Eine persönliche Vorstellung mit offener Fragerunde.</p>
+                                                <p class="event-speaker">- Mit Matthew Aldridge</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>14:25 Uhr</p>
+                                                <h4>Vorstellung Speaker</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-3 col-md-push-9 text-center"><img src="/img/otto/Michael-Arndt-OTTO.jpg" alt="Scala Live Coding" data-no-retina></div>
+                                            <div class="col-md-9 col-md-pull-3">
+                                                <p>14:30 Uhr</p>
+                                                <h4>"Wo klemmt's?" - "Keine Ahnung..."</h4>
+                                                <p>Mit der Einführung einer Microservice-Architektur und der Kopplung per Kafka ist es uns - dem Tracking-Team@OTTO - gelungen, einen großen Schritt in Richtung Skalierbarkeit und Ausfallsicherheit zu machen. Doch wie kann ich sicher sein, dass jedes Rad im Getriebe funktioniert? Wenn Service B 2.000 Nachrichten pro Sekunde verarbeitet, dann ist das echt toll, aber nur, solange Service A nicht 4.000 pro Sekunde schreibt.</p>
+                                                <p>Backpressure über MS-Genzen hinweg ist nicht trivial, aber machbar. Voraussetzung hierfür ist ein Monitoring der Schreib- und Leseraten der einzelnen Kafka Consumer und Producer. In dieser Session werden wir uns mithilfe von Akka (mal ohne Akka-Streams; richtig handgemacht) einer möglichen Lösung nähern. Dabei steht nicht die Kafka-API im Vordergrund, sondern der geeignete Aufbau eines Aktoren-Systems, oder untechnisch ausgedrückt: echte Umsetzung von Fachlichkeit.</p>
+                                                <p class="event-speaker">- Mit Michael Arndt</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>16:00 Uhr</p>
+                                                <h4>Pause</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>16:10 Uhr</p>
+                                                <h4>Vorstellung Speaker</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <div class="row">
+                                            <div class="col-md-3 text-center"><img src="/img/otto/scala-thomas-hackbarth.jpg" alt="Scala Thomas Hackbarth" data-no-retina></div>
+                                            <div class="col-md-8">
+                                                <p>16:15 Uhr</p>
+                                                <h4>Property-based Testing mit Scala</h4>
+                                                <p>In dieser Session wollen wir gemeinsam in die Tasten greifen und Tests schreiben, um in kleinen Programmen Fehler zu finden und deren Funktionsweise zu ergründen. Dabei werden wir verschiedene Testbibliotheken nutzen und einfache Unittest und Property-based Tests entwicklen.</p>
+                                                <p class="event-speaker">- Mit Thomas Hackbarth</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="event">
+                                        <p>18:30 Uhr</p>
+                                        <h4>Gewinnspiel</h4>
+                                        <p>Ende der Veranstaltung mit Abmoderation, einem Gewinnspiel und Video-Interviews für <a href="https://www.youtube.com/channel/UCjVT6iJ_wg7OM0DkV5TpNCQ" target="_blank">Never Code Alone TV</a></p>
+                                    </li>
+                                    <li class="event">
+                                        <p>19:30 Uhr</p>
+                                        <h4>Open After Event Party</h4>
+                                        <p>In dem Räumen von OTTO</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="speaker section-spacing text-center" id="contact">
+        <div class="container">
+            <header>
+                <h2>DIGITALE ZUKUNFT GESTALTEN</h2>
+                <p>Direkt auf dem <a href="https://www.otto.de/unternehmen/jobs/" target="_blank">OTTO-Campus</a> in Hamburg die Zukunft des E-Commerce vorantreiben. Nutze den E-Commerce-Spirit von OTTO und die Innovationskraft unseres Konzerns. Arbeite in den unterschiedlichen Teams, die otto.de erfolgreich machen und in einem der Otto Group Funktionsbereiche, die 123 nationale und internationale Einzelgesellschaften steuern. Leg los!</p>
+                <div>&nbsp;</div>
+                <h2>Aktuelle Stellenangebote</h2>
+                <p>
+                    <a href="https://www.otto.de/unternehmen/jobs/jobs/00284923/Agile-Scala-Software-Developer-OTTO-de--m-w-" target="_blank">Agile Scala Software Developer OTTO.de (m/w)</a>
+                    <br>
+                    <a href="https://www.otto.de/unternehmen/jobs/jobs/00269102/Software-Developer-Functional-Programming-OTTO-de--w-m-" target="_blank">Software Developer Functional Programming OTTO.de (w/m)</a>
+                    <br>
+                    <a href="https://www.otto.de/unternehmen/jobs/jobs/00268444/Senior-Clojure-Developer-OTTO-de--w-m-" target="_blank">Senior Clojure Developer OTTO.de (w/m)</a>
+                    <br>
+                    <a href="https://www.otto.de/unternehmen/jobs/jobs/00290057/Data-Engineer-f-r-Suche---Navigation--w-m--in-OTTO-BI" target="_blank">Data Engineer für Suche & Navigation (w/m) in OTTO BI</a>
+                    <br>
+                    <a href="https://www.otto.de/unternehmen/jobs/jobs/00286502/Data-Architect--w-m--Business-Intelligence-in-der-Otto-Group" target="_blank">Data Architect (w/m) Business Intelligence in der Otto Group</a>
+                </p>
+            </header>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="event-speaker">
+                        <figure> <img src="/img/otto/Hannah-Wilkens.jpg" alt="Hannah Wilkens Scala Human Ressources" data-no-retina>
+                            <figcaption>
+                                <h4>Hannah Wilkens</h4>
+                                <p>Recruiterin IT</p>
+                                <p><a href="tel:+494064616768"><i class="fa fa-phone"></i> 040/6461-6768</a></p>
+                                <ul class="social">
+                                    <li><a href="https://www.xing.com/profile/HannahElisa_Wilkens/" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                </ul>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="event-speaker">
+                        <figure> <img src="/img/otto/wibke-nagel.jpg" alt="Wibke Nagel Otto Recruitment" data-no-retina>
+                            <figcaption>
+                                <h4>Wibke Nagel</h4>
+                                <p>Recruiterin IT</p>
+                                <p><a href="tel:+494064611497"><i class="fa fa-phone"></i> 040/6461-1497</a></p>
+                                <ul class="social">
+                                    <li><a href="https://www.xing.com/profile/Wibke_Nagel/" target="_blank"><i class="fa fa-xing"></i></a></li>
+                                </ul>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+    </section>
+    <section class="pricing section-spacing text-center" id="pricing">
+        <div class="container">
+            <header>
+                <h2>Preis</h2>
+                <h3>Wir setzen uns ein für kostenlose Weiterbildung</h3>
+                <p>Der Ticketpreis wird zu 100% für die <b>Sternenbrücke</b> in Hamburg gespendet.</p>
+            </header>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="plan">
+                        <div class="header">
+                            <h4>Teilnehmer</h4>
+                            <div class="price"><span class="currency">€</span>10,-<span class="ticket">/ Pro Ticket als Spende <b>Sternenbrücke</b></span> </div>
+                        </div>
+                        <ul class="plan-features">
+                            <li>4 Live Coding Sessions</li>
+                            <li>Frühstück und Mittagessen</li>
+                            <li>Getränke</li>
+                            <li>Community Networking</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="action-btn-pricing"><a href="{{ eventLink }}" target="_blank" class="bttn">Ticket kaufen</a></div>
+        </div>
+    </section>
+    <section class="hotels section-spacing text-center" id="highlights">
+        <div class="container">
+            <header class="text-center">
+                <h2>Weitere Highlights</h2>
+                <h3>Auf dem Event präsentieren wir zusätzlich ein Rahmenprogramm</h3>
+            </header>
+            <div class="row">
+                <div class="col-md-6">
+                    <figure class="text-left"> <img src="/img/otto/sternenbruecke-hamburg.jpg" alt="Spende Sternenbrücke Hamburg" data-no-retina>
+                        <figcaption>
+                            <div class="hotel-details">
+                                <h4>Spende Sternenbrücke<span class="ratings five"></span></h4>
+                                <p class="hotel-price">400,- Euro</p>
+                                <p class="hotel-info">Wir spenden die Ticket Gebühr immer zu 100% in eine soziale Institution in der jeweiligen Stadt. Diesmal geht das Geld an die
+                                    Sternenbrücke in Hamburg. Das Kinder-Hospiz Sternenbrücke begleitet betroffene Familien im Rahmen der Entlastungspflege auf
+                                    dem langen Krankheitsweg ihrer Kinder, um ihnen eine kraftschenkende Erholungsphase zu ermöglichen.</p>
+                                <a class="hotel-map" href="https://sternenbruecke.de/home" target="_blank">sternenbruecke.de</a></div>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-md-6">
+                    <figure class="text-left"> <img src="/conference/img/specials/wachschuetteln.jpg" alt="Wachschuetteln" data-no-retina>
+                        <figcaption>
+                            <div class="hotel-details">
+                                <h4>Unser Getränke-Partner [ma.tɕa]<span class="ratings five"></span></h4>
+                                <p class="hotel-info">Der erste natürliche & gesunde Wachmacher in Bio- und Vegan Qualität.. 27mg Koffein/100ml aus dem feinsten japanischen Matcha. Kombiniert mit Limette und der Süße der Agave ergibt sich ein einzigartiges erfrischendes Erlebnis und dein Fokus bleibt für bis zu 5 Stunden auf höchstem Level!
+                                    <a href="https://twitter.com/search?q=%23wachsch%C3%BCtteln" target="_blank">#wachschütteln</a>. Das Getränk ist in der Entwickler Szene beliebt und kann auf dem Event getestet werden.</p>
+                                <a class="hotel-map" href="http://www.ma-tea.de/" target="_blank">[ma.tɕa]ncasozial.png</a></div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="venue section-spacing" id="venue">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <h2>Anfahrt</h2>
+                    <address>
+                        <p> <i class="fa fa-map-marker"></i> <a href="https://collabor8-ottogroup.de/" target="_blank">collabor8</a> • Bannwarthstraße 5 • 22179 Hamburg</p>
+                        <p><i class="fa fa-mobile"></i> Roland: 017624747727 </p>
+                        <p class="map-link"><a target="_blank" href="https://www.google.com/maps/place/Collabor8/@53.6008446,10.0735209,17z/data=!3m1!4b1!4m5!3m4!1s0x47b18962292e34a3:0x5b3b489cd9b78ae9!8m2!3d53.6008414!4d10.0757096">Google Maps</a></p>
+                        <p><a href="/img/otto/Anfahrtsskizze.pdf" target="_blank">Anfahrtsskizze</a> mit Bus und Parkplätzen</p>
+                    </address>
+                </div>
+                <div class="col-md-7">
+                    <div class="map">
+                        <div id="map-canvas"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="sponsor section-spacing text-center">
+        <div class="container">
+            <header>
+                <h2>Der Sponsor - Otto (GmbH & Co KG)</h2>
+            </header>
+            <div class="row">
+                <div class="col-md-12">
+                    <figure><img src="/img/logo.png" data-at2x="/img/logo.png" alt="#NCAEvent Sponsor Otto Hamburg" width="350px"></figure>
+                </div>
+            </div>
+            <div class="action-btn-sponsor"><a href="https://blog.nevercodealone.de/gute-webdeveloper-suchen-gute-arbeitgeber/" target="_blank" data-toggle="modal" data-target="#modal-contact-form" class="bttn">Über #NCAEvents</a></div>
+        </div>
+    </section>
+    <section class="faq section-spacing" id="faq">
+        <div class="container">
+            <header class="text-center">
+                <h2>FAQ</h2>
+                <h3>Fragen und Antworten zu dem Event</h3>
+            </header>
+            <div class="row">
+                <div class="col-md-10 center-block">
+                    <ul class="cd-faq-group">
+                        <li> <a class="cd-faq-trigger" href="#0">Brauche ich einen Laptop</a>
+                            <div class="cd-faq-content">
+                                <p>Nein, es reicht da zu sein. Hier hat auch nicht jeder einen Schreibtisch. Man kann aber gerne ein Gerät mitbringen. Steckdosen sind vorhanden.</p>
+                            </div>
+                        </li>
+                        <li> <a class="cd-faq-trigger" href="#0">Kann ich kostenlos parken?</a>
+                            <div class="cd-faq-content">
+                                <p>Das klären wir noch.</p>
+                            </div>
+                        </li>
+                        <li> <a class="cd-faq-trigger" href="#0">Live-Coding - Muß ich an die Tastatur?</a>
+                            <div class="cd-faq-content">
+                                <p>Keiner muß an die Tastatur. Sie wird Reihenweise an Freiwillige weiter gegeben. Alles ist ganz entspannt und freundlich. Darauf legen wir großen Wert und moderieren hier auch.</p>
+                            </div>
+                        </li>
+                        <li> <a class="cd-faq-trigger" href="#0">Gibt es vegetarisches Essen?</a>
+                            <div class="cd-faq-content">
+                                <p>Ja das wird auf jeden Fall berücksichtigt.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="site-footer section-spacing text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <p class="footer-links"><a href="/impressum/">Impressum</a> | <a href="/">NCA</a> | <a href="https://blog.nevercodealone.de/" target="_blank">Blog</a></p>
+                </div>
+                <div class="col-sm-4">
+                    <figure><img src="/img/logo.png" data-at2x="/img/logo.png" alt="Never Code Alone"></figure>
+                    <small>2018 Hall of Fame Never Code Alone Event.</small></div>
+                <div class="col-sm-4">
+                    <p class="footer-contact-us">Folgt uns</p>
+                    <ul class="social">
+                        <li><a href="https://www.youtube.com/channel/UCjVT6iJ_wg7OM0DkV5TpNCQ"><i class="fa fa-youtube"></i></a></li>
+                        <li><a href="https://twitter.com/nevercodealone" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="https://www.facebook.com/nevercodealone" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</main>
+<div>
+    <div class="cd-speaker-bio speaker-1">
+        <div class="cd-bio-content">
+            <h2>SMT - Streaming Media Technologies GmbH Thomas Weinert</h2>
+            <p>Thomas Weinert ist PHP-Entwickler und arbeitet als Senior Developer bei der SMT - Streaming Media Technologies GmbH. Er veröffentlichte bereits mehrere Open-Source-Projekte – vor allem im Zusammenhang mit XML und Physical Computing mit PHP. Manch einer kennt ihn noch als Autor von Weaverslave – einem Windows-Editor.</p>
+        </div>
+    </div>
+    <div class="cd-speaker-bio speaker-2">
+        <div class="cd-bio-content">
+            <h2>MOIA - Markus Jura</h2>
+            <p>Markus is Scala Lead at MOIA. As a Scala enthusiast, his focus is to design and build distributed systems based on Akka. He is co-organizing the Reactive Systems user group in Hamburg and shares his knowledge regularly at conferences. Markus is also the co-founder and former CTO of Y-Combinator funded startup.</p>
+        </div>
+    </div>
+    <div class="cd-speaker-bio speaker-3">
+        <div class="cd-bio-content">
+            <h2>OTTO - Frederik Mars</h2>
+            <p>Frederik arbeitet seit 3 Jahren bei OTTO. Dort ist er als Software-Entwickler in einem Team, das sich mit der Personalisierung von otto.de beschäftigt. Das Team arbeitet überwiegend mit Scala, Clojure und Python und setzen dabei Spark und Tensorflow ein.</p>
+        </div>
+    </div>
+    <div class="cd-speaker-bio speaker-4">
+        <div class="cd-bio-content">
+            <h2>Otto - Sebastian Schröder</h2>
+            <p>Sebastian ist seit über sechs Jahren Entwickler bei OTTO. Aktuell beschäftigt er sich intensiv mit Scala und Kafka basierten Microservices. In seinem Team werden die otto.de Bewegungsdaten in Realtime verarbeitet und einer Vielzahl von Abnehmern zur Verfügung gestellt.</p>
+        </div>
+    </div>
+    <div class="cd-speaker-bio speaker-5">
+        <div class="cd-bio-content">
+            <h2>Otto - Matthew Aldridge</h2>
+            <p>Matthew is Team Lead – Personalisation at OTTO since 2018. As agile leader, his focus is on creating and supporting high performing cross-functional teams. With an extensive background in software engineering Matthew has worked in multiple industries including telecommunications, finance, and eCommerce always with a strong focus on people.</p>
+        </div>
+    </div>
+    <div class="cd-speaker-bio speaker-6">
+        <div class="cd-bio-content">
+            <h2>Otto - Michael Arndt</h2>
+            <p>Michael ist seit über sieben Jahren Entwickler bei OTTO. Aktuell beschäftigt er sich intensiv mit Scala und Kafka basierten Microservices und ist ein echter Akka-Fan. In seinem Team werden die otto.de Bewegungsdaten in Realtime verarbeitet und einer Vielzahl von Abnehmern zur Verfügung gestellt.</p>
+        </div>
+    </div>
+    <a href="#0" class="cd-speaker-bio-close">Close</a> </div>
+<p class="scroll-top"><a href="#"><i class="fa fa-chevron-up"></i></a></p>
+<script src="/conference/js/jquery-2.1.3.min.js"></script>
+<script src="/conference/js/bootstrap.min.js"></script>
+<script src="/conference/js/waypoints.min.js"></script>
+<script src="/conference/js/jquery.animateNumber.min.js"></script>
+<script src="/conference/js/waypoints-sticky.min.js"></script>
+<script src="/conference/js/retina.min.js"></script>
+<script src="/conference/js/owl.carousel.min.js"></script>
+<script src="/conference/js/jquery.ajaxchimp.min.js"></script>
+<script src="/conference/js/jquery.form.min.js"></script>
+<script src="/conference/js/jquery.validate.min.js"></script>
+<script src="/conference/js/main.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script>
+    var mapLocation = new google.maps.LatLng(53.600841, 10.075710);
+</script>
+<script src="/conference/js/gmap.js"></script>
+{% include '/partial/google-analytics.html.twig' %}
+</body>
+</html>
+
