@@ -43,7 +43,9 @@ build_development_image:
     - docker login --username gitlab-ci-token --password $CI_BUILD_TOKEN $CI_REGISTRY 2>/dev/null
   script:
     - docker build -t $WEB_IMAGE --target webserver --pull .
+    - docker tag $WEB_IMAGE $LATEST_WEB_IMAGE
     - docker push $WEB_IMAGE
+    - docker push $LATEST_WEB_IMAGE
   tags:
     - docker-executor
   except:
