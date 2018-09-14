@@ -37,8 +37,8 @@ class seoCest
     {
         $specialLinks = [
             'tel:+',
-            'https://symfony.com/doc',
-            'http://symfony.com/support'
+            '//symfony.com',
+            'https://clea'
         ];
 
         $url = $helperConfig->getUrlFromConfigWebdriver('url');
@@ -59,7 +59,7 @@ class seoCest
                         continue 2;
                     }
                 }
-//                 rel="noopener"
+
                 $I->assertSame('noopener', $itemsRel[$key], 'Item rel is noopener ' . $item . $key);
                 $I->assertSame('_blank', $itemsTargets[$key], 'Item blank: ' . $item . $key);
             } else {
