@@ -2,7 +2,6 @@
 namespace NCATesting;
 
 use NCATesting\_generated\AcceptanceTesterActions;
-use diversen\meta;
 
 /**
  * Inherited Methods
@@ -45,25 +44,5 @@ class AcceptanceTester extends \Codeception\Actor
             $timeout
         );
         $this->waitForAjax($timeout);
-    }
-
-    public function getMeta($tags = [], $timeout = 10) {
-        $m = new meta();
-        return $m->getMeta($this->getCurrentUrl(), $tags);
-    }
-
-    public function getCurrentUrl()
-    {
-        return $this->executeJS("return location.href");
-    }
-
-    public function getCurlStatusByUrl($url) {
-        $ch = curl_init('http://www.example.com/');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_exec($ch);
-        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-
-        return $status;
     }
 }

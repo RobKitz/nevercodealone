@@ -4,9 +4,6 @@ use NCATesting\ApiTester;
 
 class messagesCest
 {
-    /**
-     * @group db
-     */
     public function addMessageWithValidNameAndEmail(ApiTester $I)
     {
         $microtime = microtime();
@@ -37,9 +34,6 @@ class messagesCest
         $I->seeNumRecords(1, 'message', $messagePost);
     }
 
-    /**
-     * @group db
-     */
     public function singleEmptyValueMessageStatus(ApiTester $I)
     {
         $time = microtime();
@@ -74,9 +68,6 @@ class messagesCest
         }
     }
 
-    /**
-     * @group db
-     */
     public function singleNotSetValueMessageStatus(ApiTester $I)
     {
         $time = microtime();
