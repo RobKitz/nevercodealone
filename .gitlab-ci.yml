@@ -288,10 +288,10 @@ deploy_production_image_to_prod:
   stage: rollout
   image: $TOOLBOX_IMAGE
   variables:
-    HTTP_URL: www3.nevercodealone.de
+    HTTP_URL: www.nevercodealone.de
     WEB_IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_PIPELINE_ID
   script:
-    - rancher up -s www3-nevercodealone-de -d --pull --prune --upgrade
+    - rancher up -s www-nevercodealone-de -d --pull --prune --upgrade
   tags:
     - docker-executor
   only:
@@ -311,7 +311,7 @@ confirm_upgrade:
   stage: postrollout
   variables:
     RANCHER_OPTIONS: --confirm-upgrade
-    RANCHER_PROJECT_NAME: www3-nevercodealone-de
+    RANCHER_PROJECT_NAME: www-nevercodealone-de
   only:
     - master
   when: manual
@@ -325,7 +325,7 @@ rollback_upgrade:
   stage: postrollout
   variables:
     RANCHER_OPTIONS: --rollback
-    RANCHER_PROJECT_NAME: www3-nevercodealone-de
+    RANCHER_PROJECT_NAME: www-nevercodealone-de
   only:
     - master
   when: manual
