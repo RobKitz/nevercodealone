@@ -11,7 +11,9 @@ class contactCest
         $I->waitForElement('#setting > i');
     }
 
-    // tests
+    /**
+     * @group db
+     */
     public function openContactFormAndSentWithValidData(AcceptanceTester $I)
     {
         $inputData = [

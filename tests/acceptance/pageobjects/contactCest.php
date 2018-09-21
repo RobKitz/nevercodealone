@@ -12,7 +12,9 @@ class contactCest
         $I->scrollTo($startpage::$formContact);
     }
 
-    // tests
+    /**
+     * @group db
+     */
     public function checkValidFormSending(AcceptanceTester $I)
     {
         $time = microtime();
