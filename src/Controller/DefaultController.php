@@ -95,18 +95,40 @@ class DefaultController extends Controller
 
     /**
      * @Route("/otto/")
-     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function ottoAction()
+    public function ottoAction(Request $request)
     {
+        $eventLink = 'https://www.eventbrite.de/e/otto-scala-never-code-alone-event-tickets-48383184407';
+
+        $sourceParam = $this->getSourceParam($request);
+
+        $eventLink .= $sourceParam;
+
         return $this->render(
             'pages/otto.html.twig',
             [
-                'title' => 'Otto Scala #NCAEvent',
-                'description' => 'Scala Live Coding Workshop im Bereich E-Commerce am 29.9. bei Otto in Hamburg',
+                'title' => 'OTTO Scala #NCAEvent',
+                'description' => 'Scala Live Coding Workshop im Bereich E-Commerce am 29.9. bei OTTO in Hamburg',
                 'smImage' => 'https://nevercodealone.de/img/otto/otto-ncaevent-hamburg.png',
-                'eventLink' => 'https://www.eventbrite.de/e/otto-scala-never-code-alone-event-tickets-48383184407'
+                'eventLink' => $eventLink
             ]
         );
+    }
+
+    /**
+     * @param Request $request
+     * @return string
+     */
+    protected function getSourceParam(Request $request): string
+    {
+        $aff = 'website';
+
+        $queryGet = $request->query->get('aff');
+        if ($queryGet !== null && $queryGet !== '') {
+            $aff = $queryGet;
+        }
+
+        $sourceParam = '?aff=' . $aff;
+        return $sourceParam;
     }
 }

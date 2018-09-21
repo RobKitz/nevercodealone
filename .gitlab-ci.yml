@@ -143,8 +143,8 @@ run_tests_against_dev_environment:
     - export DB_HOST=$HTTP_URL:$DB_PORT
     - "echo \"DB_HOST=${DB_HOST}\""
   script:
-    - /var/www/html/vendor/bin/codecept run api --html
-    - /var/www/html/vendor/bin/codecept run integration --html
+    - /var/www/html/vendor/bin/codecept run api --html -vvv
+    - /var/www/html/vendor/bin/codecept run integration --html -vvv
   artifacts:
     paths:
       - ./tests/_output/report.html
@@ -159,7 +159,7 @@ run_tests_against_prod_environment:
   stage: test
   image: $TOOLBOX_IMAGE
   script:
-    - /var/www/html/vendor/bin/codecept run acceptance --html --skip-group db
+    - /var/www/html/vendor/bin/codecept run acceptance --html --skip-group db -vvv
   artifacts:
     paths:
       - ./tests/_output/report.html
