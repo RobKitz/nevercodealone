@@ -189,6 +189,29 @@ $( window ).on( "load", function() {
         jQuery('.tz-training-content').css("top",$padding+'px');
     },100);
 
+    jQuery(".tz-event-wrapper").owlCarousel({
+        items : 4,
+        itemsDesktop : [1199,4],
+        itemsDesktopSmall : [979,3],
+        itemsTablet: [768, 2],
+        itemsMobile: [479, 1],
+        slideSpeed:500,
+        paginationSpeed:800,
+        rewindSpeed:1000,
+        autoPlay:true,
+        stopOnHover: false,
+        singleItem:false,
+        rewindNav:false,
+        pagination:false,
+        paginationNumbers:false,
+        itemsScaleUp:false
+    });
+    jQuery(".tz-last-event-prev").on('click',function(){
+        jQuery(".tz-event-wrapper").trigger('owl.prev');
+    }) ;
+    jQuery(".tz-last-event-next").on('click',function(){
+        jQuery(".tz-event-wrapper").trigger('owl.next');
+    }) ;
 
     jQuery('.tz-banner-content').css('top',$topContentBanner);
     jQuery('.tz-button-right').css('top','40%');
