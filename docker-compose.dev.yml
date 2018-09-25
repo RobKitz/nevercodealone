@@ -24,6 +24,12 @@ services:
     - APP_SECRET
     - CORS_ALLOW_ORIGIN
     - DATABASE_URL
+    - MAIL_USER
+    - MAIL_PASS
+    - MAIL_HUB
+    - MAIL_USER_FILE=/run/secrets/nca_mail_user
+    - MAIL_PASS_FILE=/run/secrets/nca_mail_pass
+    - MAIL_HUB_FILE=/run/secrets/nca_mail_hub
     image: $WEB_IMAGE
     labels:
       io.rancher.container.pull_image: always
@@ -34,4 +40,16 @@ services:
       traefik.frontend.entryPoints: http,https
       traefik.port: 80
     restart: always
+    secrets:
+    - nca_mail_user
+    - nca_mail_pass
+    - nca_mail_hub
+
+secrets:
+  nca_mail_user:
+    external: true
+  nca_mail_pass:
+    external: true
+  nca_mail_hub:
+    external: true
 

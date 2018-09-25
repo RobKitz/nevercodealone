@@ -32,6 +32,9 @@ services:
     - APP_SECRET
     - CORS_ALLOW_ORIGIN
     - DATABASE_URL
+    - MAIL_USER
+    - MAIL_PASS
+    - MAIL_HUB
     ports:
     - 8080:80/tcp
     restart: always

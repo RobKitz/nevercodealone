@@ -29,6 +29,9 @@ services:
     - APP_SECRET_FILE=/run/secrets/nca_app_secret
     - CORS_ALLOW_ORIGIN_FILE=/run/secrets/nca_cors_allow_origin
     - DATABASE_URL_FILE=/run/secrets/nca_database_url
+    - MAIL_USER_FILE=/run/secrets/nca_mail_user
+    - MAIL_PASS_FILE=/run/secrets/nca_mail_pass
+    - MAIL_HUB_FILE=/run/secrets/nca_mail_hub
     image: $WEB_IMAGE
     labels:
       io.rancher.container.pull_image: always
@@ -45,6 +48,9 @@ services:
     - nca_app_secret
     - nca_cors_allow_origin
     - nca_database_url
+    - nca_mail_user
+    - nca_mail_pass
+    - nca_mail_hub
 
 volumes:
   db_data:
@@ -67,5 +73,11 @@ secrets:
   nca_cors_allow_origin:
     external: true
   nca_database_url:
+    external: true
+  nca_mail_user:
+    external: true
+  nca_mail_pass:
+    external: true
+  nca_mail_hub:
     external: true
 

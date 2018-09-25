@@ -18,6 +18,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
  && apt-get install -y \
         jq \
         libzip-dev \
+        ssmtp \
+        vim \
  && apt-get clean \
  && rm -rf /var/cache/apt \
  && rm -rf /var/lib/apt
@@ -40,6 +42,7 @@ CMD ["/usr/sbin/apachectl", "-DFOREGROUND"]
 
 COPY apache.conf /etc/apache2/sites-enabled/000-default.conf
 COPY php.ini /usr/local/etc/php/php.ini
+COPY ssmtp.conf /etc/ssmtp/ssmtp.conf
 COPY --chown=www-data:www-data --from=composer /app /var/www/html
 
 
