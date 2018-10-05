@@ -116,6 +116,32 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/hall-of-fame/")
+     */
+    public function hofAction(Request $request)
+    {
+        $eventLink = 'https://www.eventbrite.de/e/nca-hall-of-fame-event-tickets-50024321091';
+
+        $sourceParam = $this->getSourceParam($request);
+
+        $eventLink .= $sourceParam;
+
+        return $this->render(
+            'pages/hall-of-fame.html.twig',
+            [
+                'title' => '#NCAEvent Hall of Fame - PHP Workshop',
+                'description' => 'Hall of Fame Event als PHP Training mit Live Coding und den besten 4 Speakern der #NCAEvents',
+                'smImage' => 'https://nevercodealone.de/events/hall-of-fame/nca-hall-of-fame-event.jpg',
+                'eventLink' => $eventLink,
+                'location' => [
+                    'latitude' => '51.3619703',
+                    'longtitude' => '6.4157362'
+                ]
+            ]
+        );
+    }
+
+    /**
      * @param Request $request
      * @return string
      */
