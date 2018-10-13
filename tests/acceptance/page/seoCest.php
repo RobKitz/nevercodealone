@@ -56,7 +56,6 @@ class seoCest
             if(strpos($item, $url) === false) {
                 foreach ($specialLinks as $specialLink) {
                     if(strpos($item, $specialLink) !== false) {
-                        $I->assertSame('', $itemsTargets[$key], 'Item no blank: ' . $item);
                         continue 2;
                     }
                 }
