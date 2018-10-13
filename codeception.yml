@@ -2,7 +2,7 @@ namespace: NCATesting
 actor: Tester
 paths:
     tests: tests
-    log: /var/www/html/tests/_output
+    log: tests/_output
     data: tests/_data
     support: tests/_support
     envs: tests/_envs
