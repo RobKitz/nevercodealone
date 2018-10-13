@@ -38,7 +38,8 @@ class seoCest
         $specialLinks = [
             'tel:+',
             '//symfony.com',
-            'https://clea'
+            'https://clea',
+            '_profiler'
         ];
 
         $url = $helperConfig->getUrlFromConfigWebdriver('url');
