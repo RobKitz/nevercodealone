@@ -147,6 +147,7 @@ run_tests_against_dev_environment:
   script:
     - /var/www/html/vendor/bin/codecept run api --html -vvv
     - /var/www/html/vendor/bin/codecept run integration --html -vvv
+    - cp -R /var/www/html/tests/_output/ /var/www/html/public/tests/
   artifacts:
     paths:
       - ./tests/_output/report.html
@@ -162,6 +163,7 @@ run_tests_against_prod_environment:
   image: $TOOLBOX_IMAGE
   script:
     - /var/www/html/vendor/bin/codecept run acceptance --html --skip-group db -vvv
+    - cp -R /var/www/html/tests/_output/ /var/www/html/public/tests/
   artifacts:
     paths:
       - ./tests/_output/report.html
@@ -178,6 +180,7 @@ run_tests_against_final_prod_environment:
     WEBSITE_URL: https://stage.nevercodealone.de
   script:
     - /var/www/html/vendor/bin/codecept run acceptance --html --skip-group db
+    - cp -R /var/www/html/tests/_output/ /var/www/html/public/tests/
   artifacts:
     paths:
       - ./tests/_output/report.html
