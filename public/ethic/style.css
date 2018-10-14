@@ -857,7 +857,7 @@ li{
 
 /*-------------------- Header 02 ----------------*/
 .tz-header-2 {
-    background:rgb(51, 72, 120);
+    background:rgb(31, 60, 15);
     padding: 0;
     -webkit-transition: all 0.4s linear 0s;
     -moz-transition: all 0.4s linear 0s;
@@ -895,7 +895,7 @@ li{
     -ms-transition: all 0.4s linear 0s;
     -o-transition: all 0.4s linear 0s;
     transition: all 0.4s linear 0s;
-    width: 164px;
+    width: 130px;
 }
 .tz-header-2.tz-header-2-eff .tz-logo a img{
     width: 150px;
@@ -1015,7 +1015,7 @@ li{
 }
 .tz-header-2 .tz-header-content .tz-menu li ul.sub-menu-style-1 li:hover a,
 .tz-header-2 .tz-header-content .tz-menu .sub-menu-style-2 li:hover a{
-    background: #334878;
+    background: #6bc32d;
 }
 
 
@@ -3147,9 +3147,6 @@ div.tz-event-content-style-3 span {
 .tz-contact-content .tz-contact-form {
     background:rgb(255, 255, 255);
     left: 0;
-    position: absolute;
-    top: -50px;
-    z-index: 999;
     width: 100%;
 }
 body .tz-contact-wapper-style-4{
@@ -4571,7 +4568,6 @@ div.tz-event-content-style-1 > span{
 }
 .tz-lastest-event-style-4{
     background: #ffffff;
-    padding-bottom: 77px;
 }
 .tz-lastest-event-style-4 .tz-images-check {
     margin-bottom: 0;
