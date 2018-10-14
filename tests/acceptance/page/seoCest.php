@@ -35,11 +35,11 @@ class seoCest
 
     public function validateInternalAndExternalLinkTargets(AcceptanceTester $I, Config $helperConfig)
     {
-        return;
         $specialLinks = [
             'tel:+',
             '//symfony.com',
-            'https://clea'
+            'https://clea',
+            '_profiler'
         ];
 
         $url = $helperConfig->getUrlFromConfigWebdriver('url');
@@ -56,7 +56,6 @@ class seoCest
             if(strpos($item, $url) === false) {
                 foreach ($specialLinks as $specialLink) {
                     if(strpos($item, $specialLink) !== false) {
-                        $I->assertSame('', $itemsTargets[$key], 'Item no blank: ' . $item);
                         continue 2;
                     }
                 }
