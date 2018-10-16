@@ -9,7 +9,6 @@ modules:
     enabled:
         - Asserts
         - WebDriver
-        - Db
 env:
     phantomjs:
         modules:
