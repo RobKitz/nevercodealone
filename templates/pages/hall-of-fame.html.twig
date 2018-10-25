@@ -413,7 +413,7 @@
                 </div>
                 <div class="col-md-7">
                     <div class="map">
-                        <div id="map-canvas"></div>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4080.6420641288278!2d6.412620316440318!3d51.3617597796114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b8a64a8c4d5777%3A0xf25da07c5ca7f6d!2sKonferenzloft!5e1!3m2!1sde!2sde!4v1540466914597" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -550,11 +550,6 @@
 <script src="/conference/js/jquery.form.min.js"></script>
 <script src="/conference/js/jquery.validate.min.js"></script>
 <script src="/conference/js/main.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-<script>
-    var mapLocation = new google.maps.LatLng({{ location['latitude'] }}, {{ location['longtitude'] }});
-</script>
-<script src="/conference/js/gmap.js"></script>
 {% include '/partial/google-analytics.html.twig' %}
 </body>
 </html>
