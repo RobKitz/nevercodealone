@@ -2007,6 +2007,7 @@ body .tz-header-4 .mega-nav{
 .tz-banner {
     position: relative;
     z-index: 1;
+    padding-top: 70px;
 }
 .tz-banner .tz-header-3{
     background: none;
@@ -3138,7 +3139,6 @@ div.tz-event-content-style-3 span {
  */
 .tz-introduce-style-4{
     background: #f6f6f6;
-	z-index:99999;
 	position:relative;
 }
 .tz-contact-content {
@@ -15786,4 +15786,8 @@ body .widget-general .tz-activity-group li {
 body > header > div > div > div > div:nth-child(1) > div > ul > li:nth-child(1) > a{
     padding-left: 20px;
     padding-right: 20px;
+}
+
+.services-navigation {
+    z-index: 0;
 }

@@ -1,0 +1,16 @@
+---
+version: '2'
+
+services:
+  reports:
+    image: $REPORT_IMAGE
+    labels:
+      io.rancher.container.pull_image: always
+      traefik.docker.network: proxy
+      traefik.enable: true
+      traefik.frontend.passHostHeader: true
+      traefik.frontend.rule: 'Host:report.$HTTP_URL'
+      traefik.frontend.entryPoints: http, https
+      traefik.port: 80
+    restart: always
+
