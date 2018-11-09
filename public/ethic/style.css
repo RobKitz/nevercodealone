@@ -10445,9 +10445,6 @@ body .widget-general .tz-activity-group li {
         margin: 0;
         padding-bottom: 0;
     }
-    body .tz-banner-content .tz-item-more-details{
-        display: none;
-    }
 
     body .tz-introduce-content {
         padding: 30px 20px;
@@ -11720,6 +11717,19 @@ body .widget-general .tz-activity-group li {
     .tz-footer-content .tz-footer-part > li {
         width: 100%;
     }
+
+    body section.tz-banner > div > div > div > div > div > div > div.tz-banner-content > div > h1,
+    body section.tz-banner > div > div > div > div > div > div > div.tz-banner-content > div > h6
+    {
+        display: none;
+    }
+
+    body .tz-items .tz-banner-content small,
+    body > section.tz-banner > div > div > div > div > div > div > div > div > small
+    {
+        display: block;
+        font-size: 25px;
+    }
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
@@ -12218,8 +12228,14 @@ body .widget-general .tz-activity-group li {
         margin: 0;
         padding-bottom: 0;
     }
-    body .tz-banner-content .tz-item-more-details{
+    body section.tz-banner > div > div > div > div > div > div > div.tz-banner-content > div > h1,
+    body section.tz-banner > div > div > div > div > div > div > div.tz-banner-content > div > h6
+    {
         display: none;
+    }
+
+    body .tz-items .tz-banner-content small {
+        display: block;
     }
 
     body .tz-cource-services-style-2 li{
