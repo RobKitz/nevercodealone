@@ -185,21 +185,19 @@ $( window ).on( "load", function() {
     },100);
 
     jQuery(".tz-event-wrapper").owlCarousel({
-        items : 4,
-        itemsDesktop : [1199,4],
-        itemsDesktopSmall : [979,3],
-        itemsTablet: [768, 2],
-        itemsMobile: [479, 1],
-        slideSpeed:500,
-        paginationSpeed:800,
-        rewindSpeed:1000,
-        autoPlay:true,
-        stopOnHover: false,
-        singleItem:false,
-        rewindNav:false,
-        pagination:false,
-        paginationNumbers:false,
-        itemsScaleUp:false
+        loop:true,
+        margin:10,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:3
+            },
+            1000:{
+                items:4
+            }
+        }
     });
     jQuery(".tz-last-event-prev").on('click',function(){
         jQuery(".tz-event-wrapper").trigger('owl.prev');
