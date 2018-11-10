@@ -28,14 +28,6 @@ class mainCest
 
     }
 
-    public function headerIsAlwaysVisible(AcceptanceTester $I)
-    {
-        $I->scrollTo('body > section:nth-child(7) > div > div.tz-introduce-content.tz-introduce-content-style-4');
-        $I->click('body > nav > header > div > div > div > ul > li:nth-child(1) > a');
-        $I->waitForElement('h1');
-
-    }
-
     /**
      * @param AcceptanceTester $I
      * @param startpage $startpage

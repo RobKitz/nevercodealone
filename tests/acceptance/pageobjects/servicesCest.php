@@ -66,6 +66,7 @@ class servicesCest
             }
         }
 
+        $I->scrollTo($startpage::$serviceSection);
         $I->click('//*[@data-q="services-navigation"]/li[1]/div/a');
         $I->waitForElementVisible('#' . $firstItem);
     }
