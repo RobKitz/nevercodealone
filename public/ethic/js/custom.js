@@ -1,8 +1,3 @@
-/* Method using for banner position center */
-jQuery(document).ready(function(){
-
-});
-
 jQuery(window).on('load resize', function() {
     var $heightElement = jQuery('.tz-training-images').height();
     var $heightAuthor  = jQuery('.tz-single-author').height();
@@ -27,7 +22,9 @@ jQuery(window).on('load resize', function() {
 
 });
 
-jQuery(document).on('load resize scroll', function() {
+$(window).on('load resize scroll', function() {
+    "use strict";
+
     var $width_Windows = jQuery(this).width(); // This is width of windows
 
 /*  Method for scroll Header 01 */
@@ -57,11 +54,9 @@ jQuery(document).on('load resize scroll', function() {
     }
 
 /*  Method for scroll Header Home-02 */
-    var $height_Tz_Sign_In = jQuery('.tz-sign-in').height();
-
     if(jQuery('.tz-header-2').length > 0){
 
-        if(jQuery(this).scrollTop() >= ($height_Tz_Sign_In + 30)){
+        if(jQuery(this).scrollTop() >= 30){
             jQuery('.tz-header-2').addClass('tz-header-2-eff')
             jQuery('.tz-banner-style2').css('z-index','99999');
         }
@@ -190,21 +185,19 @@ $( window ).on( "load", function() {
     },100);
 
     jQuery(".tz-event-wrapper").owlCarousel({
-        items : 4,
-        itemsDesktop : [1199,4],
-        itemsDesktopSmall : [979,3],
-        itemsTablet: [768, 2],
-        itemsMobile: [479, 1],
-        slideSpeed:500,
-        paginationSpeed:800,
-        rewindSpeed:1000,
-        autoPlay:true,
-        stopOnHover: false,
-        singleItem:false,
-        rewindNav:false,
-        pagination:false,
-        paginationNumbers:false,
-        itemsScaleUp:false
+        loop:true,
+        margin:10,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:3
+            },
+            1000:{
+                items:4
+            }
+        }
     });
     jQuery(".tz-last-event-prev").on('click',function(){
         jQuery(".tz-event-wrapper").trigger('owl.prev');
