@@ -34,7 +34,7 @@
 
             var posNav = function () {
                     var t = $(window).scrollTop();
-                    if (t < $nav.position().top) $nav.css('top', t);
+                    if (t < $nav.position().top) $nav.css('top', 0);
                 },
 
                 bdHideNav = function (e) {
@@ -66,6 +66,8 @@
                     setTimeout (function(){
                         wpfix(2);
                     }, 1000);
+
+                    $('#show').hide();
                 },
 
                 hideNav = function () {
@@ -79,8 +81,10 @@
 
                     setTimeout (function(){
                         $('html').removeClass ('off-canvas');
+                        $('#show').show();
                     }, 600);
                     $('.exit-cavas').remove();
+
                 },
 
                 wpfix = function (step) {
@@ -96,7 +100,6 @@
                             return;
                         }
                     }
-
                     if (step==1) {
                         $fixeditems.css({'position': 'absolute', 'top': $(window).scrollTop() + 'px'});
                     } else {
