@@ -26,7 +26,7 @@ class AcceptanceTester extends \Codeception\Actor
     /**
      * @param int $timeout
      */
-    public function waitForAjax($timeout = 60)
+    public function waitForAjax($timeout = 5)
     {
         $this->waitForJS(
             'return !!window.jQuery && window.jQuery.active == 0;',
@@ -38,7 +38,7 @@ class AcceptanceTester extends \Codeception\Actor
     /**
      * @param int $timeout
      */
-    public function waitForPageLoad($timeout = 60)
+    public function waitForPageLoad($timeout = 5)
     {
         $this->waitForJS(
             'return document.readyState == "complete"',
@@ -47,7 +47,7 @@ class AcceptanceTester extends \Codeception\Actor
         $this->waitForAjax($timeout);
     }
 
-    public function getMeta($tags = [], $timeout = 10) {
+    public function getMeta($tags = []) {
         $m = new meta();
         return $m->getMeta($this->getCurrentUrl(), $tags);
     }
@@ -58,7 +58,7 @@ class AcceptanceTester extends \Codeception\Actor
     }
 
     public function getCurlStatusByUrl($url) {
-        $ch = curl_init('http://www.example.com/');
+        $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_exec($ch);
         $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
