@@ -7,7 +7,7 @@ class startpageCest
     public function _before(AcceptanceTester $I)
     {
         $I->amOnPage('/');
-        $I->waitForElement('h1');
+        $I->waitForPageLoad();
     }
 
     public function titleContainsOpenSource(AcceptanceTester $I)

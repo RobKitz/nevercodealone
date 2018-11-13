@@ -7,7 +7,8 @@ class contactCest
     public function _before(AcceptanceTester $I)
     {
         $I->amOnPage('/nca-paas-startup/');
-        $I->wait(5);
+        $I->waitForPageLoad();
+        $I->waitForElementNotVisible("#preloader");
         $I->waitForElement('#setting > i');
     }
 
