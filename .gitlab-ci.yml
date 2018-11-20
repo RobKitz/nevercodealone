@@ -133,7 +133,7 @@ deploy_production_image_to_stage:
 # Stage: test
 
 run_code_analyses_against_dev_environment:
-  stage: codeanalyse
+  stage: test
   image: $TOOLBOX_IMAGE
   script:
     - /var/www/html/vendor/bin/phpstan analyse src --level max
