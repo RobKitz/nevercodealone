@@ -11,6 +11,7 @@
 stages:
   - build
   - deploy
+  - codeanalyse
   - test
   - posttest
   - posttest2
@@ -131,6 +132,17 @@ deploy_production_image_to_stage:
     - master
 
 # Stage: test
+
+run_code_analyses_against_dev_environment:
+  stage: codeanalyse
+  image: $TOOLBOX_IMAGE
+  script:
+    - /var/www/html/vendor/bin/phpstan analyse src --level max
+  tags:
+    - docker-executor
+  except:
+    - master
+    - /^prod\/.*/
 
 run_tests_against_dev_environment:
   stage: test
