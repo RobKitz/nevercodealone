@@ -20,7 +20,7 @@ class MessagesController extends Controller
     public function messagesAction(Request $request, SpamProtection $spamProtection)
     {
 
-        $data = json_decode($request->getContent(), true);
+        $data = json_decode((string) $request->getContent(), true);
 
         if(!isset($data['name']) || !isset($data['email']) || !isset($data['message'])) {
             return new JsonResponse(
@@ -57,7 +57,7 @@ class MessagesController extends Controller
         try {
             $em = $this->getDoctrine()->getManager();
             $em->persist($messageEntity);
-            $em->flush($messageEntity);
+            $em->flush();
 
             mail('rolandgolla@gmail.com', 'Kontakt NCA', $email . ' ' . $message);
             $status = 200;
