@@ -8,9 +8,6 @@
 
 namespace App\Service;
 
-
-use DavidePastore\Ipinfo\Ipinfo;
-
 class SpamProtection
 {
     public $spamWords = [
