@@ -11,7 +11,7 @@ namespace App\Service;
 
 class YouTubeService
 {
-    public function getJsonFromChannel()
+    public function getItemsFromChannel()
     {
         $client = $this->getClient();
         $service = new \Google_Service_YouTube($client);
@@ -19,7 +19,7 @@ class YouTubeService
         $params = array('maxResults' => 25, 'playlistId' => 'PLKrKzhBjw2Y8XpxPMbaTvc8hHLqDTcDNF');
 
         $videoList = $this->playlistItemsListByPlaylistId($service, 'snippet',$params);
-        return $videoList;
+        return $videoList['items'];
     }
 
     private function getClient() {
