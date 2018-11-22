@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\YouTubeService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -16,6 +17,9 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+        $youTubeService = new YouTubeService();
+        $videoList = $youTubeService->getJsonFromChannel();
+
         return $this->render(
             'pages/startpage.html.twig',
             [
