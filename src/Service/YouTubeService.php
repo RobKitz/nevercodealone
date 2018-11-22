@@ -18,7 +18,7 @@ class YouTubeService
 
         $params = array('maxResults' => 25, 'playlistId' => 'PLKrKzhBjw2Y8XpxPMbaTvc8hHLqDTcDNF');
 
-        $videoList = $this->playlistItemsListByPlaylistId($service, 'snippet,contentDetails',$params);
+        $videoList = $this->playlistItemsListByPlaylistId($service, 'snippet',$params);
         return $videoList;
     }
 
