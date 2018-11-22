@@ -16,10 +16,16 @@ class YouTubeService
         $client = $this->getClient();
         $service = new \Google_Service_YouTube($client);
 
-        $params = array('maxResults' => 25, 'playlistId' => 'PLKrKzhBjw2Y8XpxPMbaTvc8hHLqDTcDNF');
+        $params = [
+            'maxResults' => 25,
+            'playlistId' => 'PLKrKzhBjw2Y8XpxPMbaTvc8hHLqDTcDNF'
+        ];
 
         $videoList = $this->playlistItemsListByPlaylistId($service, 'snippet',$params);
-        return $videoList['items'];
+        $videos = array_reverse($videoList['items']);
+
+
+        return $videos;
     }
 
     private function getClient() {
