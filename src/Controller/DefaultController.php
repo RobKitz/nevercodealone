@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\YouTubeService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -48,13 +49,17 @@ class DefaultController extends Controller
      */
     public function employerbrandingAction()
     {
+        $youTubeService = new YouTubeService();
+        $videoList = $youTubeService->getItemsFromChannel();
+
         return $this->render(
             'pages/employer-branding.html.twig',
             [
                 'title' => '#NCAEvents - Employer Branding für Webdevelopment Jobs als Community Event',
                 'description' => 'Perfektes Employer Branding - Webdeveloper Jobs über Community Events & Social Media Marketing präsentieren',
                 'smImage' => 'https://nevercodealone.de/img/employer-branding-facebook-new.jpg',
-                'smTwitter' => 'https://nevercodealone.de/img/employer-branding-twitter.jpg'
+                'smTwitter' => 'https://nevercodealone.de/img/employer-branding-twitter.jpg',
+                'videoList' => $videoList
             ]
         );
     }
