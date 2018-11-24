@@ -31,6 +31,7 @@ services:
     - MAIL_USER_FILE=/run/secrets/nca_mail_user
     - MAIL_PASS_FILE=/run/secrets/nca_mail_pass
     - MAIL_HUB_FILE=/run/secrets/nca_mail_hub
+    - GOOGLE_API_KEY_FILE=/run/secrets/GOOGLE_API_KEY_FILE
     image: $WEB_IMAGE
     labels:
       io.rancher.container.pull_image: always
@@ -54,6 +55,6 @@ secrets:
     external: true
   nca_mail_hub:
     external: true
-  GOOGLE_API_KEY_FILE:
+  GOOGLE_API_KEY:
     external: true
 
