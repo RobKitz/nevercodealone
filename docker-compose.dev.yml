@@ -22,7 +22,7 @@ services:
     - APP_DEBUG
     - APP_ENV
     - APP_SECRET
-    - GOOGLE_API_KEY_FILE
+    - GOOGLE_API_KEY
     - CORS_ALLOW_ORIGIN
     - DATABASE_URL
     - MAIL_USER
@@ -45,7 +45,7 @@ services:
     - nca_mail_user
     - nca_mail_pass
     - nca_mail_hub
-    - GOOGLE_API_KEY_FILE
+    - GOOGLE_API_KEY
 
 secrets:
   nca_mail_user:
