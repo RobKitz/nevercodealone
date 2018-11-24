@@ -47,9 +47,9 @@ class DefaultController extends Controller
      * @Route("/employer-branding/")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function employerbrandingAction()
+    public function employerbrandingAction(YouTubeService $youTubeService)
     {
-        $youTubeService = new YouTubeService();
+        
         $videoList = $youTubeService->getItemsFromChannel();
 
         return $this->render(
