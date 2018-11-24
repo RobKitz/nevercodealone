@@ -556,16 +556,13 @@
     <!-- Portfolio Nav Ends -->
     <!-- Portfolio Thumbs Starts -->
     <div class="make2columns mansory-effect">
-        <figure class="item youtube">
-            <div class="picture">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/P823yJQuHgM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
-        </figure>
-        <figure class="item youtube">
-            <div class="picture">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/8VDpH0aRgaU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
-        </figure>
+        {% for video in videoList %}
+            <figure class="item youtube">
+                <div class="picture">
+                    <iframe title="{{ video['snippet']['title'] }}" width="560" height="315" src="https://www.youtube.com/embed/{{ video['snippet']['resourceId']['videoId'] }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+            </figure>
+        {% endfor %}
         <figure class="item twitter">
             <div class="picture">
                 <blockquote class="twitter-tweet" data-lang="de"><p lang="de" dir="ltr">Ein starker Talk auf dem <a href="https://twitter.com/hashtag/python?src=hash&amp;ref_src=twsrc%5Etfw">#python</a> Workshop <a href="https://twitter.com/hashtag/NCAEvent?src=hash&amp;ref_src=twsrc%5Etfw">#NCAEvent</a> - Das Django Framework von Scratch - Ist das wirklich so ein Hype? - Mit dir schon lieber Christoph es war uns ein Fest mit dir zu coden - Danke <a href="https://twitter.com/codethonian?ref_src=twsrc%5Etfw">@codethonian</a> <a href="https://twitter.com/5MindsIT?ref_src=twsrc%5Etfw">@5MindsIT</a> <a href="https://twitter.com/Influencer_DB?ref_src=twsrc%5Etfw">@Influencer_DB</a> <a href="https://t.co/3qnDhOCt5n">https://t.co/3qnDhOCt5n</a> <a href="https://t.co/s3ikIHWOyL">pic.twitter.com/s3ikIHWOyL</a></p>&mdash; Never Code Alone (@nevercodealone) <a href="https://twitter.com/nevercodealone/status/973215567569137664?ref_src=twsrc%5Etfw">12. März 2018</a></blockquote>
