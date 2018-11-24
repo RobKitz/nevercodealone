@@ -20,7 +20,7 @@ class DefaultController extends Controller
         return $this->render(
             'pages/startpage.html.twig',
             [
-                'title' => 'PHP Schulung, Software-Qualität und soziale Open Source Projekte',
+                'title' => 'PHP Training, Software-Qualität und soziale Open Source Projekte',
                 'description' => 'Never Code Alone Als Sachverständiger für Webdesign und Event Veranstalter Software-Qualität beim Webdesign.',
                 'smImage' => 'https://nevercodealone.de/img/never-code-alone-roboter-org.jpg'
             ]
