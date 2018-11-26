@@ -18,9 +18,6 @@ if (!isset($_SERVER['APP_ENV'])) {
 $env = $_SERVER['APP_ENV'] ?? 'dev';
 $debug = $_SERVER['APP_DEBUG'] ?? ('prod' !== $env);
 
-var_dump(__FILE__, $_ENV['GOOGLE_API_KEY']);
-exit;
-
 if ($debug) {
     umask(0000);
 
