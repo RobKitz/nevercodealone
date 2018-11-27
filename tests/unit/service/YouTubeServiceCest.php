@@ -11,10 +11,14 @@ class YouTubeServiceCest
     public function _before(UnitTester $I)
     {
         $_ENV['GOOGLE_API_KEY'] = 'testify';
-        $this->fixture = new YouTubeService();
+
     }
 
-    // tests
+    /**
+     * @skip
+     * @param UnitTester $I
+     * @throws \Exception
+     */
     public function getItemsFromChannelReverseArrayFromPlaylistItemsListByPlaylistId(UnitTester $I)
     {
         $array = [
@@ -23,7 +27,7 @@ class YouTubeServiceCest
             'three'
         ];
 
-        $externalMock = m::mock('overload:\Google_Service_YouTube');
+        $externalMock = m::mock('overload:App\Service\YouTubeService');
         $externalMock->shouldReceive('foo')
             ->once()
             ->andReturn($array)
@@ -34,7 +38,11 @@ class YouTubeServiceCest
 
         $obj = new \stdClass();
         $obj->playlistItems = new \stdClass();
-        $obj->playlistItems->listPlaylistItems = $array
+        $obj->playlistItems->listPlaylistItems = $array;
+
+        $googleClient = new \Google_Client();
+        $youTubeService = new \Google_Service_YouTube($googleClient);
+        $this->fixture = new YouTubeService($youTubeService);
 
         $this->fixture = Stub::make(
             $this->fixture,
