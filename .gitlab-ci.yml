@@ -159,7 +159,7 @@ run_tests_against_dev_environment:
     - export DB_HOST=$HTTP_URL:$DB_PORT
     - "echo \"DB_HOST=${DB_HOST}\""
   script:
-    - /var/www/html/vendor/bin/codecept run --skip acceptance --html -vvv
+    - /var/www/html/vendor/bin/codecept run unit --html -vvv
   artifacts:
     paths:
       - ./tests/_output/*
