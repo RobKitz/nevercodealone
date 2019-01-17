@@ -5,7 +5,7 @@
 # build:        build docker image
 # deploy:       deploy application to environment
 # test:         run tests on deployed environment
-# posttest:     confirm or rollback 
+# posttest:     confirm or rollback
 # final:        remove environment / deploy to production
 
 stages:
@@ -71,7 +71,7 @@ build_production_image:
   only:
     - master
     - /^prod\/.*/
-  
+
 build_toolbox_image:
   stage: build
   image: docker:stable
@@ -159,7 +159,7 @@ run_tests_against_dev_environment:
     - export DB_HOST=$HTTP_URL:$DB_PORT
     - "echo \"DB_HOST=${DB_HOST}\""
   script:
-    - /var/www/html/vendor/bin/codecept run --skip acceptance --html -vvv
+    - /var/www/html/vendor/bin/codecept run unit --html -vvv
   artifacts:
     paths:
       - ./tests/_output/*
@@ -174,7 +174,7 @@ run_tests_against_prod_environment:
   stage: test
   image: $TOOLBOX_IMAGE
   script:
-    - /var/www/html/vendor/bin/codecept run acceptance --html --skip-group db -vvv
+    - /var/www/html/vendor/bin/codecept
   artifacts:
     paths:
       - ./tests/_output/*
@@ -190,7 +190,7 @@ run_tests_against_final_prod_environment:
   variables:
     WEBSITE_URL: https://stage.nevercodealone.de
   script:
-    - /var/www/html/vendor/bin/codecept run acceptance --html --skip-group db
+    - /var/www/html/vendor/bin/codecept
   artifacts:
     paths:
       - ./tests/_output/*
