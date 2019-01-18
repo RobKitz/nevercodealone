@@ -158,7 +158,7 @@ run_tests_against_dev_environment:
     - "echo \"DATABASE_URL=${DATABASE_URL}\""
     - export DB_HOST=$HTTP_URL:$DB_PORT
     - "echo \"DB_HOST=${DB_HOST}\""
-    -  sed -i 's/WEBSITE_URL/FOO/g' codeception.yml
+    -  sed -i 's/WEBSITE_URL/${WEBSITE_URL}/g' codeception.yml
   script:
     - /var/www/html/vendor/bin/codecept run --skip acceptance --html -vvv
   artifacts:
