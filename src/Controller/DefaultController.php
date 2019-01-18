@@ -3,14 +3,14 @@
 namespace App\Controller;
 
 use App\Service\YouTubeService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-class DefaultController extends Controller
+class DefaultController extends AbstractController
 {
     /**
      * @Route("/")
@@ -49,7 +49,7 @@ class DefaultController extends Controller
      */
     public function employerbrandingAction(YouTubeService $youTubeService)
     {
-        
+
         $videoList = $youTubeService->getItemsFromChannel();
 
         return $this->render(
