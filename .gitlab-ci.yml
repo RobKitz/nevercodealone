@@ -1,4 +1,3 @@
-
 #--------------------------------------------------------------------------------------------------
 # STAGES
 #--------------------------------------------------------------------------------------------------
@@ -160,7 +159,7 @@ run_tests_against_dev_environment:
     - "echo \"DB_HOST=${DB_HOST}\""
     - sed -i "s~WEBSITE_URL~${WEBSITE_URL}~g" codeception.yml
   script:
-    - /var/www/html/vendor/bin/codecept run unit --html -vvv
+    - /var/www/html/vendor/bin/codecept run --skip acceptance --html -vvv
   artifacts:
     paths:
       - ./tests/_output/*
@@ -191,7 +190,7 @@ run_tests_against_final_prod_environment:
   variables:
     WEBSITE_URL: https://stage.nevercodealone.de
   script:
-    - /var/www/html/vendor/bin/codecept run acceptance --html --skip-group db -vvv
+    - /var/www/html/vendor/bin/codecept
   artifacts:
     paths:
       - ./tests/_output/*
