@@ -155,10 +155,10 @@ run_tests_against_dev_environment:
     - export CONTAINERID=$(rancher ps | grep $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG/db | awk '{ print $1 }')
     - export DB_PORT=$(rancher inspect $CONTAINERID | jq -r .publicEndpoints[0].port)
     - export DATABASE_URL=mysql://nca:nca@$HTTP_URL:$DB_PORT/nca
+    - export WEBSITE_URL=$WEBSITE_URL
     - "echo \"DATABASE_URL=${DATABASE_URL}\""
     - export DB_HOST=$HTTP_URL:$DB_PORT
     - "echo \"DB_HOST=${DB_HOST}\""
-    - sed -i 's/\[%WEBSITE_URL%\]/[${WEBSITE_URL}]/g' codeception.yml
     - cat codeception.yml
   script:
     - /var/www/html/vendor/bin/codecept run --skip acceptance --html -vvv
