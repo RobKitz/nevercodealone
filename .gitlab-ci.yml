@@ -160,7 +160,7 @@ run_tests_against_dev_environment:
     - "echo \"DB_HOST=${DB_HOST}\""
     - sed -i "s~WEBSITE_URL~${WEBSITE_URL}~g" codeception.yml
   script:
-    - /var/www/html/vendor/bin/codecept run --skip acceptance --html -vvv
+    - /var/www/html/vendor/bin/codecept run unit --html -vvv
   artifacts:
     paths:
       - ./tests/_output/*
@@ -175,7 +175,7 @@ run_tests_against_prod_environment:
   stage: test
   image: $TOOLBOX_IMAGE
   script:
-    - /var/www/html/vendor/bin/codecept run acceptance --html --skip-group db -vvv
+    - /var/www/html/vendor/bin/codecept
   artifacts:
     paths:
       - ./tests/_output/*
