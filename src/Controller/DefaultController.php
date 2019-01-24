@@ -121,6 +121,28 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @Route("/accenture-interactive/")
+     */
+    public function accentureInteractiveAction(Request $request)
+    {
+        $eventLink = '';
+
+        $sourceParam = $this->getSourceParam($request);
+
+        $eventLink .= $sourceParam;
+
+        return $this->render(
+            'pages/accenture-interactive.html.twig',
+            [
+                'title' => 'Accenture Interactive Jav #NCAEvent',
+                'description' => 'Java Live Coding Workshop im Bereich E-Commerce am 06.4. bei Accenture Interactive in Dortmund',
+                'smImage' => 'https://nevercodealone.de/ncaevents/accenture-interactive/dortmund-skyline.jpg',
+                'eventLink' => $eventLink
+            ]
+        );
+    }
+
+    /**
      * @Route("/hall-of-fame/")
      */
     public function hofAction(Request $request)
