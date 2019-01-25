@@ -125,7 +125,7 @@ class DefaultController extends AbstractController
      */
     public function accentureInteractiveAction(Request $request)
     {
-        $eventLink = '';
+        $eventLink = 'https://www.eventbrite.de/e/accenture-interactive-java-ncaevent-tickets-55311196277';
 
         $sourceParam = $this->getSourceParam($request);
 
