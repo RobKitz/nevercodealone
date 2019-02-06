@@ -116,7 +116,7 @@ deploy_production_image_to_stage:
   image: $TOOLBOX_IMAGE
   variables:
     HTTP_URL: stage.nevercodealone.de
-    WEBSITE_URL: www.stage.nevercodealone.de
+    WWW_URL: www.stage.nevercodealone.de
   before_script:
     - rancher rm --type stack --stop stage-nevercodealone-de || true
     # create the stack with the latest known working image and upgrade from there
@@ -157,6 +157,7 @@ run_tests_against_dev_environment:
     - "echo \"DATABASE_URL=${DATABASE_URL}\""
     - export DB_HOST=$HTTP_URL:$DB_PORT
     - "echo \"DB_HOST=${DB_HOST}\""
+    - sed -i "s~WEBSITE_URL~${WEBSITE_URL}~g" codeception.yml
   script:
     - /var/www/html/vendor/bin/codecept run --skip acceptance --html -vvv
   artifacts:
@@ -172,10 +173,9 @@ run_tests_against_dev_environment:
 run_tests_against_prod_environment:
   stage: test
   image: $TOOLBOX_IMAGE
-  variables:
-    WEBSITE_URL: https://stage.nevercodealone.de
+  WEBSITE_URL: https://stage.nevercodealone.de
   before_script:
-    - export WEBSITE_URL=https://stage.nevercodealone.de
+    - sed -i "s~WEBSITE_URL~${WEBSITE_URL}~g" codeception.yml
   script:
     - /var/www/html/vendor/bin/codecept run acceptance --html --skip-group db -vvv
   artifacts:
@@ -191,9 +191,9 @@ run_tests_against_final_prod_environment:
   stage: test
   image: $TOOLBOX_IMAGE
   variables:
-    WEBSITE_URL: https://nevercodealone.de
+    WEBSITE_URL: https://stage.nevercodealone.de
   before_script:
-    - export WEBSITE_URL=https://stage.nevercodealone.de
+    - sed -i "s~WEBSITE_URL~${WEBSITE_URL}~g" codeception.yml
   script:
     - /var/www/html/vendor/bin/codecept run acceptance --html --skip-group db -vvv
   artifacts:
