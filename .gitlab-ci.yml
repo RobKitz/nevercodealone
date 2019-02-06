@@ -173,8 +173,10 @@ run_tests_against_dev_environment:
 run_tests_against_prod_environment:
   stage: test
   image: $TOOLBOX_IMAGE
+  variables:
+    WEBSITE_URL: https://stage.nevercodealone.de
   script:
-    - /var/www/html/vendor/bin/codecept
+    - /var/www/html/vendor/bin/codecept run acceptance --html --skip-group db -vvv
   artifacts:
     paths:
       - ./tests/_output/*
@@ -188,9 +190,9 @@ run_tests_against_final_prod_environment:
   stage: test
   image: $TOOLBOX_IMAGE
   variables:
-    WEBSITE_URL: https://stage.nevercodealone.de
+    WEBSITE_URL: https://nevercodealone.de
   script:
-    - /var/www/html/vendor/bin/codecept
+    - /var/www/html/vendor/bin/codecept run acceptance --html --skip-group db -vvv
   artifacts:
     paths:
       - ./tests/_output/*
