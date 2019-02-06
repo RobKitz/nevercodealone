@@ -136,7 +136,7 @@ class DefaultController extends AbstractController
             [
                 'title' => 'Accenture Interactive Jav #NCAEvent',
                 'description' => 'Java Live Coding Workshop im Bereich E-Commerce am 06.4. bei Accenture Interactive in Dortmund',
-                'smImage' => 'https://nevercodealone.de/ncaevents/accenture-interactive/dortmund-skyline.jpg',
+                'smImage' => 'https://nevercodealone.de/NCAEvent-java-live-coding.png',
                 'eventLink' => $eventLink
             ]
         );
