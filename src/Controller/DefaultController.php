@@ -121,6 +121,28 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @Route("/accenture-interactive/")
+     */
+    public function accentureInteractiveAction(Request $request)
+    {
+        $eventLink = 'https://www.eventbrite.de/e/accenture-interactive-java-ncaevent-tickets-55311196277';
+
+        $sourceParam = $this->getSourceParam($request);
+
+        $eventLink .= $sourceParam;
+
+        return $this->render(
+            'pages/accenture-interactive.html.twig',
+            [
+                'title' => 'Accenture Interactive Jav #NCAEvent',
+                'description' => 'Java Live Coding Workshop im Bereich E-Commerce am 06.4. bei Accenture Interactive in Dortmund',
+                'smImage' => 'https://nevercodealone.de/NCAEvent-java-live-coding.png',
+                'eventLink' => $eventLink
+            ]
+        );
+    }
+
+    /**
      * @Route("/hall-of-fame/")
      */
     public function hofAction(Request $request)
