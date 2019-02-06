@@ -35,7 +35,7 @@ modules:
             curl:
                 CURLOPT_RETURNTRANSFER: true
         REST:
-            url: 'WEBSITE_URL'
+            url: '%WEBSITE_URL%'
             depends: PhpBrowser
             part: Json
         WebDriver:
