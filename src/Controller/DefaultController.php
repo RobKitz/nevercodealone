@@ -134,7 +134,7 @@ class DefaultController extends AbstractController
         return $this->render(
             'pages/accenture-interactive.html.twig',
             [
-                'title' => 'Accenture Interactive Jav #NCAEvent',
+                'title' => 'Accenture Interactive Java #NCAEvent',
                 'description' => 'Java Live Coding Workshop im Bereich E-Commerce am 06.4. bei Accenture Interactive in Dortmund',
                 'smImage' => 'https://nevercodealone.de/NCAEvent-java-live-coding.png',
                 'eventLink' => $eventLink
