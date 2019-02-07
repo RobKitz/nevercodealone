@@ -175,6 +175,8 @@ run_tests_against_prod_environment:
   image: $TOOLBOX_IMAGE
   variables:
     WEBSITE_URL: https://stage.nevercodealone.de
+  before_script:
+    - sed -i "s~WEBSITE_URL~${WEBSITE_URL}~g" codeception.yml
   script:
     - /var/www/html/vendor/bin/codecept run acceptance --html --skip-group db -vvv
   artifacts:
@@ -190,7 +192,9 @@ run_tests_against_final_prod_environment:
   stage: test
   image: $TOOLBOX_IMAGE
   variables:
-    WEBSITE_URL: https://nevercodealone.de
+    WEBSITE_URL: https://stage.nevercodealone.de
+  before_script:
+    - sed -i "s~WEBSITE_URL~${WEBSITE_URL}~g" codeception.yml
   script:
     - /var/www/html/vendor/bin/codecept run acceptance --html --skip-group db -vvv
   artifacts:
