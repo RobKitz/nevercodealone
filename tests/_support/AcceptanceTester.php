@@ -40,7 +40,11 @@ class AcceptanceTester extends \Codeception\Actor
      */
     public function waitForPageLoad($timeout = 5)
     {
-        $this->waitForElement('h1');
+        $this->waitForJS(
+            'return document.readyState == "complete"',
+            $timeout
+        );
+        $this->waitForAjax($timeout);
     }
 
     public function getMeta($tags = []) {
