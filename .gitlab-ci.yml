@@ -206,7 +206,6 @@ run_tests_against_final_prod_environment:
   only:
     - master
 
-
 # Stage: posttest
 
 build_reports_image:
